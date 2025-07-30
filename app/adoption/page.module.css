@@ -1,0 +1,342 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 202px;
+  background: #FFF;
+}
+
+.content {
+  max-width: 1296px;
+  margin: 0 auto;
+  padding: 60px 72px;
+}
+
+.title {
+  color: var(--Neutral-Darker);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.48px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.subtitle p {
+  color: var(--Primary-Dark);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.2px;
+}
+
+.filters {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  margin-bottom: 40px;
+  padding: 30px;
+  background: #F9F9F9;
+  border-radius: 20px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filterLabel {
+  color: var(--Neutral-Darker);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.16px;
+}
+
+.filterSelect {
+  padding: 12px 16px;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  background: white;
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: var(--Neutral-Darker);
+  min-width: 120px;
+}
+
+.searchButton {
+  background: var(--Primary-Dark);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+  background: #3a4578;
+}
+
+.stats {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.statNumber {
+  color: var(--Primary-Dark);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.32px;
+}
+
+.statLabel {
+  color: var(--Neutral-Darker);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.18px;
+}
+
+.petGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 100px;
+}
+
+.petCard {
+  background: #F4F4F4;
+  border-radius: 25px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.petCard:hover {
+  transform: translateY(-5px);
+}
+
+.petImage {
+  width: 100%;
+  height: 250px;
+  background: #D9D9D9;
+  border-radius: 20px;
+  margin: 15px 15px 20px 15px;
+  width: calc(100% - 30px);
+}
+
+.petInfo {
+  padding: 0 20px 25px;
+}
+
+.petName {
+  color: var(--Neutral-Darker);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  margin-bottom: 12px;
+}
+
+.petDetails {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.petDetail {
+  background: white;
+  color: var(--Neutral-Darker);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.petLocation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: var(--Neutral-Darker);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.locationIcon {
+  font-size: 14px;
+}
+
+.petSize {
+  margin-bottom: 20px;
+}
+
+.sizeTag {
+  background: var(--Light-Blue);
+  color: var(--Primary-Dark);
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 6px 12px;
+  border-radius: 15px;
+}
+
+.adoptButton {
+  width: 100%;
+  background: var(--Primary-Dark);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 12px;
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.adoptButton:hover {
+  background: #3a4578;
+}
+
+.emergency {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+  border-radius: 25px;
+  padding: 50px 40px;
+  color: white;
+}
+
+.emergencyTitle {
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  text-align: center;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.emergencyDescription {
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.18px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.emergencyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.emergencyCard {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  color: var(--Neutral-Darker);
+}
+
+.emergencyBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #FF6B6B;
+  color: white;
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.emergencyImage {
+  width: 100%;
+  height: 180px;
+  background: #D9D9D9;
+  border-radius: 15px;
+  margin-bottom: 16px;
+}
+
+.emergencyName {
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  margin-bottom: 8px;
+}
+
+.emergencyDesc {
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  color: #666;
+}
+
+.emergencyButton {
+  width: 100%;
+  background: #FF6B6B;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.emergencyButton:hover {
+  background: #FF5252;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .filterGroup {
+    width: 100%;
+  }
+  
+  .filterSelect {
+    width: 100%;
+  }
+  
+  .petGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .content {
+    padding: 40px 20px;
+  }
+}
