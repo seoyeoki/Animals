@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ABeeZee } from 'next/font/google'
 import './globals.css'
+import Header from './components/Header'
 
 const abeeZee = ABeeZee({ 
   weight: '400',
@@ -20,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={abeeZee.className}>
-        <main>
+        <Header />
+        <main style={{ marginTop: '140px' }}>
           {children}
         </main>
       </body>

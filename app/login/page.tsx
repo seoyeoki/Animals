@@ -16,30 +16,6 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <span className={styles.logo}>logo here</span>
-        </div>
-        <div className={styles.headerTitle}>
-          <span>Webpage Title Here</span>
-        </div>
-        <div className={styles.headerButtons}>
-          <span className={styles.headerText}>마이 페이지</span>
-          <button className={styles.loginButton}>로그인</button>
-        </div>
-      </header>
-
-      {/* Navigation Bar */}
-      <nav className={styles.navigation}>
-        <div className={styles.navContainer}>
-          <div className={styles.navItem}>소개</div>
-          <div className={styles.navItem}>이용법</div>
-          <div className={styles.navItem}>입양 및 입소</div>
-          <div className={styles.navItem}>입양동물 등록</div>
-        </div>
-      </nav>
-
       {/* Main Content */}
       <main className={styles.main}>
         {/* Back Arrow */}

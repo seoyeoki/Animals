@@ -1,3 +1,36 @@
+<<<<<<< HEAD
+=======
+.입양-및-입소 {
+  top: 1338px;
+  left: 0px;
+  width: 1296px;
+  height: 1240px;
+
+  position: absolute;
+}
+.group-1000000853 {
+  top: 0px;
+  left: 0px;
+  width: 1368px;
+  height: 1240px;
+  position: absolute;
+}
+.rectangle-1084 {
+  top: 0px;
+  left: 0px;
+  width: 1296px;
+  height: 1240px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.frame-107 {
+  top: 40px;
+  left: 72px;
+  width: 1296px;
+  height: 52px;
+  position: absolute;
+}
+>>>>>>> a8e38efc5aeda01a89d5ac9f628fb08b05ababe6
 .container {
   width: 100%;
   min-height: 100vh;

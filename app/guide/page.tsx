@@ -9,7 +9,7 @@ export default function GuidePage() {
         
         <div className={styles.intro}>
           <p className={styles.introText}>
-            간단한 4단계로 새로운 가족을 만나보세요
+            4단계로 간단히 새로운 가족을 만나보세요
           </p>
         </div>
 
@@ -20,8 +20,8 @@ export default function GuidePage() {
               <h3 className={styles.stepTitle}>회원가입 및 프로필 작성</h3>
               <p className={styles.stepDescription}>
                 기본 정보와 반려동물 선호도를 입력하여 프로필을 완성하세요. 
-                생활 환경, 경험, 선호하는 동물 크기 등을 상세히 ��성해주시면 
-                더 정확한 매칭이 가능합니다.
+                생활 환경, 경험, 선호하는 동물 크기 등을 상세히 작성해주시면 
+                더 정확한 매칭이 가능합니다. (아니면, 챗봇과 대화하며 자신도 모르던 반려동물 취향에 대해 알아가보세요!)
               </p>
               <div className={styles.stepImage}></div>
             </div>
@@ -46,8 +46,8 @@ export default function GuidePage() {
               <h3 className={styles.stepTitle}>입양 신청 및 상담</h3>
               <p className={styles.stepDescription}>
                 마음에 드는 동물이 있다면 입양 신청서를 작성하세요. 
-                전문 상담사와의 1:1 상담을 통해 입양 준비사항과 
-                주의사항에 대해 자세히 안내받으실 수 있습니���.
+                반려동물 등록자와 1:1 상담을 하며 입양 준비사항과 
+                주의사항을 자세히 안내받을 수 있습니다.
               </p>
               <div className={styles.stepImage}></div>
             </div>

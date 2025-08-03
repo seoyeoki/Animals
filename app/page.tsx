@@ -5,30 +5,6 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <span className={styles.logo}>logo here</span>
-        </div>
-        <div className={styles.headerTitle}>
-          <span>Webpage Title Here</span>
-        </div>
-        <div className={styles.headerButtons}>
-          <span className={styles.headerText}>마이 페이지</span>
-          <Link href="/login" className={styles.loginButton}>로그인</Link>
-        </div>
-      </header>
-
-      {/* 네비게이션 바 */}
-      <nav className={styles.navigationBar}>
-        <div className={styles.navContainer}>
-          <div className={styles.navItem}>소개</div>
-          <div className={styles.navItem}>이용법</div>
-          <div className={styles.navItem}>입양 및 입소</div>
-          <div className={styles.navItem}>입양동물 등록</div>
-        </div>
-      </nav>
-      
       <section className={styles.content}>
         <h1 className={styles.mainTitle}>가족을 찾고 있어요</h1>
         

@@ -35,37 +35,6 @@ export default function Register() {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <span className={styles.logo}>logo here</span>
-        </div>
-        <div className={styles.headerTitle}>
-          <span>Webpage Title Here</span>
-        </div>
-        <div className={styles.headerButtons}>
-          <span className={styles.headerText}>마이 페이지</span>
-          <Link href="/login" className={styles.loginButton}>로그인</Link>
-        </div>
-      </header>
-
-      {/* Navigation Bar */}
-      <nav className={styles.navigation}>
-        <div className={styles.navContainer}>
-          <div className={styles.backIcon}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M19 12H5M12 19L5 12L12 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <div className={styles.navItems}>
-            <div className={styles.navItem}>소개</div>
-            <div className={styles.navItem}>이용법</div>
-            <div className={styles.navItem}>입양 및 입소</div>
-            <div className={styles.navItem}>입양동물 등록</div>
-          </div>
-        </div>
-      </nav>
-
       {/* Main Content */}
       <main className={styles.main}>
         <div className={styles.registerContainer}>

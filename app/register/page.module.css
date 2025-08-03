@@ -3,118 +3,7 @@
   min-height: 100vh;
   background-color: #ffffff;
   position: relative;
-}
-
-/* Header Styles */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 72px 0;
-  height: 92px;
-}
-
-.logoContainer {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid #000000;
-  border-radius: 0;
-  padding: 14px 15px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.logo {
-  color: #606060;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.headerTitle {
-  color: #373737;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.headerButtons {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.headerText {
-  color: #6B6B6B;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.loginButton {
-  background-color: #454F90;
-  color: white;
-  border: none;
-  border-radius: 40px;
-  padding: 16px 40px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loginButton:hover {
-  background-color: #3a4377;
-}
-
-/* Navigation Styles */
-.navigation {
-  background-color: #6475D3;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  max-width: 1280px;
-  width: 100%;
-  padding: 0 4px;
-  height: 100%;
-}
-
-.backIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0 20px;
-  margin-right: 20px;
-}
-
-.navItems {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-.navItem {
-  background-color: #6569D3;
-  color: white;
-  padding: 12px 40px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navItem:hover {
-  background-color: #5a5fc7;
+  padding-top: 140px;
 }
 
 /* Main Content Styles */
@@ -203,33 +92,27 @@
 }
 
 .loginLink {
-  color: #4A4A4A;
+  color: #454F90;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   transition: color 0.3s;
 }
 
 .loginLink:hover {
-  color: #373737;
+  color: #3a4377;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-  .header {
-    padding: 20px 20px 0;
-  }
-  
-  .contentContainer {
-    width: 90%;
-    padding: 20px;
+  .registerContainer {
+    padding-top: 20px;
   }
   
   .registerForm {
-    max-width: 100%;
+    max-width: 300px;
   }
   
-  .backButton {
-    top: 200px;
-    left: 20px;
+  .buttonContainer {
+    flex-direction: column;
+    gap: 10px;
   }
 }
