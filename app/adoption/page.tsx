@@ -1,297 +1,193 @@
-import React from "react";
-import styles from './page.module.css';
+'use client'
 
+import React, { useState } from 'react'
+import styles from './page.module.css'
+import Link from 'next/link'
 
 export default function Adoption() {
-  return (
-    <>
-      <div className={styles["입양-및-입소"]}>
-<div className={styles["group-1000000853"]}>
-<div className={styles["rectangle-1084"]}>
-</div>
-<div className={styles["frame-107"]}>
-<div className={styles["container"]}>
-<p className={styles["text-logo-here"]}>logo-here
-</p>
-</div>
-<div className={styles["button-container"]}>
-<p className={styles["text-button-text"]}>button-text
-</p>
-</div>
-<p className={styles["text-button-text"]}>button-text
-</p>
-</div>
-<p className={styles["text-title"]}>title
-</p>
-<p className={styles["text-입양-및-입소를-기다리고-있어요"]}>입양-및-입소를-기다리고-있어요
-</p>
-<div className={styles["group-1000000859"]}>
-<div className={styles["group-1000000856"]}>
-<div className={styles["rectangle-1087"]}>
-</div>
-<div className={styles["rectangle-1086"]}>
-</div>
-<div className={styles["rectangle-1088"]}>
-</div>
-</div>
-<div className={styles["group-1000000857"]}>
-<div className={styles["rectangle-1087"]}>
-</div>
-<div className={styles["rectangle-1086"]}>
-</div>
-<div className={styles["rectangle-1088"]}>
-</div>
-</div>
-<div className={styles["group-1000000855"]}>
-<div className={styles["rectangle-1087"]}>
-</div>
-<div className={styles["rectangle-1086"]}>
-</div>
-<div className={styles["rectangle-1088"]}>
-</div>
-</div>
-</div>
-</div>
-<div className={styles["navigation-bar"]}>
-<div className={styles["frame-108"]}>
-<div className={styles["menu-item"]}>
-<p className={styles["text-menu-text"]}>menu-text
-</p>
-</div>
-<div className={styles["menu-item"]}>
-<p className={styles["text-menu-text"]}>menu-text
-</p>
-</div>
-<div className={styles["menu-item"]}>
-<p className={styles["text-menu-text"]}>menu-text
-</p>
-</div>
-<div className={styles["menu-item"]}>
-<p className={styles["text-menu-text"]}>menu-text
-</p>
-</div>
-</div>
-</div>
-<p className={styles["text-검색하기"]}>검색하기
-</p>
-<div className={styles["group-1000000871"]}>
-<div className={styles["rectangle-1092"]}>
-</div>
-<div className={styles["button-container"]}>
-<p className={styles["text-button-text"]}>button-text
-</p>
-</div>
-<div className={styles["group-1000000861"]}>
-<div className={styles["drop-down-(expense)"]}>
-<div className={styles["input"]}>
-<div className={styles["default-type"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["food"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["cab"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["hotel"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["tip"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["visa-fee"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["other"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["vector"]}>
-</div>
-</div>
-</div>
-<p className={styles["text-시도"]}>시도
-</p>
-</div>
-<div className={styles["group-1000000863"]}>
-<div className={styles["drop-down-(expense)"]}>
-<div className={styles["input"]}>
-<div className={styles["default-type"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["food"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["cab"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["hotel"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["tip"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["visa-fee"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["other"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["vector"]}>
-</div>
-</div>
-</div>
-<p className={styles["text-분류"]}>분류
-</p>
-</div>
-<div className={styles["group-1000000864"]}>
-<div className={styles["drop-down-(expense)"]}>
-<div className={styles["input"]}>
-<div className={styles["default-type"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["food"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["cab"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["hotel"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["tip"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["visa-fee"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["other"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["vector"]}>
-</div>
-</div>
-</div>
-<p className={styles["text-품종"]}>품종
-</p>
-</div>
-<div className={styles["group-1000000862"]}>
-<div className={styles["drop-down-(expense)"]}>
-<div className={styles["input"]}>
-<div className={styles["default-type"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["food"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["cab"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["hotel"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["tip"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["visa-fee"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["other"]}>
-<p className={styles["text-input"]}>input
-</p>
-</div>
-<div className={styles["vector"]}>
-</div>
-</div>
-</div>
-<p className={styles["text-시군구"]}>시군구
-</p>
-</div>
-</div>
-<div className={styles["group-1000000867"]}>
-<div className={styles["button-container"]}>
-<div className={styles["gpt-logo-1"]}>
-</div>
-</div>
-<div className={styles["group-1000000865"]}>
-<div className={styles["rectangle-1093"]}>
-</div>
-<div className={styles["polygon-1"]}>
-</div>
-<p className={styles["text-어떤-반려동물을-만나면-좋을지-알아보세요!"]}>어떤-반려동물을-만나면-좋을지-알아보세요!
-</p>
-</div>
-<div className={styles["group-1000000866"]}>
-<div className={styles["button-container"]}>
-<div className={styles["gpt-logo-1"]}>
-</div>
-</div>
-<div className={styles["group-1000000865"]}>
-<div className={styles["rectangle-1093"]}>
-</div>
-<div className={styles["polygon-1"]}>
-</div>
-<p className={styles["text-어떤-반려동물을-만나면-좋을지-알아보세요!"]}>어떤-반려동물을-만나면-좋을지-알아보세요!
-</p>
-</div>
-</div>
-</div>
-<div className={styles["group-1000000868"]}>
-<div className={styles["button-container"]}>
-<div className={styles["gpt-logo-1"]}>
-</div>
-</div>
-<div className={styles["group-1000000865"]}>
-<div className={styles["rectangle-1093"]}>
-</div>
-<div className={styles["polygon-1"]}>
-</div>
-<p className={styles["text-어떤-반려동물을-만나면-좋을지-알아보세요!"]}>어떤-반려동물을-만나면-좋을지-알아보세요!
-</p>
-</div>
-<div className={styles["group-1000000866"]}>
-<div className={styles["button-container"]}>
-<div className={styles["gpt-logo-1"]}>
-</div>
-</div>
-<div className={styles["group-1000000865"]}>
-<div className={styles["rectangle-1093"]}>
-</div>
-<div className={styles["polygon-1"]}>
-</div>
-<p className={styles["text-어떤-반려동물을-만나면-좋을지-알아보세요!"]}>어떤-반려동물을-만나면-좋을지-알아보세요!
-</p>
-</div>
-</div>
-</div>
-</div>
+  const [selectedRegion, setSelectedRegion] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedBreed, setSelectedBreed] = useState('')
+  const [selectedDistrict, setSelectedDistrict] = useState('')
 
-    </>
-  );
+  const handleSearch = () => {
+    // 검색 로직 구현
+    console.log('Search filters:', {
+      region: selectedRegion,
+      category: selectedCategory,
+      breed: selectedBreed,
+      district: selectedDistrict
+    })
+  }
+
+  return (
+    <div className={styles.container}>
+      {/* Header */}
+      <header className={styles.header}>
+        <div className={styles.logoContainer}>
+          <span className={styles.logo}>logo here</span>
+        </div>
+        <div className={styles.headerTitle}>
+          <span>Webpage Title Here</span>
+        </div>
+        <div className={styles.headerButtons}>
+          <span className={styles.headerText}>마이 페이지</span>
+          <button className={styles.loginButton}>로그인</button>
+        </div>
+      </header>
+
+      {/* Navigation Bar */}
+      <nav className={styles.navigation}>
+        <div className={styles.navContainer}>
+          <div className={styles.navItem}>소개</div>
+          <div className={styles.navItem}>이용법</div>
+          <div className={styles.navItem}>입양 및 입소</div>
+          <div className={styles.navItem}>입양동물 등록</div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <main className={styles.main}>
+        {/* Back Arrow */}
+        <div className={styles.backArrow}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M19 12H5M12 19L5 12L12 5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+
+        {/* Page Title */}
+        <div className={styles.pageTitle}>
+          <h1 className={styles.title}>입양 및 입소</h1>
+          <p className={styles.subtitle}>입양 및 입소를 기다리고 있어요</p>
+        </div>
+
+        {/* Search Section */}
+        <div className={styles.searchSection}>
+          <h2 className={styles.searchTitle}>검색하기</h2>
+          
+          <div className={styles.searchFilters}>
+            <div className={styles.filterGroup}>
+              <label className={styles.filterLabel}>시도</label>
+              <select 
+                value={selectedRegion} 
+                onChange={(e) => setSelectedRegion(e.target.value)}
+                className={styles.filterSelect}
+              >
+                <option value="">전체</option>
+                <option value="seoul">서울특별시</option>
+                <option value="busan">부산광역시</option>
+                <option value="daegu">대구광역시</option>
+                <option value="incheon">인천광역시</option>
+                <option value="gwangju">광주광역시</option>
+                <option value="daejeon">대전광역시</option>
+                <option value="ulsan">울산광역시</option>
+              </select>
+            </div>
+
+            <div className={styles.filterGroup}>
+              <label className={styles.filterLabel}>분류</label>
+              <select 
+                value={selectedCategory} 
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className={styles.filterSelect}
+              >
+                <option value="">전체</option>
+                <option value="dog">강아지</option>
+                <option value="cat">고양이</option>
+                <option value="other">기타</option>
+              </select>
+            </div>
+
+            <div className={styles.filterGroup}>
+              <label className={styles.filterLabel}>품종</label>
+              <select 
+                value={selectedBreed} 
+                onChange={(e) => setSelectedBreed(e.target.value)}
+                className={styles.filterSelect}
+              >
+                <option value="">전체</option>
+                <option value="mixed">믹스</option>
+                <option value="labrador">래브라도</option>
+                <option value="golden">골든리트리버</option>
+                <option value="persian">페르시안</option>
+                <option value="siamese">샴</option>
+              </select>
+            </div>
+
+            <div className={styles.filterGroup}>
+              <label className={styles.filterLabel}>시군구</label>
+              <select 
+                value={selectedDistrict} 
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                className={styles.filterSelect}
+              >
+                <option value="">전체</option>
+                <option value="gangnam">강남구</option>
+                <option value="seocho">서초구</option>
+                <option value="mapo">마포구</option>
+                <option value="hongdae">홍대입구</option>
+              </select>
+            </div>
+          </div>
+
+          <button onClick={handleSearch} className={styles.searchButton}>
+            검색
+          </button>
+        </div>
+
+        {/* AI Recommendation Section */}
+        <div className={styles.aiSection}>
+          <div className={styles.aiCard}>
+            <div className={styles.aiIcon}>🤖</div>
+            <div className={styles.aiContent}>
+              <h3 className={styles.aiTitle}>AI 추천</h3>
+              <p className={styles.aiDescription}>
+                어떤 반려동물을 만나면 좋을지 알아보세요!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Animal Cards Grid */}
+        <div className={styles.animalGrid}>
+          {/* Sample Animal Cards */}
+          <div className={styles.animalCard}>
+            <div className={styles.animalImage}></div>
+            <div className={styles.animalInfo}>
+              <h3 className={styles.animalName}>멍멍이</h3>
+              <p className={styles.animalBreed}>믹스견</p>
+              <p className={styles.animalLocation}>서울 강남구</p>
+            </div>
+          </div>
+
+          <div className={styles.animalCard}>
+            <div className={styles.animalImage}></div>
+            <div className={styles.animalInfo}>
+              <h3 className={styles.animalName}>냥냥이</h3>
+              <p className={styles.animalBreed}>페르시안</p>
+              <p className={styles.animalLocation}>서울 서초구</p>
+            </div>
+          </div>
+
+          <div className={styles.animalCard}>
+            <div className={styles.animalImage}></div>
+            <div className={styles.animalInfo}>
+              <h3 className={styles.animalName}>댕댕이</h3>
+              <p className={styles.animalBreed}>래브라도</p>
+              <p className={styles.animalLocation}>서울 마포구</p>
+            </div>
+          </div>
+
+          <div className={styles.animalCard}>
+            <div className={styles.animalImage}></div>
+            <div className={styles.animalInfo}>
+              <h3 className={styles.animalName}>고양이</h3>
+              <p className={styles.animalBreed}>샴</p>
+              <p className={styles.animalLocation}>서울 홍대입구</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  )
 }
