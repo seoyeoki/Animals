@@ -1,342 +1,1088 @@
-.container {
-  width: 100%;
-  min-height: 100vh;
-  padding-top: 140px;
-  background: #FFF;
-}
+.입양-및-입소 {
+  top: 1338px;
+  left: 0px;
+  width: 1296px;
+  height: 1240px;
 
-.content {
-  max-width: 1296px;
-  margin: 0 auto;
-  padding: 60px 72px;
-}
-
-.title {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 48px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.48px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.subtitle {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.subtitle p {
-  color: var(--Primary-Dark);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.2px;
-}
-
-.filters {
-  display: flex;
-  gap: 20px;
-  align-items: end;
-  margin-bottom: 40px;
-  padding: 30px;
-  background: #F9F9F9;
-  border-radius: 20px;
-}
-
-.filterGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.filterLabel {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: -0.16px;
-}
-
-.filterSelect {
-  padding: 12px 16px;
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  background: white;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  color: var(--Neutral-Darker);
-  min-width: 120px;
-}
-
-.searchButton {
-  background: var(--Primary-Dark);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.searchButton:hover {
-  background: #3a4578;
-}
-
-.stats {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.statItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.statNumber {
-  color: var(--Primary-Dark);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: 400;
-  letter-spacing: -0.32px;
-}
-
-.statLabel {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: -0.18px;
-}
-
-.petGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-bottom: 100px;
-}
-
-.petCard {
-  background: #F4F4F4;
-  border-radius: 25px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.petCard:hover {
-  transform: translateY(-5px);
-}
-
-.petImage {
-  width: 100%;
-  height: 250px;
-  background: #D9D9D9;
-  border-radius: 20px;
-  margin: 15px 15px 20px 15px;
-  width: calc(100% - 30px);
-}
-
-.petInfo {
-  padding: 0 20px 25px;
-}
-
-.petName {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: -0.24px;
-  margin-bottom: 12px;
-}
-
-.petDetails {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.petDetail {
-  background: white;
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 4px 8px;
-  border-radius: 12px;
-}
-
-.petLocation {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 12px;
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.locationIcon {
-  font-size: 14px;
-}
-
-.petSize {
-  margin-bottom: 20px;
-}
-
-.sizeTag {
-  background: var(--Light-Blue);
-  color: var(--Primary-Dark);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 6px 12px;
-  border-radius: 15px;
-}
-
-.adoptButton {
-  width: 100%;
-  background: var(--Primary-Dark);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 12px;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.adoptButton:hover {
-  background: #3a4578;
-}
-
-.emergency {
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
-  border-radius: 25px;
-  padding: 50px 40px;
-  color: white;
-}
-
-.emergencyTitle {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.32px;
-  text-align: center;
-  margin-bottom: 16px;
-  color: white;
-}
-
-.emergencyDescription {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.18px;
-  text-align: center;
-  margin-bottom: 40px;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.emergencyGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.emergencyCard {
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  position: relative;
-  color: var(--Neutral-Darker);
-}
-
-.emergencyBadge {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #FF6B6B;
-  color: white;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 4px 12px;
-  border-radius: 12px;
 }
-
-.emergencyImage {
-  width: 100%;
-  height: 180px;
-  background: #D9D9D9;
-  border-radius: 15px;
-  margin-bottom: 16px;
+.group-1000000853 {
+  top: 0px;
+  left: 0px;
+  width: 1368px;
+  height: 1240px;
+  position: absolute;
 }
-
-.emergencyName {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: -0.2px;
-  margin-bottom: 8px;
+.rectangle-1084 {
+  top: 0px;
+  left: 0px;
+  width: 1296px;
+  height: 1240px;
+  position: absolute;
+  background-color: #ffffff;
 }
-
-.emergencyDesc {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.4;
-  margin-bottom: 16px;
-  color: #666;
+.frame-107 {
+  top: 40px;
+  left: 72px;
+  width: 1296px;
+  height: 52px;
+  position: absolute;
 }
-
-.emergencyButton {
-  width: 100%;
-  background: #FF6B6B;
-  color: white;
-  border: none;
-  border-radius: 15px;
-  padding: 10px;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+.container {
+  top: 8px;
+  left: 0px;
+  width: 110px;
+  height: 44px;
+  position: absolute;
+  background-color: #ffffff;
+  background-color: #949494;
 }
-
-.emergencyButton:hover {
-  background: #FF5252;
+.text-logo-here {
+  top: 14px;
+  left: 15px;
+  width: 79px;
+  height: 16px;
+  position: absolute;
+  background-color: #606060;
 }
-
-@media (max-width: 768px) {
-  .filters {
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .filterGroup {
-    width: 100%;
-  }
-  
-  .filterSelect {
-    width: 100%;
-  }
-  
-  .petGrid {
-    grid-template-columns: 1fr;
-  }
-  
-  .content {
-    padding: 40px 20px;
-  }
+.button-container {
+  top: 0px;
+  left: 1018px;
+  width: 146px;
+  height: 48px;
+  position: absolute;
+  background-color: #455090;
+}
+.text-button-text {
+  top: 16px;
+  left: 40px;
+  width: 66px;
+  height: 16px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.text-button-text {
+  top: 16px;
+  left: 901px;
+  width: 88px;
+  height: 16px;
+  position: absolute;
+  background-color: #6a6a6a;
+}
+.text-title {
+  top: 48px;
+  left: 391px;
+  width: 453px;
+  height: 59px;
+  position: absolute;
+  background-color: #373737;
+}
+.text-입양-및-입소를-기다리고-있어요 {
+  top: 288px;
+  left: 104px;
+  width: 520px;
+  height: 47px;
+  position: absolute;
+  background-color: #373737;
+}
+.group-1000000859 {
+  top: 739px;
+  left: 113px;
+  width: 947px;
+  height: 341px;
+  position: absolute;
+}
+.group-1000000856 {
+  top: 739px;
+  left: 113px;
+  width: 296px;
+  height: 341px;
+  position: absolute;
+}
+.rectangle-1087 {
+  top: 739px;
+  left: 113px;
+  width: 296px;
+  height: 341px;
+  position: absolute;
+  background-color: #f4f4f4;
+}
+.rectangle-1086 {
+  top: 754px;
+  left: 126px;
+  width: 270px;
+  height: 252px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.rectangle-1088 {
+  top: 1017px;
+  left: 127px;
+  width: 269px;
+  height: 50px;
+  position: absolute;
+  background-color: #dedede;
+}
+.group-1000000857 {
+  top: 739px;
+  left: 764px;
+  width: 296px;
+  height: 341px;
+  position: absolute;
+}
+.rectangle-1087 {
+  top: 739px;
+  left: 764px;
+  width: 296px;
+  height: 341px;
+  position: absolute;
+  background-color: #f4f4f4;
+}
+.rectangle-1086 {
+  top: 754px;
+  left: 777px;
+  width: 270px;
+  height: 252px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.rectangle-1088 {
+  top: 1017px;
+  left: 778px;
+  width: 269px;
+  height: 50px;
+  position: absolute;
+  background-color: #dedede;
+}
+.group-1000000855 {
+  top: 739px;
+  left: 438px;
+  width: 296px;
+  height: 341px;
+  position: absolute;
+}
+.rectangle-1087 {
+  top: 739px;
+  left: 438px;
+  width: 296px;
+  height: 341px;
+  position: absolute;
+  background-color: #f4f4f4;
+}
+.rectangle-1086 {
+  top: 754px;
+  left: 451px;
+  width: 270px;
+  height: 252px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.rectangle-1088 {
+  top: 1017px;
+  left: 452px;
+  width: 269px;
+  height: 50px;
+  position: absolute;
+  background-color: #dedede;
+}
+.navigation-bar {
+  top: 154px;
+  left: 0px;
+  width: 1296px;
+  height: 48px;
+  position: absolute;
+  background-color: #6474d2;
+}
+.frame-108 {
+  top: 4px;
+  left: 4px;
+  width: 1280px;
+  height: 40px;
+  position: absolute;
+}
+.menu-item {
+  top: 0px;
+  left: 340px;
+  width: 113px;
+  height: 40px;
+  position: absolute;
+  background-color: #6575d3;
+}
+.text-menu-text {
+  top: 12px;
+  left: 40px;
+  width: 33px;
+  height: 16px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.menu-item {
+  top: 0px;
+  left: 453px;
+  width: 130px;
+  height: 40px;
+  position: absolute;
+  background-color: #6575d3;
+}
+.text-menu-text {
+  top: 12px;
+  left: 40px;
+  width: 50px;
+  height: 16px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.menu-item {
+  top: 0px;
+  left: 583px;
+  width: 173px;
+  height: 40px;
+  position: absolute;
+  background-color: #aab5f5;
+}
+.text-menu-text {
+  top: 12px;
+  left: 40px;
+  width: 93px;
+  height: 16px;
+  position: absolute;
+  background-color: #4a4a4a;
+}
+.menu-item {
+  top: 0px;
+  left: 756px;
+  width: 184px;
+  height: 40px;
+  position: absolute;
+  background-color: #6575d3;
+}
+.text-menu-text {
+  top: 12px;
+  left: 40px;
+  width: 104px;
+  height: 16px;
+  position: absolute;
+}
+.text-검색하기 {
+  top: 394px;
+  left: 118px;
+  width: 110px;
+  height: 35px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000871 {
+  top: 441px;
+  left: 116px;
+  width: 944px;
+  height: 192px;
+  position: absolute;
+}
+.rectangle-1092 {
+  top: 441px;
+  left: 116px;
+  width: 944px;
+  height: 192px;
+  position: absolute;
+  background-color: #d1d7fa;
+}
+.button-container {
+  top: 572px;
+  left: 923px;
+  width: 113px;
+  height: 48px;
+  position: absolute;
+  background-color: #6575d3;
+}
+.text-button-text {
+  top: 16px;
+  left: 40px;
+  width: 33px;
+  height: 16px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.group-1000000861 {
+  top: 460px;
+  left: 145px;
+  width: 239px;
+  height: 40px;
+  position: absolute;
+}
+.drop-down-expense {
+  top: 460px;
+  left: 208px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+}
+.input {
+  top: 0px;
+  left: 0px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.default-type {
+  top: 9px;
+  left: 12px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.food {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.cab {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.hotel {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.tip {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.visa-fee {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.other {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.vector {
+  top: 16.232284545898438px;
+  left: 164px;
+  width: 7.535429954528809px;
+  height: 12px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-시도 {
+  top: 466px;
+  left: 145px;
+  width: 46px;
+  height: 30px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000863 {
+  top: 517px;
+  left: 145px;
+  width: 240px;
+  height: 40px;
+  position: absolute;
+}
+.drop-down-expense {
+  top: 517px;
+  left: 209px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+}
+.input {
+  top: 0px;
+  left: 0px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.default-type {
+  top: 9px;
+  left: 12px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.food {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.cab {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.hotel {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.tip {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.visa-fee {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.other {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.vector {
+  top: 16.232284545898438px;
+  left: 164px;
+  width: 7.535429954528809px;
+  height: 12px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-분류 {
+  top: 523px;
+  left: 145px;
+  width: 46px;
+  height: 30px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000864 {
+  top: 517px;
+  left: 446px;
+  width: 240px;
+  height: 40px;
+  position: absolute;
+}
+.drop-down-expense {
+  top: 517px;
+  left: 510px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+}
+.input {
+  top: 0px;
+  left: 0px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.default-type {
+  top: 9px;
+  left: 12px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.food {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.cab {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.hotel {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.tip {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.visa-fee {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.other {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.vector {
+  top: 16.232284545898438px;
+  left: 164px;
+  width: 7.535429954528809px;
+  height: 12px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-품종 {
+  top: 523px;
+  left: 446px;
+  width: 46px;
+  height: 30px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000862 {
+  top: 460px;
+  left: 446px;
+  width: 268px;
+  height: 40px;
+  position: absolute;
+}
+.drop-down-expense {
+  top: 460px;
+  left: 538px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+}
+.input {
+  top: 0px;
+  left: 0px;
+  width: 176px;
+  height: 40px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.default-type {
+  top: 9px;
+  left: 12px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.food {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.cab {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.hotel {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.tip {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.visa-fee {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.other {
+  top: 9px;
+  left: 152px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+}
+.text-input {
+  top: 0px;
+  left: 0px;
+  width: 99px;
+  height: 22px;
+  position: absolute;
+  background-color: #262626;
+}
+.vector {
+  top: 16.232284545898438px;
+  left: 164px;
+  width: 7.535429954528809px;
+  height: 12px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-시군구 {
+  top: 466px;
+  left: 446px;
+  width: 69px;
+  height: 30px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000867 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 247px;
+  position: absolute;
+}
+.button-container {
+  top: 1101px;
+  left: 1141px;
+  width: 109px;
+  height: 102px;
+  position: absolute;
+  background-color: #455090;
+}
+.gpt-logo-1 {
+  top: 11.5px;
+  left: 94px;
+  width: 79px;
+  height: 79px;
+  position: absolute;
+}
+.group-1000000865 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 136.55210876464844px;
+  position: absolute;
+}
+.rectangle-1093 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 120px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.polygon-1 {
+  top: 1092.4036865234375px;
+  left: 1213.6214599609375px;
+  width: 35.48198699951172px;
+  height: 33.403987884521484px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-어떤-반려동물을-만나면-좋을지-알아보세요 {
+  top: 975px;
+  left: 1136px;
+  width: 121px;
+  height: 80px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000866 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 247px;
+  position: absolute;
+}
+.button-container {
+  top: 1101px;
+  left: 1141px;
+  width: 109px;
+  height: 102px;
+  position: absolute;
+  background-color: #455090;
+}
+.gpt-logo-1 {
+  top: 11.5px;
+  left: 94px;
+  width: 79px;
+  height: 79px;
+  position: absolute;
+}
+.group-1000000865 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 136.55210876464844px;
+  position: absolute;
+}
+.rectangle-1093 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 120px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.polygon-1 {
+  top: 1092.4036865234375px;
+  left: 1213.6214599609375px;
+  width: 35.48198699951172px;
+  height: 33.403987884521484px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-어떤-반려동물을-만나면-좋을지-알아보세요 {
+  top: 975px;
+  left: 1136px;
+  width: 121px;
+  height: 80px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000868 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 247px;
+  position: absolute;
+}
+.button-container {
+  top: 1101px;
+  left: 1141px;
+  width: 109px;
+  height: 102px;
+  position: absolute;
+  background-color: #455090;
+}
+.gpt-logo-1 {
+  top: 11.5px;
+  left: 94px;
+  width: 79px;
+  height: 79px;
+  position: absolute;
+}
+.group-1000000865 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 136.55210876464844px;
+  position: absolute;
+}
+.rectangle-1093 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 120px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.polygon-1 {
+  top: 1092.4036865234375px;
+  left: 1213.6214599609375px;
+  width: 35.48198699951172px;
+  height: 33.403987884521484px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-어떤-반려동물을-만나면-좋을지-알아보세요 {
+  top: 975px;
+  left: 1136px;
+  width: 121px;
+  height: 80px;
+  position: absolute;
+  background-color: #000000;
+}
+.group-1000000866 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 247px;
+  position: absolute;
+}
+.button-container {
+  top: 1101px;
+  left: 1141px;
+  width: 109px;
+  height: 102px;
+  position: absolute;
+  background-color: #455090;
+}
+.gpt-logo-1 {
+  top: 11.5px;
+  left: 94px;
+  width: 79px;
+  height: 79px;
+  position: absolute;
+}
+.group-1000000865 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 136.55210876464844px;
+  position: absolute;
+}
+.rectangle-1093 {
+  top: 956px;
+  left: 1126px;
+  width: 140px;
+  height: 120px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.polygon-1 {
+  top: 1092.4036865234375px;
+  left: 1213.6214599609375px;
+  width: 35.48198699951172px;
+  height: 33.403987884521484px;
+  position: absolute;
+  background-color: #d9d9d9;
+}
+.text-어떤-반려동물을-만나면-좋을지-알아보세요 {
+  top: 975px;
+  left: 1136px;
+  width: 121px;
+  height: 80px;
+  position: absolute;
+  background-color: #000000;
 }
