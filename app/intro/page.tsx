@@ -11,7 +11,7 @@ export default function IntroPage() {
           <div className={styles.heroContent}>
             <h2 className={styles.heroTitle}>새로운 가족을 만나세요</h2>
             <p className={styles.heroDescription}>
-              우리는 사랑이 필요한 동물들과 따뜻한 가정을 연결하는 플��폼입니다. 
+              우리는 사랑이 필요한 동물들과 따뜻한 가정을 연결하는 플랫폼입니다. 
               모든 동물이 행복한 가정을 찾을 수 있도록 돕고 있습니다.
             </p>
           </div>
