@@ -1,545 +1,301 @@
-.adoption-register {
-  top: 2676px;
-  left: 0px;
-  width: 1296px;
-  height: 1240px;
-  position: absolute;
-}
-.group-1000000853 {
-  top: 0px;
-  left: 0px;
-  width: 1368px;
-  height: 1240px;
-  position: absolute;
-}
-.rectangle-1084 {
-  top: 0px;
-  left: 0px;
-  width: 1296px;
-  height: 1240px;
-  position: absolute;
-  background-color: #ffffff;
-}
-.frame-107 {
-  top: 40px;
-  left: 72px;
-  width: 1296px;
-  height: 52px;
-  position: absolute;
-}
+/* Container */
 .container {
-  top: 8px;
-  left: 0px;
-  width: 110px;
-  height: 44px;
-  position: absolute;
+  width: 100%;
+  min-height: 100vh;
   background-color: #ffffff;
-  background-color: #949494;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
-.text-logo-here {
-  top: 14px;
-  left: 15px;
-  width: 79px;
-  height: 16px;
-  position: absolute;
-  background-color: #606060;
+
+/* Header */
+.header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 72px;
+  height: 92px;
+  display: flex;
+  align-items: center;
 }
-.button-container {
-  top: 0px;
-  left: 1018px;
-  width: 146px;
-  height: 48px;
-  position: absolute;
+
+.headerContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoContainer {
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  padding: 14px 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  color: #606060;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.headerTitle {
+  color: #373737;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.headerText {
+  color: #6a6a6a;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.loginButton {
   background-color: #455090;
+  color: #ffffff;
+  border: none;
+  border-radius: 40px;
+  padding: 16px 40px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
-.text-logout {
-  top: 16px;
-  left: 40px;
-  width: 66px;
-  height: 16px;
-  position: absolute;
-  background-color: #ffffff;
+
+.loginButton:hover {
+  background-color: #3a4580;
 }
-.text-button-text {
-  top: 16px;
-  left: 901px;
-  width: 88px;
-  height: 16px;
-  position: absolute;
-  background-color: #6a6a6a;
-}
-.text-title {
-  top: 48px;
-  left: 391px;
-  width: 453px;
-  height: 59px;
-  position: absolute;
-  background-color: #373737;
-}
-.text-.adoption-register {
-  top: 288px;
-  left: 104px;
-  width: 231px;
-  height: 47px;
-  position: absolute;
-  background-color: #373737;
-}
-.navigation-bar {
-  top: 154px;
-  left: 0px;
-  width: 1296px;
-  height: 48px;
-  position: absolute;
+
+/* Navigation */
+.navigation {
   background-color: #6474d2;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
 }
-.frame-108 {
-  top: 4px;
-  left: 4px;
-  width: 1280px;
-  height: 40px;
-  position: absolute;
+
+.navContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0;
 }
-.menu-item {
-  top: 0px;
-  left: 340px;
-  width: 113px;
+
+.navItem {
+  color: #ffffff;
+  padding: 12px 40px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
   height: 40px;
-  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.navItem:hover {
   background-color: #6575d3;
 }
-.text-menu-text {
-  top: 12px;
-  left: 40px;
-  width: 33px;
-  height: 16px;
-  position: absolute;
-  background-color: #ffffff;
-}
-.menu-item {
-  top: 0px;
-  left: 453px;
-  width: 130px;
-  height: 40px;
-  position: absolute;
-  background-color: #6575d3;
-}
-.text-menu-text {
-  top: 12px;
-  left: 40px;
-  width: 50px;
-  height: 16px;
-  position: absolute;
-  background-color: #ffffff;
-}
-.menu-item {
-  top: 0px;
-  left: 583px;
-  width: 173px;
-  height: 40px;
-  position: absolute;
-  background-color: #6575d3;
-}
-.text-menu-text {
-  top: 12px;
-  left: 40px;
-  width: 93px;
-  height: 16px;
-  position: absolute;
-  background-color: #ffffff;
-}
-.menu-item {
-  top: 0px;
-  left: 756px;
-  width: 184px;
-  height: 40px;
-  position: absolute;
+
+.navItemActive {
+  color: #ffffff;
+  padding: 12px 40px;
+  font-size: 14px;
+  cursor: pointer;
   background-color: #aab5f5;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
-.text-menu-text {
-  top: 12px;
-  left: 40px;
-  width: 104px;
-  height: 16px;
-  position: absolute;
+
+/* Main Content */
+.main {
+  padding: 40px 72px;
+  max-width: 1296px;
+  margin: 0 auto;
 }
-.rectangle-1094 {
-  top: 497px;
-  left: 109px;
-  width: 1021px;
-  height: 49px;
-  position: absolute;
-  background-color: #f0f0f0;
+
+/* Page Title */
+.pageTitle {
+  text-align: center;
+  margin-bottom: 40px;
 }
-.group-1000000870 {
-  top: 568px;
-  left: 114px;
-  width: 1016px;
-  height: 518px;
-  position: absolute;
+
+.title {
+  color: #373737;
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
 }
-.rectangle-1097 {
-  top: 568px;
-  left: 114px;
-  width: 1016px;
-  height: 518px;
-  position: absolute;
-  background-color: #f0f0f0;
+
+/* Address Section */
+.addressSection {
+  margin-bottom: 30px;
 }
-.rectangle-1095 {
-  top: 568px;
-  left: 114px;
-  width: 1016px;
-  height: 518px;
-  position: absolute;
-  background-color: #f0f0f0;
+
+.addressLabel {
+  display: block;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
-.rectangle-1096 {
-  top: 568px;
-  left: 72px;
-  width: 1091px;
-  height: 63px;
-  position: absolute;
-  background-color: #d9d9d9;
+
+.addressInputContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
-.text-주소 {
-  top: 382px;
-  left: 123px;
-  width: 46px;
-  height: 30px;
-  position: absolute;
-  background-color: #000000;
-}
-.rectangle-1098 {
-  top: 378px;
-  left: 194px;
-  width: 799px;
+
+.addressInput {
+  flex: 1;
   height: 34px;
-  position: absolute;
+  padding: 8px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 0;
   background-color: #ededed;
+  font-size: 14px;
 }
-.rectangle-1099 {
-  top: 378px;
-  left: 1014px;
+
+.addressInput:focus {
+  outline: none;
+  border-color: #455090;
+}
+
+.searchButton {
   width: 97px;
   height: 34px;
-  position: absolute;
   background-color: #d9d9d9;
+  border: none;
+  color: #000000;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
-.text-검색 {
-  top: 382px;
-  left: 1038px;
-  width: 46px;
-  height: 30px;
-  position: absolute;
-  background-color: #000000;
+
+.searchButton:hover {
+  background-color: #c0c0c0;
 }
-.group-1000000869 {
-  top: 435px;
-  left: 123px;
-  width: 240px;
-  height: 40px;
-  position: absolute;
+
+/* Filters Section */
+.filtersSection {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
 }
-.drop-down-expense {
-  top: 435px;
-  left: 187px;
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filterLabel {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.filterSelect {
   width: 176px;
   height: 40px;
-  position: absolute;
-}
-.input {
-  top: 0px;
-  left: 0px;
-  width: 176px;
-  height: 40px;
-  position: absolute;
+  padding: 8px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
   background-color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
 }
-.default-type {
-  top: 9px;
-  left: 12px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #455090;
 }
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #d9d9d9;
+
+/* Content Area */
+.contentArea {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  min-height: 400px;
 }
-.food {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.cab {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.hotel {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.tip {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.visa-fee {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.other {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.vector {
-  top: 16.232284545898438px;
-  left: 164px;
-  width: 7.535429954528809px;
-  height: 12px;
-  position: absolute;
-  background-color: #d9d9d9;
-}
-.text-category {
-  top: 441px;
-  left: 123px;
-  width: 46px;
-  height: 30px;
-  position: absolute;
-  background-color: #000000;
-}
-.group-1000000869 {
-  top: 435px;
-  left: 394px;
-  width: 240px;
-  height: 40px;
-  position: absolute;
-}
-.drop-down-expense {
-  top: 435px;
-  left: 458px;
-  width: 176px;
-  height: 40px;
-  position: absolute;
-}
-.input {
-  top: 0px;
-  left: 0px;
-  width: 176px;
-  height: 40px;
-  position: absolute;
-  background-color: #ffffff;
-}
-.default-type {
-  top: 9px;
-  left: 12px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #d9d9d9;
-}
-.food {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.cab {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.hotel {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.tip {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.visa-fee {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.other {
-  top: 9px;
-  left: 152px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-}
-.text-input {
-  top: 0px;
-  left: 0px;
-  width: 99px;
-  height: 22px;
-  position: absolute;
-  background-color: #262626;
-}
-.vector {
-  top: 16.232284545898438px;
-  left: 164px;
-  width: 7.535429954528809px;
-  height: 12px;
-  position: absolute;
-  background-color: #d9d9d9;
-}
-.text-품종 {
-  top: 441px;
-  left: 394px;
-  width: 46px;
-  height: 30px;
-  position: absolute;
-  background-color: #000000;
-}
-.text-toolbar {
-  top: 586px;
-  left: 137px;
-  width: 90px;
-  height: 30px;
-  position: absolute;
+
+.toolbar {
   background-color: #636363;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: inline-block;
 }
-.button-container {
-  top: 1108px;
-  left: 1017px;
+
+.toolbarText {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.contentBox {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholderText {
+  color: #636363;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Submit Button */
+.submitSection {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
+}
+
+.submitButton {
+  background-color: #6575d3;
+  color: #ffffff;
+  border: none;
+  border-radius: 40px;
+  padding: 16px 40px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
   width: 113px;
   height: 48px;
-  position: absolute;
-  background-color: #6575d3;
 }
-.text-button-text {
-  top: 16px;
-  left: 40px;
-  width: 33px;
-  height: 16px;
-  position: absolute;
-  background-color: #ffffff;
+
+.submitButton:hover {
+  background-color: #5a6ac0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main {
+    padding: 20px;
+  }
+  
+  .filtersSection {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .addressInputContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .searchButton {
+    width: 100%;
+  }
 }

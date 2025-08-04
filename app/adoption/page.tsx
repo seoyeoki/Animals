@@ -3,8 +3,10 @@
 import React, { useState } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function Adoption() {
+  const router = useRouter()
   const [selectedRegion, setSelectedRegion] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedBreed, setSelectedBreed] = useState('')
@@ -20,32 +22,13 @@ export default function Adoption() {
     })
   }
 
+  const handleCardClick = (animalId: string) => {
+    // 동물 카드 클릭 시 상세 페이지로 이동
+    router.push(`/adoption-detail?id=${animalId}`)
+  }
+
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <span className={styles.logo}>logo here</span>
-        </div>
-        <div className={styles.headerTitle}>
-          <span>Webpage Title Here</span>
-        </div>
-        <div className={styles.headerButtons}>
-          <span className={styles.headerText}>마이 페이지</span>
-          <button className={styles.loginButton}>로그인</button>
-        </div>
-      </header>
-
-      {/* Navigation Bar */}
-      <nav className={styles.navigation}>
-        <div className={styles.navContainer}>
-          <div className={styles.navItem}>소개</div>
-          <div className={styles.navItem}>이용법</div>
-          <div className={styles.navItem}>입양 및 입소</div>
-          <div className={styles.navItem}>입양동물 등록</div>
-        </div>
-      </nav>
-
       {/* Main Content */}
       <main className={styles.main}>
         {/* Back Arrow */}
@@ -151,7 +134,11 @@ export default function Adoption() {
         {/* Animal Cards Grid */}
         <div className={styles.animalGrid}>
           {/* Sample Animal Cards */}
-          <div className={styles.animalCard}>
+          <div 
+            className={styles.animalCard}
+            onClick={() => handleCardClick('dog1')}
+            style={{ cursor: 'pointer' }}
+          >
             <div className={styles.animalImage}></div>
             <div className={styles.animalInfo}>
               <h3 className={styles.animalName}>멍멍이</h3>
@@ -160,7 +147,11 @@ export default function Adoption() {
             </div>
           </div>
 
-          <div className={styles.animalCard}>
+          <div 
+            className={styles.animalCard}
+            onClick={() => handleCardClick('cat1')}
+            style={{ cursor: 'pointer' }}
+          >
             <div className={styles.animalImage}></div>
             <div className={styles.animalInfo}>
               <h3 className={styles.animalName}>냥냥이</h3>
@@ -169,7 +160,11 @@ export default function Adoption() {
             </div>
           </div>
 
-          <div className={styles.animalCard}>
+          <div 
+            className={styles.animalCard}
+            onClick={() => handleCardClick('dog2')}
+            style={{ cursor: 'pointer' }}
+          >
             <div className={styles.animalImage}></div>
             <div className={styles.animalInfo}>
               <h3 className={styles.animalName}>댕댕이</h3>
@@ -178,7 +173,11 @@ export default function Adoption() {
             </div>
           </div>
 
-          <div className={styles.animalCard}>
+          <div 
+            className={styles.animalCard}
+            onClick={() => handleCardClick('cat2')}
+            style={{ cursor: 'pointer' }}
+          >
             <div className={styles.animalImage}></div>
             <div className={styles.animalInfo}>
               <h3 className={styles.animalName}>고양이</h3>

@@ -1,0 +1,70 @@
+.chatbot {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+}
+
+.chatbotBubble {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.chatbotText {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.chatbotTail {
+  position: absolute;
+  bottom: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+}
+
+.chatbotButton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #007bff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+
+.chatbotButton:hover {
+  transform: scale(1.05);
+}
+
+.chatbotIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

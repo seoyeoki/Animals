@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { ABeeZee } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
+import Chatbot from './components/Chatbot'
 
 const abeeZee = ABeeZee({ 
   weight: '400',
@@ -25,6 +26,7 @@ export default function RootLayout({
         <main style={{ marginTop: '140px' }}>
           {children}
         </main>
+        <Chatbot />
       </body>
     </html>
   )

@@ -1,14 +1,65 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import styles from './Header.module.css'
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userData, setUserData] = useState(null)
+  const router = useRouter()
 
-  const handleLoginToggle = () => {
-    setIsLoggedIn(!isLoggedIn)
+  // 컴포넌트 마운트 시 로그인 상태 확인
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const loginStatus = localStorage.getItem('isLoggedIn')
+      const user = localStorage.getItem('user')
+      
+      if (loginStatus === 'true' && user) {
+        setIsLoggedIn(true)
+        setUserData(JSON.parse(user))
+      } else {
+        setIsLoggedIn(false)
+        setUserData(null)
+      }
+    }
+
+    checkLoginStatus()
+
+    // localStorage 변경 감지
+    window.addEventListener('storage', checkLoginStatus)
+    
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus)
+    }
+  }, [])
+
+  const handleLoginClick = () => {
+    if (isLoggedIn) {
+      // 로그아웃 처리
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      localStorage.removeItem('isLoggedIn')
+      setIsLoggedIn(false)
+      setUserData(null)
+      
+      // 홈 화면으로 이동
+      router.push('/')
+    } else {
+      // 로그인 페이지로 이동
+      router.push('/login')
+    }
+  }
+
+  const handleMyPageClick = () => {
+    if (isLoggedIn) {
+      // 로그인된 상태면 마이페이지로 이동
+      router.push('/mypage')
+    } else {
+      // 로그인되지 않은 상태면 로그인 페이지로 이동
+      router.push('/login')
+    }
   }
 
   return (
@@ -23,12 +74,15 @@ export default function Header() {
             </Link>
           </div>
           <div className={styles.userSection}>
-            <Link href="/mypage" className={styles.mypageButton}>
+            <button 
+              className={styles.mypageButton}
+              onClick={handleMyPageClick}
+            >
               마이 페이지
-            </Link>
+            </button>
             <button 
               className={styles.loginButton}
-              onClick={handleLoginToggle}
+              onClick={handleLoginClick}
             >
               {isLoggedIn ? '로그아웃' : '로그인'}
             </button>
@@ -48,7 +102,7 @@ export default function Header() {
           <Link href="/adoption" className={styles.navItem}>
             입양 및 입소
           </Link>
-          <Link href="/register" className={styles.navItem}>
+          <Link href="/adoption-register" className={styles.navItem}>
             입양동물 등록
           </Link>
         </div>

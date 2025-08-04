@@ -1,8 +1,18 @@
+'use client'
+
 import React from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
+
+  const handleCardClick = (animalId: string) => {
+    // 동물 카드 클릭 시 상세 페이지로 이동
+    router.push(`/adoption-detail?id=${animalId}`)
+  }
+
   return (
     <div className={styles.container}>
       <section className={styles.content}>
@@ -16,9 +26,18 @@ export default function Home() {
           
           <div className={styles.cardGrid}>
             {[...Array(3)].map((_, index) => (
-              <div key={index} className={styles.card}>
+              <div 
+                key={index} 
+                className={styles.card}
+                onClick={() => handleCardClick(`gangseo-${index + 1}`)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className={styles.cardImage}></div>
-                <div className={styles.cardInfo}></div>
+                <div className={styles.cardInfo}>
+                  <h3 className={styles.animalName}>강서 {index + 1}번</h3>
+                  <p className={styles.animalBreed}>믹스견</p>
+                  <p className={styles.animalLocation}>서울 강서구</p>
+                </div>
               </div>
             ))}
           </div>
@@ -32,28 +51,23 @@ export default function Home() {
           
           <div className={styles.cardGrid}>
             {[...Array(3)].map((_, index) => (
-              <div key={index} className={styles.card}>
+              <div 
+                key={index} 
+                className={styles.card}
+                onClick={() => handleCardClick(`junggu-${index + 1}`)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className={styles.cardImage}></div>
-                <div className={styles.cardInfo}></div>
+                <div className={styles.cardInfo}>
+                  <h3 className={styles.animalName}>중구 {index + 1}번</h3>
+                  <p className={styles.animalBreed}>페르시안</p>
+                  <p className={styles.animalLocation}>서울 중구</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      <div className={styles.chatbot}>
-        <div className={styles.chatbotBubble}>
-          <span className={styles.chatbotText}>챗봇 이름또는로고</span>
-          <div className={styles.chatbotTail}></div>
-        </div>
-        <button className={styles.chatbotButton}>
-          <img 
-            src="https://api.builder.io/api/v1/image/assets/TEMP/c829a260964bfc445a8395b93b2849770b8c9ec9?width=158" 
-            alt="ChatBot" 
-            className={styles.chatbotIcon}
-          />
-        </button>
-      </div>
     </div>
   )
 }

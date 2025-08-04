@@ -1,152 +1,99 @@
-import React from "react";
-import './page.module.css';
+'use client'
+
+import React, { useState } from 'react'
+import styles from './page.module.css'
+import Link from 'next/link'
 
 export default function AdoptionRegister() {
-  return (
-    <>
-      <div className="입양동물-등록">
-<div className="group-1000000853">
-<div className="rectangle-1084">
-</div>
-<div className="frame-107">
-<div className="container">
-<p className="text-logo-here">logo-here
-</p>
-</div>
-<div className="button-container">
-<p className="text-로그아웃">로그아웃
-</p>
-</div>
-<p className="text-button-text">button-text
-</p>
-</div>
-<p className="text-title">title
-</p>
-<p className="text-입양동물-등록">입양동물-등록
-</p>
-</div>
-<div className="navigation-bar">
-<div className="frame-108">
-<div className="menu-item">
-<p className="text-menu-text">menu-text
-</p>
-</div>
-<div className="menu-item">
-<p className="text-menu-text">menu-text
-</p>
-</div>
-<div className="menu-item">
-<p className="text-menu-text">menu-text
-</p>
-</div>
-<div className="menu-item">
-<p className="text-menu-text">menu-text
-</p>
-</div>
-</div>
-</div>
-<div className="rectangle-1094">
-</div>
-<div className="group-1000000870">
-<div className="rectangle-1097">
-</div>
-<div className="rectangle-1095">
-</div>
-<div className="rectangle-1096">
-</div>
-</div>
-<p className="text-주소">주소
-</p>
-<div className="rectangle-1098">
-</div>
-<div className="rectangle-1099">
-</div>
-<p className="text-검색">검색
-</p>
-<div className="group-1000000869">
-<div className="drop-down-(expense)">
-<div className="input">
-<div className="default-type">
-<p className="text-input">input
-</p>
-</div>
-<div className="food">
-<p className="text-input">input
-</p>
-</div>
-<div className="cab">
-<p className="text-input">input
-</p>
-</div>
-<div className="hotel">
-<p className="text-input">input
-</p>
-</div>
-<div className="tip">
-<p className="text-input">input
-</p>
-</div>
-<div className="visa-fee">
-<p className="text-input">input
-</p>
-</div>
-<div className="other">
-<p className="text-input">input
-</p>
-</div>
-<div className="vector">
-</div>
-</div>
-</div>
-<p className="text-분류">분류
-</p>
-</div>
-<div className="group-1000000869">
-<div className="drop-down-(expense)">
-<div className="input">
-<div className="default-type">
-<p className="text-input">input
-</p>
-</div>
-<div className="food">
-<p className="text-input">input
-</p>
-</div>
-<div className="cab">
-<p className="text-input">input
-</p>
-</div>
-<div className="hotel">
-<p className="text-input">input
-</p>
-</div>
-<div className="tip">
-<p className="text-input">input
-</p>
-</div>
-<div className="visa-fee">
-<p className="text-input">input
-</p>
-</div>
-<div className="other">
-<p className="text-input">input
-</p>
-</div>
-<div className="vector">
-</div>
-</div>
-</div>
-<p className="text-품종">품종
-</p>
-</div>
-<p className="text-toolbar">toolbar
-</p>
-<div className="button-container">
-<p className="text-button-text">button-text
-</p>
-</div>
-</div>
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedBreed, setSelectedBreed] = useState('')
+  const [address, setAddress] = useState('')
 
-    </>
-  );
+  const handleSubmit = () => {
+    // 등록 로직 구현
+    console.log('Registration data:', {
+      address,
+      category: selectedCategory,
+      breed: selectedBreed
+    })
+  }
+
+  return (
+    <div className={styles.container}>
+      {/* Main Content */}
+      <main className={styles.main}>
+        {/* Page Title */}
+        <div className={styles.pageTitle}>
+          <h1 className={styles.title}>입양동물 등록</h1>
+        </div>
+
+        {/* Address Section */}
+        <div className={styles.addressSection}>
+          <label className={styles.addressLabel}>주소</label>
+          <div className={styles.addressInputContainer}>
+            <input 
+              type="text" 
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="주소를 입력하세요"
+              className={styles.addressInput}
+            />
+            <button className={styles.searchButton}>검색</button>
+          </div>
+        </div>
+
+        {/* Category and Breed Section */}
+        <div className={styles.filtersSection}>
+          <div className={styles.filterGroup}>
+            <label className={styles.filterLabel}>분류</label>
+            <select 
+              value={selectedCategory} 
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className={styles.filterSelect}
+            >
+              <option value="">분류를 선택하세요</option>
+              <option value="dog">강아지</option>
+              <option value="cat">고양이</option>
+              <option value="other">기타</option>
+            </select>
+          </div>
+
+          <div className={styles.filterGroup}>
+            <label className={styles.filterLabel}>품종</label>
+            <select 
+              value={selectedBreed} 
+              onChange={(e) => setSelectedBreed(e.target.value)}
+              className={styles.filterSelect}
+            >
+              <option value="">품종을 선택하세요</option>
+              <option value="mixed">믹스</option>
+              <option value="labrador">래브라도</option>
+              <option value="golden">골든리트리버</option>
+              <option value="persian">페르시안</option>
+              <option value="siamese">샴</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className={styles.contentArea}>
+          <div className={styles.toolbar}>
+            <span className={styles.toolbarText}>ToolBar</span>
+          </div>
+          
+          <div className={styles.contentBox}>
+            {/* 여기에 실제 등록 폼 내용이 들어갈 예정 */}
+            <p className={styles.placeholderText}>등록 폼이 여기에 표시됩니다</p>
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <div className={styles.submitSection}>
+          <button onClick={handleSubmit} className={styles.submitButton}>
+            등록
+          </button>
+        </div>
+      </main>
+    </div>
+  )
 }
