@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import styles from './Header.module.css'
 
 export default function Header() {
@@ -64,13 +65,21 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      {/* 상단 흰색 헤더 */}
+      {/* 상단 베이지 헤더 */}
       <div className={styles.topHeader}>
         <div className={styles.topHeaderContent}>
           <div className={styles.logoSection}>
-            <div className={styles.logo}>Logo Here</div>
+            <div className={styles.logo}>
+              <Image 
+                src="/logo.png" 
+                alt="멍탐정 로고" 
+                width={40} 
+                height={40}
+                className={styles.logoImage}
+              />
+            </div>
             <Link href="/" className={styles.title}>
-              <h1>Webpage Title Here</h1>
+              <h1>멍탐정</h1>
             </Link>
           </div>
           <div className={styles.userSection}>
@@ -90,7 +99,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 하단 파란색 네비게이션 바 */}
+      {/* 하단 우드 톤 네비게이션 바 */}
       <nav className={styles.navigation}>
         <div className={styles.navContent}>
           <Link href="/intro" className={styles.navItem}>
@@ -101,9 +110,6 @@ export default function Header() {
           </Link>
           <Link href="/adoption" className={styles.navItem}>
             입양 및 입소
-          </Link>
-          <Link href="/adoption-register" className={styles.navItem}>
-            입양동물 등록
           </Link>
         </div>
       </nav>

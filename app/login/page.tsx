@@ -18,7 +18,7 @@ export default function Login() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('/users/login', {
+      const response = await fetch('/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,17 +34,14 @@ export default function Login() {
         const userData = await response.json()
         console.log('Login successful:', userData)
         
-        // 세션 유지를 위한 데이터 저장
+        // 백엔드 응답: {id: , email: , password: , nickname: }
+        // 로컬 스토리지에 사용자 정보 저장 (비밀번호 포함)
         localStorage.setItem('user', JSON.stringify({
           id: userData.id,
           email: userData.email,
+          password: userData.password, // 백엔드에서 받은 비밀번호
           nickname: userData.nickname
         }))
-        
-        // 토큰이 있다면 저장
-        if (userData.token) {
-          localStorage.setItem('token', userData.token)
-        }
         
         // 로그인 상태를 전역으로 설정 (Header 컴포넌트에서 사용)
         localStorage.setItem('isLoggedIn', 'true')
@@ -67,13 +64,6 @@ export default function Login() {
     <div className={styles.container}>
       {/* Main Content */}
       <main className={styles.main}>
-        {/* Back Arrow */}
-        <div className={styles.backArrow}>
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
-            <path d="M19 12H5M12 19L5 12L12 5" stroke="#1D1A20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-
         {/* Page Title */}
         <div className={styles.pageTitle}>
           <h1 className={styles.title}>로그인</h1>

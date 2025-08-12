@@ -3,7 +3,7 @@
   min-height: 100vh;
   position: relative;
   padding-top: 0;
-  background: #FFF;
+  background: var(--Background-Beige);
 }
 
 .content {
@@ -13,12 +13,12 @@
 }
 
 .mainTitle {
-  color: var(--Neutral-Darker);
+  color: var(--Primary-Wood);
   text-align: center;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 40px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.4px;
   margin-bottom: 47px;
@@ -35,12 +35,12 @@
 }
 
 .locationText {
-  color: var(--Neutral-Darker);
+  color: var(--Text-Brown);
   text-align: center;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 25px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
   letter-spacing: -0.25px;
 }
@@ -48,8 +48,9 @@
 .locationUnderline {
   width: 94px;
   height: 8px;
-  background: var(--Light-Blue);
+  background: var(--Primary-Wood);
   margin: 8px auto 0;
+  border-radius: 4px;
 }
 
 .cardGrid {
@@ -61,28 +62,29 @@
 }
 
 .card {
-  background: white;
+  background: var(--Light-Beige);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px var(--Shadow-Brown);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   height: 341px;
+  border: 1px solid var(--Border-Beige);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(139, 69, 19, 0.25);
 }
 
 .cardImage {
   width: 100%;
   height: 252px;
-  background: #F4F4F4;
-  background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
-                    linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
-                    linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
-                    linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+  background: var(--Medium-Beige);
+  background-image: linear-gradient(45deg, var(--Medium-Beige) 25%, transparent 25%), 
+                    linear-gradient(-45deg, var(--Medium-Beige) 25%, transparent 25%), 
+                    linear-gradient(45deg, transparent 75%, var(--Medium-Beige) 75%), 
+                    linear-gradient(-45deg, transparent 75%, var(--Medium-Beige) 75%);
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
@@ -93,10 +95,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: var(--Light-Beige);
 }
 
 .animalName {
-  color: #373737;
+  color: var(--Primary-Wood);
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -104,14 +107,14 @@
 }
 
 .animalBreed {
-  color: #6B6B6B;
+  color: var(--Text-Brown);
   font-size: 16px;
   margin-bottom: 4px;
   margin: 0 0 4px 0;
 }
 
 .animalLocation {
-  color: #9B9B9B;
+  color: var(--Secondary-Wood);
   font-size: 14px;
   margin: 0;
 }

@@ -46,13 +46,6 @@ export default function MyPage() {
     <div className={styles.container}>
       {/* Main Content */}
       <main className={styles.main}>
-        {/* Back Arrow */}
-        <div className={styles.backArrow}>
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
-            <path d="M19 12H5M12 19L5 12L12 5" stroke="#1D1A20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-
         {/* Page Title */}
         <div className={styles.pageTitle}>
           <h1 className={styles.title}>마이 페이지</h1>

@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   padding-top: 140px;
-  background: #FFF;
+  background: var(--Background-Beige);
 }
 
 .content {
@@ -12,10 +12,10 @@
 }
 
 .title {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.48px;
   text-align: center;
@@ -28,10 +28,10 @@
 }
 
 .introText {
-  color: var(--Primary-Dark);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.24px;
 }
@@ -54,16 +54,17 @@
 .stepNumber {
   width: 80px;
   height: 80px;
-  background: var(--Primary-Dark);
-  color: white;
+  background: var(--Primary-Wood);
+  color: var(--Light-Beige);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 36px;
-  font-weight: 400;
+  font-weight: 600;
   flex-shrink: 0;
+  box-shadow: 0 4px 20px var(--Shadow-Brown);
 }
 
 .stepContent {
@@ -74,18 +75,18 @@
 }
 
 .stepTitle {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 28px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.28px;
   margin-bottom: 16px;
 }
 
 .stepDescription {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Text-Brown);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
@@ -96,22 +97,25 @@
 .stepImage {
   width: 100%;
   height: 200px;
-  background: #F4F4F4;
+  background: var(--Medium-Beige);
   border-radius: 15px;
+  border: 1px solid var(--Border-Beige);
 }
 
 .tips {
-  background: #F9F9F9;
+  background: var(--Light-Beige);
   border-radius: 25px;
   padding: 50px 40px;
   margin-bottom: 80px;
+  border: 1px solid var(--Border-Beige);
+  box-shadow: 0 4px 20px var(--Shadow-Brown);
 }
 
 .tipsTitle {
-  color: var(--Primary-Dark);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.32px;
   text-align: center;
@@ -132,12 +136,12 @@
 
 .tipIcon {
   font-size: 20px;
-  color: var(--Primary-Dark);
+  color: var(--Primary-Wood);
 }
 
 .tipText {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Text-Brown);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: normal;
@@ -146,41 +150,42 @@
 
 .cta {
   text-align: center;
-  background: linear-gradient(135deg, var(--Primary-Dark) 0%, var(--Navigation-Blue) 100%);
+  background: linear-gradient(135deg, var(--Primary-Wood) 0%, var(--Secondary-Wood) 100%);
   border-radius: 25px;
   padding: 60px 40px;
-  color: white;
+  color: var(--Light-Beige);
+  box-shadow: 0 8px 30px var(--Shadow-Brown);
 }
 
 .ctaTitle {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.32px;
   margin-bottom: 16px;
-  color: white;
+  color: var(--Light-Beige);
 }
 
 .ctaDescription {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.2px;
   margin-bottom: 32px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(245, 241, 235, 0.9);
 }
 
 .ctaButton {
-  background: white;
-  color: var(--Primary-Dark);
+  background: var(--Light-Beige);
+  color: var(--Primary-Wood);
   border: none;
   border-radius: 40px;
   padding: 16px 40px;
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 16px;
   letter-spacing: -0.18px;
   cursor: pointer;
@@ -189,6 +194,7 @@
 
 .ctaButton:hover {
   transform: translateY(-2px);
+  background: var(--Medium-Beige);
 }
 
 @media (max-width: 768px) {

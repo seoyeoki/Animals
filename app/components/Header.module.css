@@ -4,14 +4,14 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #f5f1eb;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
 }
 
 .topHeader {
-  background: white;
+  background: #f5f1eb;
   padding: 1rem 2rem;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #d4c4a8;
 }
 
 .topHeaderContent {
@@ -29,23 +29,34 @@
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoImage {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.2);
 }
 
 .title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #8b4513;
   margin: 0;
   text-decoration: none;
   cursor: pointer;
   transition: opacity 0.2s;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .title:hover {
   opacity: 0.8;
+}
+
+.title h1 {
+  margin: 0;
+  color: #8b4513;
 }
 
 .userSection {
@@ -56,36 +67,43 @@
 
 .mypageButton {
   padding: 0.5rem 1rem;
-  background: #f8f9fa;
-  color: #333;
+  background: #e6d7c3;
+  color: #8b4513;
   text-decoration: none;
-  border-radius: 4px;
+  border: 1px solid #d4c4a8;
+  border-radius: 6px;
   font-size: 0.9rem;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .mypageButton:hover {
-  background: #e9ecef;
+  background: #d4c4a8;
+  color: #654321;
 }
 
 .loginButton {
   padding: 0.5rem 1rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  background: #8b4513;
+  color: #f5f1eb;
+  border: 1px solid #654321;
+  border-radius: 6px;
   font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .loginButton:hover {
-  background: #0056b3;
+  background: #654321;
+  color: #f5f1eb;
 }
 
 .navigation {
-  background: #007bff;
+  background: #8b4513;
   padding: 0.75rem 2rem;
+  border-bottom: 2px solid #654321;
 }
 
 .navContent {
@@ -97,17 +115,20 @@
 }
 
 .navItem {
-  color: white;
+  color: #f5f1eb;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  border-radius: 6px;
+  transition: all 0.2s;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .navItem:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(245, 241, 235, 0.15);
+  color: #f5f1eb;
+  transform: translateY(-1px);
 }
 
 /* 반응형 디자인 */
@@ -137,5 +158,9 @@
   .navItem {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
+  }
+  
+  .title {
+    font-size: 1.3rem;
   }
 } 

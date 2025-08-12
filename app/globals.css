@@ -1,9 +1,13 @@
 :root {
-  --Primary-Dark: #455090;
-  --Neutral-Darker: #373737;
-  --Miscellaneous-Text-Field---BG: #FFF;
-  --Navigation-Blue: #6575D3;
-  --Light-Blue: #ABB6F5;
+  --Primary-Wood: #8b4513;
+  --Secondary-Wood: #654321;
+  --Light-Beige: #f5f1eb;
+  --Medium-Beige: #e6d7c3;
+  --Dark-Beige: #d4c4a8;
+  --Text-Brown: #5d4037;
+  --Background-Beige: #faf8f5;
+  --Border-Beige: #d4c4a8;
+  --Shadow-Brown: rgba(139, 69, 19, 0.15);
 }
 
 * {
@@ -13,9 +17,10 @@
 }
 
 body {
-  font-family: 'ABeeZee', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', 'ABeeZee', -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 400;
-  background: #FFF;
+  background: var(--Background-Beige);
+  color: var(--Text-Brown);
 }
 
 a {

@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 export default function Register() {
   const router = useRouter()
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     nickname: '',
     password: '',
@@ -55,16 +54,16 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch('/users/register', {
+      const response = await fetch('/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
           email: formData.email,
           password: formData.password,
-          nickname: formData.nickname
+          nickname: formData.nickname,
+          confirmPassword: formData.confirmPassword
         })
       })
 
@@ -96,18 +95,6 @@ export default function Register() {
       <main className={styles.main}>
         <div className={styles.registerContainer}>
           <form className={styles.registerForm} onSubmit={handleSubmit}>
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>이름 *</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className={styles.input}
-                required
-              />
-            </div>
-            
             <div className={styles.inputGroup}>
               <label className={styles.label}>이메일 *</label>
               <input

@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   padding-top: 140px;
-  background: #FFF;
+  background: var(--Background-Beige);
 }
 
 .content {
@@ -12,10 +12,10 @@
 }
 
 .title {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.48px;
   text-align: center;
@@ -34,18 +34,18 @@
 }
 
 .heroTitle {
-  color: var(--Primary-Dark);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 36px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.36px;
   margin-bottom: 24px;
 }
 
 .heroDescription {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Text-Brown);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
@@ -55,9 +55,10 @@
 .heroImage {
   width: 400px;
   height: 300px;
-  background: #F4F4F4;
+  background: var(--Medium-Beige);
   border-radius: 20px;
   flex-shrink: 0;
+  border: 1px solid var(--Border-Beige);
 }
 
 .features {
@@ -65,10 +66,10 @@
 }
 
 .sectionTitle {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.32px;
   text-align: center;
@@ -82,35 +83,39 @@
 }
 
 .featureCard {
-  background: #F9F9F9;
+  background: var(--Light-Beige);
   border-radius: 20px;
   padding: 40px 30px;
   text-align: center;
   transition: transform 0.3s ease;
+  border: 1px solid var(--Border-Beige);
+  box-shadow: 0 4px 20px var(--Shadow-Brown);
 }
 
 .featureCard:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(139, 69, 19, 0.25);
 }
 
 .featureIcon {
   font-size: 48px;
   margin-bottom: 20px;
+  color: var(--Primary-Wood);
 }
 
 .featureTitle {
-  color: var(--Primary-Dark);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Primary-Wood);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.22px;
   margin-bottom: 16px;
 }
 
 .featureDescription {
-  color: var(--Neutral-Darker);
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--Text-Brown);
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -118,14 +123,15 @@
 }
 
 .stats {
-  background: linear-gradient(135deg, var(--Primary-Dark) 0%, var(--Navigation-Blue) 100%);
+  background: linear-gradient(135deg, var(--Primary-Wood) 0%, var(--Secondary-Wood) 100%);
   border-radius: 25px;
   padding: 60px 40px;
-  color: white;
+  color: var(--Light-Beige);
+  box-shadow: 0 8px 30px var(--Shadow-Brown);
 }
 
 .stats .sectionTitle {
-  color: white;
+  color: var(--Light-Beige);
   margin-bottom: 50px;
 }
 
@@ -140,22 +146,22 @@
 }
 
 .statNumber {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.48px;
   margin-bottom: 12px;
-  color: white;
+  color: var(--Light-Beige);
 }
 
 .statLabel {
-  font-family: ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.18px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(245, 241, 235, 0.9);
 }
 
 @media (max-width: 768px) {
