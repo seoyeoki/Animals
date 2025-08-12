@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -23,7 +23,7 @@ interface AnimalData {
   filename: string
 }
 
-export default function AdoptionDetail() {
+function AdoptionDetailContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isLiked, setIsLiked] = useState(false)
@@ -424,5 +424,13 @@ export default function AdoptionDetail() {
         </div>
       </main>
     </div>
+  )
+}
+
+export default function AdoptionDetail() {
+  return (
+    <Suspense fallback={<div>로딩 중...</div>}>
+      <AdoptionDetailContent />
+    </Suspense>
   )
 }

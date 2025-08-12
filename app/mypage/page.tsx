@@ -4,8 +4,14 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './page.module.css'
 
+interface UserData {
+  id: string
+  email: string
+  nickname: string
+}
+
 export default function MyPage() {
-  const [userData, setUserData] = useState(null)
+  const [userData, setUserData] = useState<UserData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
@@ -15,7 +21,14 @@ export default function MyPage() {
     const user = localStorage.getItem('user')
     
     if (loginStatus === 'true' && user) {
-      setUserData(JSON.parse(user))
+      try {
+        const parsedUser = JSON.parse(user) as UserData
+        setUserData(parsedUser)
+      } catch (error) {
+        console.error('Failed to parse user data:', error)
+        router.push('/login')
+        return
+      }
     } else {
       // 로그인되지 않은 상태면 로그인 페이지로 이동
       router.push('/login')
