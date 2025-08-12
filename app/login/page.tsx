@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './page.module.css'
 import Link from 'next/link'
+import Header from '../components/Header'
 
 export default function Login() {
   const [email, setEmail] = useState('')
