@@ -337,6 +337,21 @@ export default function Adoption() {
             </div>
 
             <div className={styles.filterGroup}>
+              <label className={styles.filterLabel}>시군구</label>
+              <select 
+                value={selectedDistrict} 
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                className={styles.filterSelect}
+              >
+                <option value="">전체</option>
+                <option value="gangnam">강남구</option>
+                <option value="seocho">서초구</option>
+                <option value="mapo">마포구</option>
+                <option value="hongdae">홍대입구</option>
+              </select>
+            </div>
+
+            <div className={styles.filterGroup}>
               <label className={styles.filterLabel}>크기</label>
               <select 
                 value={selectedCategory} 
@@ -366,21 +381,6 @@ export default function Adoption() {
                     {breed.kindName}
                   </option>
                 ))}
-              </select>
-            </div>
-
-            <div className={styles.filterGroup}>
-              <label className={styles.filterLabel}>시군구</label>
-              <select 
-                value={selectedDistrict} 
-                onChange={(e) => setSelectedDistrict(e.target.value)}
-                className={styles.filterSelect}
-              >
-                <option value="">전체</option>
-                <option value="gangnam">강남구</option>
-                <option value="seocho">서초구</option>
-                <option value="mapo">마포구</option>
-                <option value="hongdae">홍대입구</option>
               </select>
             </div>
           </div>

@@ -73,8 +73,8 @@ export default function Header() {
               <Image 
                 src="/logo.png" 
                 alt="멍탐정 로고" 
-                width={40} 
-                height={40}
+                width={50} 
+                height={50}
                 className={styles.logoImage}
               />
             </div>
