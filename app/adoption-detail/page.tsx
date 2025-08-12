@@ -226,15 +226,7 @@ function AdoptionDetailContent() {
     console.log('Share clicked')
   }
 
-  const handleEdit = () => {
-    console.log('Edit clicked')
-  }
 
-  const handleDelete = () => {
-    if (confirm('정말 삭제하시겠습니까?')) {
-      console.log('Delete confirmed')
-    }
-  }
 
   const handleContact = () => {
     if (animalData?.careTel) {
@@ -298,11 +290,6 @@ function AdoptionDetailContent() {
           <span className={styles.modifiedDate}>
             공고기간: {formatDate(animalData.noticeSdt)} ~ {formatDate(animalData.noticeEdt)}
           </span>
-          <div className={styles.actionButtons}>
-            <button className={styles.editButton} onClick={handleEdit}>수정</button>
-            <span className={styles.separator}>|</span>
-            <button className={styles.deleteButton} onClick={handleDelete}>삭제</button>
-          </div>
         </div>
 
         {/* Content Area */}
@@ -364,20 +351,15 @@ function AdoptionDetailContent() {
                     <span className={styles.infoValue}>{animalData.desertionNo || '번호 미상'}</span>
                   </div>
                   
-                  <div className={styles.infoItem}>
-                    <span className={styles.infoLabel}>공고기간:</span>
-                    <span className={styles.infoValue}>
-                      {formatDate(animalData.noticeSdt)} ~ {formatDate(animalData.noticeEdt)}
-                    </span>
-                  </div>
+
                 </div>
                 
-                {animalData.specialMark && (
-                  <div className={styles.specialMark}>
-                    <h3 className={styles.specialTitle}>특이사항</h3>
-                    <p className={styles.specialText}>{animalData.specialMark}</p>
-                  </div>
-                )}
+                <div className={styles.specialMark}>
+                  <h3 className={styles.specialTitle}>특이사항</h3>
+                  <p className={styles.specialText}>
+                    {animalData.specialMark || '특이사항이 없습니다.'}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -385,7 +367,7 @@ function AdoptionDetailContent() {
           {/* Image Section */}
           <div className={styles.imageSection}>
             <div className={styles.imageContainer}>
-              {animalData.filename ? (
+              {animalData.filename && animalData.filename.trim() !== '' ? (
                 <img 
                   src={animalData.filename} 
                   alt={getBreedText(animalData.kindCd)}
@@ -393,6 +375,14 @@ function AdoptionDetailContent() {
                   onError={(e) => {
                     const target = e.target as HTMLImageElement
                     target.style.display = 'none'
+                    // 이미지 로드 실패 시 placeholder 표시
+                    const container = target.parentElement
+                    if (container) {
+                      const placeholder = document.createElement('div')
+                      placeholder.className = styles.imagePlaceholder
+                      placeholder.innerHTML = '<span>이미지를 불러올 수 없습니다</span>'
+                      container.appendChild(placeholder)
+                    }
                   }}
                 />
               ) : (

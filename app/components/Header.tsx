@@ -17,22 +17,62 @@ export default function Header() {
       const loginStatus = localStorage.getItem('isLoggedIn')
       const user = localStorage.getItem('user')
       
+             // 개발 환경에서만 디버깅 로그 출력
+       if (process.env.NODE_ENV === 'development') {
+         console.log('Header - Login status check:', { 
+           loginStatus, 
+           user,
+           loginStatusType: typeof loginStatus,
+           loginStatusStrict: loginStatus === 'true',
+           userExists: !!user
+         })
+       }
+      
       if (loginStatus === 'true' && user) {
-        setIsLoggedIn(true)
-        setUserData(JSON.parse(user))
-      } else {
-        setIsLoggedIn(false)
-        setUserData(null)
-      }
+                 try {
+           const parsedUser = JSON.parse(user)
+           if (process.env.NODE_ENV === 'development') {
+             console.log('Header - Setting logged in state with user:', parsedUser)
+           }
+           setIsLoggedIn(true)
+           setUserData(parsedUser)
+         } catch (error) {
+           console.error('Header - Failed to parse user data:', error)
+           setIsLoggedIn(false)
+           setUserData(null)
+         }
+             } else {
+         if (process.env.NODE_ENV === 'development') {
+           console.log('Header - Setting logged out state')
+         }
+         setIsLoggedIn(false)
+         setUserData(null)
+       }
     }
 
+    // 초기 상태 확인
     checkLoginStatus()
 
-    // localStorage 변경 감지
+    // localStorage 변경 감지 (다른 탭에서의 변경)
     window.addEventListener('storage', checkLoginStatus)
+    
+         // 같은 탭에서의 localStorage 변경 감지를 위한 커스텀 이벤트 리스너
+     const handleStorageChange = () => {
+       if (process.env.NODE_ENV === 'development') {
+         console.log('Header - localStorageChange event received')
+       }
+       checkLoginStatus()
+     }
+    
+    window.addEventListener('localStorageChange', handleStorageChange)
+    
+    // 주기적으로 상태 확인 (추가 안전장치)
+    const interval = setInterval(checkLoginStatus, 1000)
     
     return () => {
       window.removeEventListener('storage', checkLoginStatus)
+      window.removeEventListener('localStorageChange', handleStorageChange)
+      clearInterval(interval)
     }
   }, [])
 
@@ -53,15 +93,25 @@ export default function Header() {
     }
   }
 
-  const handleMyPageClick = () => {
-    if (isLoggedIn) {
-      // 로그인된 상태면 마이페이지로 이동
-      router.push('/mypage')
-    } else {
-      // 로그인되지 않은 상태면 로그인 페이지로 이동
-      router.push('/login')
-    }
-  }
+     const handleMyPageClick = () => {
+     if (process.env.NODE_ENV === 'development') {
+       console.log('Header - MyPage button clicked, isLoggedIn:', isLoggedIn)
+     }
+     
+     if (isLoggedIn) {
+       // 로그인된 상태면 마이페이지로 이동
+       if (process.env.NODE_ENV === 'development') {
+         console.log('Header - Redirecting to /mypage')
+       }
+       router.push('/mypage')
+     } else {
+       // 로그인되지 않은 상태면 로그인 페이지로 이동
+       if (process.env.NODE_ENV === 'development') {
+         console.log('Header - Redirecting to /login')
+       }
+       router.push('/login')
+     }
+   }
 
   return (
     <header className={styles.header}>
@@ -95,6 +145,12 @@ export default function Header() {
             >
               {isLoggedIn ? '로그아웃' : '로그인'}
             </button>
+                         {/* 개발 환경에서만 디버깅용 로그인 상태 표시 */}
+             {process.env.NODE_ENV === 'development' && (
+               <div style={{ fontSize: '10px', color: 'red', marginTop: '5px' }}>
+                 Debug: {isLoggedIn ? 'LOGGED IN' : 'LOGGED OUT'}
+               </div>
+             )}
           </div>
         </div>
       </div>

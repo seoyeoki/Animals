@@ -19,11 +19,12 @@ export async function POST(request: NextRequest) {
       throw new Error(`Backend API error: ${response.status}`)
     }
 
-    const data = await response.json()
+    const data = await response.text()  // 문자열로 받기
     
-    return NextResponse.json(data, {
+    return new NextResponse(data, {  // 문자열 그대로 반환
       status: 200,
       headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',

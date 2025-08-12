@@ -47,6 +47,9 @@ export default function Login() {
         // 로그인 상태를 전역으로 설정 (Header 컴포넌트에서 사용)
         localStorage.setItem('isLoggedIn', 'true')
         
+        // Header 컴포넌트에 localStorage 변경 알림
+        window.dispatchEvent(new Event('localStorageChange'))
+        
         // 홈 화면으로 이동
         router.push('/')
       } else {

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './page.module.css'
+import Header from '../components/Header'
 
 interface UserData {
   id: string
@@ -42,6 +43,10 @@ export default function MyPage() {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
     localStorage.removeItem('isLoggedIn')
+    
+    // Header 컴포넌트에 localStorage 변경 알림
+    window.dispatchEvent(new Event('localStorageChange'))
+    
     router.push('/')
   }
 
@@ -57,6 +62,7 @@ export default function MyPage() {
 
   return (
     <div className={styles.container}>
+      <Header />
       {/* Main Content */}
       <main className={styles.main}>
         {/* Page Title */}

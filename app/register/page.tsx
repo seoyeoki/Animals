@@ -15,6 +15,8 @@ export default function Register() {
   })
   const [errorMessage, setErrorMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -69,10 +71,18 @@ export default function Register() {
 
       if (response.ok) {
         // 회원가입 성공 (200)
-        console.log('Registration successful')
+        const result = await response.text() // 문자열로 받기
+        console.log('Registration successful:', result)
         
-        // 로그인 페이지로 이동
-        router.push('/login')
+        // 성공 메시지 설정 및 팝업 표시
+        setSuccessMessage(result)
+        setShowSuccessPopup(true)
+        
+        // 2초 후 팝업 숨기고 로그인 페이지로 이동
+        setTimeout(() => {
+          setShowSuccessPopup(false)
+          router.push('/login')
+        }, 2000)
       } else {
         // 회원가입 실패 (200이 아닌 모든 상태)
         setErrorMessage('회원가입에 실패했습니다')
@@ -91,6 +101,15 @@ export default function Register() {
 
   return (
     <div className={styles.container}>
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className={styles.successPopup}>
+          <div className={styles.successPopupContent}>
+            {successMessage}
+          </div>
+        </div>
+      )}
+      
       {/* Main Content */}
       <main className={styles.main}>
         <div className={styles.registerContainer}>
