@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Header from './components/Header'
 
 // 동물 데이터 타입 정의
 interface AnimalData {
@@ -151,6 +152,7 @@ export default function Home() {
   if (isLoading) {
     return (
       <div className={styles.container}>
+        <Header />
         <section className={styles.content}>
           <h1 className={styles.mainTitle}>가족을 찾고 있어요</h1>
           <div style={{ textAlign: 'center', padding: '50px' }}>
@@ -164,6 +166,7 @@ export default function Home() {
   if (error) {
     return (
       <div className={styles.container}>
+        <Header />
         <section className={styles.content}>
           <h1 className={styles.mainTitle}>가족을 찾고 있어요</h1>
           <div style={{ textAlign: 'center', padding: '50px', color: 'red' }}>
@@ -180,6 +183,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <Header />
       <section className={styles.content}>
         <h1 className={styles.mainTitle}>가족을 찾고 있어요</h1>
         

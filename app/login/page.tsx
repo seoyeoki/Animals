@@ -62,6 +62,7 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
+      <Header />
       {/* Main Content */}
       <main className={styles.main}>
         {/* Page Title */}
