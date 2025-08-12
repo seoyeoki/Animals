@@ -1,14 +1,14 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  padding-top: 140px;
+  padding-top: 0;
   background: var(--Background-Beige);
 }
 
 .content {
   max-width: 1296px;
   margin: 0 auto;
-  padding: 60px 72px;
+  padding: 120px 72px 60px 72px;
 }
 
 .title {
