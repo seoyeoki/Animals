@@ -1,7 +1,24 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styles from './Chatbot.module.css'
+
+interface Message {
+  id: string
+  type: 'user' | 'bot'
+  text: string
+  image?: string
+  timestamp: Date
+}
+
+interface ApiResponse {
+  recommendation: string
+  similar: Array<{
+    idx: number
+    sim: number
+    url: string
+  }>
+}
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
@@ -9,6 +26,24 @@ export default function Chatbot() {
   const [message, setMessage] = useState('')
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      type: 'bot',
+      text: '안녕하세요! 반려동물 입양에 대해 궁금한 점이 있으시면 언제든 물어보세요. 🐕🐱\n\n강아지 사진을 업로드하고 원하는 조건을 말씀해주시면, AI가 적합한 품종을 추천해드릴게요!',
+      timestamp: new Date()
+    }
+  ])
+  const [isLoading, setIsLoading] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   const handleToggle = () => {
     if (isAnimating) return // 애니메이션 중에는 클릭 무시
@@ -61,18 +96,74 @@ export default function Chatbot() {
     setImagePreview(null)
   }
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!message.trim() && !selectedImage) return
     
-    console.log('메시지 전송:', message)
-    if (selectedImage) {
-      console.log('이미지 전송:', selectedImage.name)
+    // 사용자 메시지 추가
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      type: 'user',
+      text: message,
+      image: imagePreview || undefined,
+      timestamp: new Date()
     }
     
-    // 메시지와 이미지 전송 후 초기화
-    setMessage('')
-    setSelectedImage(null)
-    setImagePreview(null)
+    setMessages(prev => [...prev, userMessage])
+    setIsLoading(true)
+    
+    try {
+      // FormData 생성
+      const formData = new FormData()
+      formData.append('user_text', message)
+      if (selectedImage) {
+        formData.append('image', selectedImage)
+      }
+      formData.append('top_k', '5')
+
+      // 백엔드 API 호출
+      const response = await fetch('http://localhost:8000/recommend-and-search', {
+        method: 'POST',
+        body: formData
+      })
+
+      if (response.ok) {
+        const data: ApiResponse = await response.json()
+        
+        // 봇 응답 생성
+        const botMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          type: 'bot',
+          text: `${data.recommendation}\n\n${data.similar.length > 0 ? '유사한 강아지 이미지들도 확인해보세요!' : ''}`,
+          timestamp: new Date()
+        }
+        
+        setMessages(prev => [...prev, botMessage])
+      } else {
+        const errorData = await response.json()
+        const errorMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          type: 'bot',
+          text: `죄송합니다. 오류가 발생했습니다: ${errorData.error}`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, errorMessage])
+      }
+    } catch (error) {
+      console.error('API 호출 오류:', error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: 'bot',
+        text: '네트워크 오류가 발생했습니다. 다시 시도해주세요.',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+      // 메시지와 이미지 전송 후 초기화
+      setMessage('')
+      setSelectedImage(null)
+      setImagePreview(null)
+    }
   }
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
@@ -95,11 +186,39 @@ export default function Chatbot() {
           </button>
         </div>
         <div className={styles.chatbotContent}>
-          <div className={styles.chatbotMessage}>
-            <div className={styles.messageBubble}>
-              안녕하세요! 반려동물 입양에 대해 궁금한 점이 있으시면 언제든 물어보세요. 🐕🐱
-            </div>
+          <div className={styles.messagesContainer}>
+            {messages.map((msg) => (
+              <div key={msg.id} className={`${styles.messageItem} ${msg.type === 'user' ? styles.userMessage : styles.botMessage}`}>
+                <div className={styles.messageBubble}>
+                  {msg.image && (
+                    <div className={styles.messageImage}>
+                      <img src={msg.image} alt="업로드된 이미지" />
+                    </div>
+                  )}
+                  <div className={styles.messageText}>{msg.text}</div>
+                  <div className={styles.messageTime}>
+                    {msg.timestamp.toLocaleTimeString('ko-KR', { 
+                      hour: '2-digit', 
+                      minute: '2-digit' 
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className={`${styles.messageItem} ${styles.botMessage}`}>
+                <div className={styles.messageBubble}>
+                  <div className={styles.typingIndicator}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
           </div>
+          
           <div className={styles.chatbotInput}>
             {/* 이미지 미리보기 */}
             {imagePreview && (
@@ -121,6 +240,7 @@ export default function Chatbot() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
+                disabled={isLoading}
               />
               
               {/* 이미지 업로드 버튼 */}
@@ -130,13 +250,18 @@ export default function Chatbot() {
                   accept="image/*"
                   onChange={handleImageUpload}
                   style={{ display: 'none' }}
+                  disabled={isLoading}
                 />
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                   <path d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z" fill="currentColor"/>
                 </svg>
               </label>
               
-              <button className={styles.sendButton} onClick={handleSendMessage}>
+              <button 
+                className={styles.sendButton} 
+                onClick={handleSendMessage}
+                disabled={isLoading || (!message.trim() && !selectedImage)}
+              >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                   <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

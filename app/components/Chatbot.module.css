@@ -107,20 +107,121 @@
   padding: 20px;
 }
 
-.chatbotMessage {
+/* 메시지 컨테이너 */
+.messagesContainer {
   flex: 1;
+  overflow-y: auto;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* 메시지 아이템 */
+.messageItem {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.userMessage {
+  justify-content: flex-end;
+}
+
+.botMessage {
+  justify-content: flex-start;
+}
+
+/* 메시지 버블 */
 .messageBubble {
-  background: #f0f2f5;
+  max-width: 80%;
   padding: 15px;
   border-radius: 15px;
-  border-bottom-left-radius: 5px;
-  max-width: 80%;
   word-wrap: break-word;
   line-height: 1.4;
+  position: relative;
+}
+
+.userMessage .messageBubble {
+  background: #8B4513;
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.botMessage .messageBubble {
+  background: #f0f2f5;
   color: #333;
+  border-bottom-left-radius: 5px;
+}
+
+/* 메시지 이미지 */
+.messageImage {
+  margin-bottom: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.messageImage img {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: cover;
+}
+
+/* 메시지 텍스트 */
+.messageText {
+  white-space: pre-wrap;
+  margin-bottom: 5px;
+}
+
+/* 메시지 시간 */
+.messageTime {
+  font-size: 11px;
+  opacity: 0.7;
+  text-align: right;
+}
+
+.userMessage .messageTime {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.botMessage .messageTime {
+  color: #666;
+}
+
+/* 타이핑 인디케이터 */
+.typingIndicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.typingIndicator span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8B4513;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.typingIndicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typingIndicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* 챗봇 입력 */
@@ -193,6 +294,11 @@
   color: #999;
 }
 
+.inputField:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* 이미지 업로드 버튼 */
 .imageUploadButton {
   background: #8B4513;
@@ -212,6 +318,11 @@
   background: #A0522D;
 }
 
+.imageUploadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .sendButton {
   background: #8B4513;
   border: none;
@@ -228,6 +339,12 @@
 
 .sendButton:hover {
   background: #A0522D;
+}
+
+.sendButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #ccc;
 }
 
 /* 반응형 디자인 */
@@ -253,5 +370,9 @@
   .chatbotIcon {
     width: 30px;
     height: 30px;
+  }
+  
+  .messageBubble {
+    max-width: 90%;
   }
 } 

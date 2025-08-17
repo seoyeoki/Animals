@@ -122,14 +122,23 @@ function AdoptionDetailContent() {
     }
   }
 
-  // 나이 텍스트 변환
+  // 나이 텍스트 변환 (현재 시간에서 출생년도 빼고 1 더하기)
   const getAgeText = (age: string) => {
     if (!age) return '나이 미상'
     
+    // "2025(60일미만) (년생)" 형태의 데이터에서 출생년도 추출
     if (age.includes('년생')) {
+      const yearMatch = age.match(/(\d{4})/)
+      if (yearMatch) {
+        const birthYear = parseInt(yearMatch[1])
+        const currentYear = new Date().getFullYear()
+        const calculatedAge = currentYear - birthYear + 1
+        return `${calculatedAge}세`
+      }
       return age.replace(' (년생)', '')
     }
     
+    // 다른 형태의 나이 데이터 처리
     return age
   }
 

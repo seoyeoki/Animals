@@ -32,12 +32,13 @@ export default function Adoption() {
   const [selectedDistrict, setSelectedDistrict] = useState('')
   
   // 무한 스크롤 관련 상태
-  const [allAnimals, setAllAnimals] = useState<AnimalData[]>([])
   const [displayedAnimals, setDisplayedAnimals] = useState<AnimalData[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
   const [hasMore, setHasMore] = useState(true)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [inViewStartTime, setInViewStartTime] = useState<number | null>(null)
   
   // 품종 데이터 상태
   const [breeds, setBreeds] = useState<Array<{kindCd: string, kindName: string}>>([])
@@ -60,10 +61,34 @@ export default function Adoption() {
 
   // 무한 스크롤 로직
   useEffect(() => {
-    if (inView && hasMore && !isLoading) {
-      loadMoreAnimals()
+    console.log('Infinite scroll check:', { inView, hasMore, isLoadingMore, currentPage, inViewStartTime })
+    
+    if (inView && hasMore && !isLoadingMore) {
+      const now = Date.now()
+      
+      if (inViewStartTime === null) {
+        // 처음 inView가 true가 되었을 때 시간 기록
+        console.log('Setting inView start time')
+        setInViewStartTime(now)
+      } else {
+        // 2초(2000ms) 이상 inView 상태가 유지되었는지 확인
+        const timeInView = now - inViewStartTime
+        console.log('Time in view:', timeInView, 'ms')
+        
+        if (timeInView >= 2000) {
+          console.log('Triggering loadMoreAnimals after 2 seconds')
+          loadMoreAnimals()
+          setInViewStartTime(null) // 리셋
+        }
+      }
+    } else if (!inView) {
+      // inView가 false가 되면 타이머 리셋
+      if (inViewStartTime !== null) {
+        console.log('Resetting inView timer')
+        setInViewStartTime(null)
+      }
     }
-  }, [inView, hasMore, isLoading])
+  }, [inView, hasMore, isLoadingMore, inViewStartTime])
 
   const fetchBreeds = async () => {
     try {
@@ -112,9 +137,13 @@ export default function Adoption() {
     kindCd?: string
     size?: string
     page?: number
-  }) => {
+  }, append: boolean = false) => {
     try {
-      setIsLoading(true)
+      if (append) {
+        setIsLoadingMore(true)
+      } else {
+        setIsLoading(true)
+      }
       setError('')
       
       // URL 파라미터 구성
@@ -135,47 +164,83 @@ export default function Adoption() {
       }
       
       const data = await response.json()
-      setAllAnimals(data)
       
-      // localStorage에 데이터 저장
-      localStorage.setItem('allAnimalsData', JSON.stringify(data))
+             console.log('Received data:', { dataLength: data.length, append, ITEMS_PER_PAGE })
+       console.log('Sample data:', data.slice(0, 2)) // 처음 2개 데이터 샘플 출력
+       
+       if (append) {
+         // 무한 스크롤: 기존 데이터에 추가
+         setDisplayedAnimals(prev => {
+           const newData = [...prev, ...data]
+           console.log('Updated displayedAnimals (append):', { prevLength: prev.length, newLength: newData.length })
+           return newData
+         })
+         const hasMoreData = data.length === ITEMS_PER_PAGE
+         console.log('Setting hasMore for append:', hasMoreData)
+         setHasMore(hasMoreData) // 페이지 크기만큼 데이터가 오면 더 있다고 판단
+       } else {
+         // 초기 로드: 데이터 교체
+         console.log('Setting displayedAnimals (initial):', data.length)
+         setDisplayedAnimals(data)
+         setCurrentPage(1)
+         const hasMoreData = data.length === ITEMS_PER_PAGE
+         console.log('Setting hasMore for initial load:', hasMoreData)
+         setHasMore(hasMoreData)
+       }
       
-      // 첫 번째 페이지 로드
-      const initialItems = data.slice(0, ITEMS_PER_PAGE)
-      setDisplayedAnimals(initialItems)
-      setCurrentPage(1)
-      setHasMore(data.length > ITEMS_PER_PAGE)
+      // localStorage에 데이터 저장 (초기 로드시에만)
+      if (!append) {
+        localStorage.setItem('allAnimalsData', JSON.stringify(data))
+      }
     } catch (err) {
       console.error('Error fetching animals:', err)
       setError('동물 데이터를 불러오는 중 오류가 발생했습니다')
     } finally {
-      setIsLoading(false)
+      if (append) {
+        setIsLoadingMore(false)
+      } else {
+        setIsLoading(false)
+      }
     }
   }
 
   const loadMoreAnimals = useCallback(() => {
-    if (isLoading || !hasMore) return
+    console.log('loadMoreAnimals called:', { isLoadingMore, hasMore, currentPage })
+    if (isLoadingMore || !hasMore) {
+      console.log('loadMoreAnimals early return:', { isLoadingMore, hasMore })
+      return
+    }
 
-    setIsLoading(true)
-    
     // 다음 페이지 계산
     const nextPage = currentPage + 1
-    const startIndex = (nextPage - 1) * ITEMS_PER_PAGE
-    const endIndex = startIndex + ITEMS_PER_PAGE
+    console.log('Loading next page:', nextPage)
+    setCurrentPage(nextPage)
     
-    // 추가 데이터 가져오기
-    const newItems = allAnimals.slice(startIndex, endIndex)
+    // 서버에서 다음 페이지 데이터 가져오기
+    const filters: {
+      kindCd?: string
+      size?: string
+      page?: number
+    } = {}
     
-    if (newItems.length > 0) {
-      setDisplayedAnimals(prev => [...prev, ...newItems])
-      setCurrentPage(nextPage)
-      setHasMore(endIndex < allAnimals.length)
-    } else {
-      setHasMore(false)
+    // 현재 필터 상태 유지
+    if (selectedBreed) {
+      filters.kindCd = selectedBreed
+    }
+    if (selectedCategory === 'small') {
+      filters.size = '소형'
+    } else if (selectedCategory === 'medium') {
+      filters.size = '중형'
+    } else if (selectedCategory === 'large') {
+      filters.size = '대형'
     }
     
-    setIsLoading(false)
-  }, [currentPage, allAnimals, isLoading, hasMore])
+    filters.page = nextPage
+    console.log('Fetching with filters:', filters)
+    
+    // 서버에서 다음 페이지 데이터 가져오기 (append=true로 설정)
+    fetchAnimals(filters, true)
+  }, [currentPage, isLoadingMore, hasMore, selectedBreed, selectedCategory])
 
   const handleSearch = () => {
     // 검색 필터 구성
@@ -226,15 +291,23 @@ export default function Adoption() {
     }
   }
 
-  // 나이 텍스트 변환 (실제 데이터 형식에 맞춤)
+  // 나이 텍스트 변환 (현재 시간에서 출생년도 빼고 1 더하기)
   const getAgeText = (age: string) => {
     if (!age) return '나이 미상'
     
-    // "2025(60일미만) (년생)" 형태의 데이터 처리
+    // "2025(60일미만) (년생)" 형태의 데이터에서 출생년도 추출
     if (age.includes('년생')) {
+      const yearMatch = age.match(/(\d{4})/)
+      if (yearMatch) {
+        const birthYear = parseInt(yearMatch[1])
+        const currentYear = new Date().getFullYear()
+        const calculatedAge = currentYear - birthYear + 1
+        return `${calculatedAge}세`
+      }
       return age.replace(' (년생)', '')
     }
     
+    // 다른 형태의 나이 데이터 처리
     return age
   }
 
@@ -251,9 +324,9 @@ export default function Adoption() {
     return weight
   }
 
-  // 품종 코드를 텍스트로 변환
+  // 품종 코드를 텍스트로 변환 (백엔드 API에 존재하는 품종만 표시)
   const getBreedText = (kindCd: string) => {
-    if (!kindCd) return '품종 미상'
+    if (!kindCd) return null
     
     // API에서 받아온 품종 데이터에서 찾기
     const breed = breeds.find(b => b.kindCd === kindCd)
@@ -261,18 +334,8 @@ export default function Adoption() {
       return breed.kindName
     }
     
-    // 기본 품종 코드에 따른 텍스트 변환 (fallback)
-    const breedMap: { [key: string]: string } = {
-      '000245': '고든 세터',
-      '000054': '골든 리트리버',
-      '000056': '그레이 하운드',
-      '000055': '그레이트 덴',
-      '000118': '그레이트 피레니즈',
-      '000249': '그리펀 벨지언',
-      '000115': '기타',
-    }
-    
-    return breedMap[kindCd] || kindCd
+    // 백엔드 API에 존재하지 않는 품종은 null 반환
+    return null
   }
 
   // 지역 정보 추출
@@ -410,98 +473,98 @@ export default function Adoption() {
           </div>
         )}
 
-        {/* Animal Cards Grid */}
-        {!error && (
-          <div className={styles.animalGrid}>
-            {displayedAnimals.length > 0 ? (
-              displayedAnimals.map((animal, index) => (
-                <div 
-                  key={animal.desertionNo || index}
-                  className={styles.animalCard}
-                  onClick={() => handleCardClick(animal.desertionNo)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className={styles.animalImage}>
-                    {animal.filename ? (
-                      <img 
-                        src={animal.filename} 
-                        alt={getBreedText(animal.kindCd)}
-                        className={styles.animalImage}
-                        onError={(e) => {
-                          // 이미지 로드 실패 시 기본 이미지로 대체
-                          const target = e.target as HTMLImageElement
-                          target.style.display = 'none'
-                        }}
-                      />
-                    ) : (
-                      <div className={styles.noImage}>
-                        <span>이미지 없음</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className={styles.animalInfo}>
-                    <h3 className={styles.animalName}>
-                      {getBreedText(animal.kindCd)}
-                    </h3>
-                    <p className={styles.animalBreed}>
-                      {getBreedText(animal.kindCd)}
-                    </p>
-                    <p className={styles.animalLocation}>
-                      {getLocationText(animal.happenPlace)}
-                    </p>
-                    <p className={styles.animalDetails}>
-                      {getSexText(animal.sexCd)} • {getAgeText(animal.age)}
-                    </p>
-                    {animal.weight && (
-                      <p className={styles.animalWeight}>
-                        체중: {getWeightText(animal.weight)}
-                      </p>
-                    )}
-                    <p className={styles.animalState}>
-                      상태: {getProcessStateText(animal.processState)}
-                    </p>
-                    {animal.size && (
-                      <p className={styles.animalSize}>
-                        크기: {animal.size}
-                      </p>
-                    )}
-                    {animal.careNm && (
-                      <p className={styles.animalCare}>
-                        보호소: {animal.careNm}
-                      </p>
-                    )}
-                    {animal.specialMark && (
-                      <p className={styles.animalSpecial}>
-                        {animal.specialMark.length > 50 
-                          ? `${animal.specialMark.substring(0, 50)}...` 
-                          : animal.specialMark}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className={styles.noData}>
-                <p>등록된 동물이 없습니다.</p>
-              </div>
-            )}
-          </div>
-        )}
+                 {/* Animal Cards Grid */}
+         {!error && (
+           <div className={styles.animalGrid}>
+             {displayedAnimals.length > 0 ? (
+               // 동물이 있을 때
+               displayedAnimals
+                 .filter(animal => {
+                   const breedText = getBreedText(animal.kindCd)
+                   const shouldShow = breedText !== null
+                   if (!shouldShow) {
+                     console.log('Filtered out animal:', { kindCd: animal.kindCd, breedText })
+                   }
+                   return shouldShow
+                 }) // 백엔드 API에 존재하는 품종만 필터링
+                 .map((animal, index) => {
+                   const breedText = getBreedText(animal.kindCd)
+                   if (!breedText) return null // 추가 안전장치
+                   
+                   return (
+                     <div 
+                       key={animal.desertionNo || index}
+                       className={styles.animalCard}
+                       onClick={() => handleCardClick(animal.desertionNo)}
+                       style={{ cursor: 'pointer' }}
+                     >
+                       <div className={styles.animalImage}>
+                         {animal.filename ? (
+                           <img 
+                             src={animal.filename} 
+                             alt={breedText}
+                             className={styles.animalImage}
+                             onError={(e) => {
+                               // 이미지 로드 실패 시 기본 이미지로 대체
+                               const target = e.target as HTMLImageElement
+                               target.style.display = 'none'
+                             }}
+                           />
+                         ) : (
+                           <div className={styles.noImage}>
+                             <span>이미지 없음</span>
+                           </div>
+                         )}
+                       </div>
+                       <div className={styles.animalInfo}>
+                         <h3 className={styles.animalName}>
+                           {breedText}
+                         </h3>
+                         <div className={styles.animalDetails}>
+                           <p className={styles.animalDetail}>
+                             {getSexText(animal.sexCd)}({getAgeText(animal.age)})
+                           </p>
+                           {(animal.weight || animal.size) && (
+                             <p className={styles.animalDetail}>
+                               {animal.weight ? getWeightText(animal.weight) : ''}
+                               {animal.weight && animal.size ? '(' : ''}
+                               {animal.size ? animal.size : ''}
+                               {animal.weight && animal.size ? ')' : ''}
+                             </p>
+                           )}
+                         </div>
+                       </div>
+                     </div>
+                   )
+                 })
+                 .filter(Boolean) // null 값 제거
+             ) : !isLoading ? (
+               // 로딩이 완료되었지만 동물이 없을 때
+               <div className={styles.noData}>
+                 <p>등록된 동물이 없습니다.</p>
+               </div>
+             ) : null}
+           </div>
+         )}
 
-        {/* Loading Indicator for Infinite Scroll */}
-        {hasMore && (
-          <div ref={ref} className={styles.loadingIndicator}>
-            {isLoading ? (
-              <div className={styles.loading}>
-                <p>더 많은 동물을 불러오는 중...</p>
-              </div>
-            ) : (
-              <div className={styles.loadMoreTrigger}>
-                <p>스크롤하여 더 보기</p>
-              </div>
-            )}
-          </div>
-        )}
+                 {/* Loading Indicator for Infinite Scroll */}
+         {hasMore && (
+           <div ref={ref} className={styles.loadingIndicator}>
+             {isLoadingMore ? (
+               <div className={styles.loading}>
+                 <p>더 많은 동물을 불러오는 중...</p>
+               </div>
+             ) : inViewStartTime !== null ? (
+               <div className={styles.loadMoreTrigger}>
+                 <p>잠시 후 자동으로 더 불러옵니다...</p>
+               </div>
+             ) : (
+               <div className={styles.loadMoreTrigger}>
+                 <p>스크롤하여 더 보기</p>
+               </div>
+             )}
+           </div>
+         )}
 
         {/* No More Data */}
         {!hasMore && displayedAnimals.length > 0 && (

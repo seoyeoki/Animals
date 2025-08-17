@@ -386,49 +386,20 @@
 
 /* Animal Details */
 .animalDetails {
-  color: var(--Text-Brown);
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin-top: 8px;
 }
 
-.animalWeight {
+.animalDetail {
   color: var(--Text-Brown);
   font-size: 14px;
-  margin-top: 4px;
-}
-
-/* Animal State */
-.animalState {
-  color: var(--Text-Brown);
-  font-size: 14px;
-  margin-top: 4px;
-}
-
-/* Animal Size */
-.animalSize {
-  color: var(--Text-Brown);
-  font-size: 12px;
-  margin-top: 4px;
   line-height: 1.4;
+  margin: 0;
 }
 
-/* Animal Care */
-.animalCare {
-  color: var(--Text-Brown);
-  font-size: 12px;
-  margin-top: 4px;
-  line-height: 1.4;
-  font-weight: 500;
-}
 
-/* Animal Special Mark */
-.animalSpecial {
-  color: var(--Secondary-Wood);
-  font-size: 12px;
-  margin-top: 8px;
-  line-height: 1.4;
-  font-style: italic;
-}
 
 /* No Image Placeholder */
 .noImage {
