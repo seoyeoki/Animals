@@ -29,35 +29,35 @@ export default function Home() {
   const [animals, setAnimals] = useState<AnimalData[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [breeds, setBreeds] = useState<{ kindCd: string; kindName: string }[]>([])
 
-  // 컴포넌트 마운트 시 동물 데이터 가져오기
+  // 컴포넌트 마운트 시 동물 데이터와 품종 데이터 가져오기
   useEffect(() => {
     fetchRandomAnimals()
+    fetchBreeds()
   }, [])
+
+  const fetchBreeds = async () => {
+    try {
+      const response = await fetch('/api/breeds')
+      if (response.ok) {
+        const data = await response.json()
+        setBreeds(data)
+      }
+    } catch (err) {
+      console.error('품종 데이터 로딩 오류:', err)
+    }
+  }
 
   const fetchRandomAnimals = async () => {
     try {
       setIsLoading(true)
       setError('')
       
-      // 랜덤 품종과 크기 설정
-      const breeds = ['000245', '000054', '000056', '000055', '000118', '000249', '000115']
-      const sizes = ['소형', '중형', '대형']
+      // 첫 페이지만 호출
+      const url = '/api/rescue/dogs?page=1'
       
-      const randomBreed = breeds[Math.floor(Math.random() * breeds.length)]
-      const randomSize = sizes[Math.floor(Math.random() * sizes.length)]
-      const randomPage = Math.floor(Math.random() * 10) + 1 // 1-10 페이지 중 랜덤
-      
-      // URL 파라미터 구성
-      const params = new URLSearchParams()
-      params.append('page', randomPage.toString())
-      params.append('kindCd', randomBreed)
-      params.append('size', randomSize)
-      
-      const url = `/api/rescue/dogs?${params.toString()}`
-      
-      console.log('Fetching random animals from URL:', url)
-      console.log('Random filters:', { breed: randomBreed, size: randomSize, page: randomPage })
+      console.log('API 호출:', url)
       
       const response = await fetch(url)
       
@@ -67,7 +67,9 @@ export default function Home() {
       
       const data = await response.json()
       
-      // 최대 6마리까지만 표시 (강서 3마리 + 중구 3마리)
+      console.log('받은 데이터:', data.length, '개')
+      
+      // 최대 6마리까지만 표시
       const limitedData = data.slice(0, 6)
       setAnimals(limitedData)
       
@@ -75,7 +77,7 @@ export default function Home() {
       localStorage.setItem('allAnimalsData', JSON.stringify(data))
       
     } catch (err) {
-      console.error('Error fetching animals:', err)
+      console.error('오류:', err)
       setError('동물 데이터를 불러오는 중 오류가 발생했습니다')
     } finally {
       setIsLoading(false)
@@ -101,10 +103,18 @@ export default function Home() {
   const getAgeText = (age: string) => {
     if (!age) return '나이 미상'
     
+    // "2019 (년생)" 형태인 경우 나이로 변환
     if (age.includes('년생')) {
-      return age.replace(' (년생)', '')
+      const yearMatch = age.match(/(\d{4})/)
+      if (yearMatch) {
+        const birthYear = parseInt(yearMatch[1])
+        const currentYear = new Date().getFullYear()
+        const ageInYears = currentYear - birthYear
+        return `${ageInYears}세`
+      }
     }
     
+    // 이미 나이 형태인 경우 그대로 반환
     return age
   }
 
@@ -120,21 +130,18 @@ export default function Home() {
     return weight
   }
 
-  // 품종 코드를 텍스트로 변환
+  // 품종 코드를 텍스트로 변환 (백엔드 API에 존재하는 품종만 표시)
   const getBreedText = (kindCd: string) => {
-    if (!kindCd) return '품종 미상'
+    if (!kindCd) return null
     
-    const breedMap: { [key: string]: string } = {
-      '000245': '고든 세터',
-      '000054': '골든 리트리버',
-      '000056': '그레이 하운드',
-      '000055': '그레이트 덴',
-      '000118': '그레이트 피레니즈',
-      '000249': '그리펀 벨지언',
-      '000115': '기타',
+    // API에서 받아온 품종 데이터에서 찾기
+    const breed = breeds.find(b => b.kindCd === kindCd)
+    if (breed) {
+      return breed.kindName
     }
     
-    return breedMap[kindCd] || kindCd
+    // 백엔드 API에 존재하지 않는 품종은 null 반환
+    return null
   }
 
   // 지역 정보 추출
@@ -177,172 +184,77 @@ export default function Home() {
     )
   }
 
-  // 강서구와 중구로 나누어 표시
-  const gangseoAnimals = animals.slice(0, 3)
-  const jungguAnimals = animals.slice(3, 6)
-
   return (
     <div className={styles.container}>
       <Header />
       <section className={styles.content}>
         <h1 className={styles.mainTitle}>가족을 찾고 있어요</h1>
         
-        <div className={styles.locationSection}>
-          <div className={styles.locationHeader}>
-            <span className={styles.locationText}>서울 강서</span>
-            <div className={styles.locationUnderline}></div>
-          </div>
-          
-          <div className={styles.cardGrid}>
-            {gangseoAnimals.length > 0 ? (
-              gangseoAnimals.map((animal, index) => (
-                <div 
-                  key={animal.desertionNo || index} 
-                  className={styles.card}
-                  onClick={() => handleCardClick(animal.desertionNo)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className={styles.cardImage}>
-                    {animal.filename ? (
-                      <img 
-                        src={animal.filename} 
-                        alt={getBreedText(animal.kindCd)}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.style.display = 'none'
-                        }}
-                      />
-                    ) : (
-                      <div style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        background: 'var(--Medium-Beige)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#8b4513'
-                      }}>
-                        이미지 없음
+        <div className={styles.animalGrid}>
+          {animals.length > 0 ? (
+            animals
+              .filter(animal => {
+                const breedText = getBreedText(animal.kindCd)
+                const shouldShow = breedText !== null
+                return shouldShow
+              }) // 백엔드 API에 존재하는 품종만 필터링
+              .map((animal, index) => {
+                const breedText = getBreedText(animal.kindCd)
+                if (!breedText) return null // 추가 안전장치
+                
+                return (
+                  <div 
+                    key={animal.desertionNo || index}
+                    className={styles.animalCard}
+                    onClick={() => handleCardClick(animal.desertionNo)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <div className={styles.animalImage}>
+                      {animal.filename ? (
+                        <img 
+                          src={animal.filename} 
+                          alt={breedText}
+                          className={styles.animalImage}
+                          onError={(e) => {
+                            // 이미지 로드 실패 시 기본 이미지로 대체
+                            const target = e.target as HTMLImageElement
+                            target.style.display = 'none'
+                          }}
+                        />
+                      ) : (
+                        <div className={styles.noImage}>
+                          <span>이미지 없음</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className={styles.animalInfo}>
+                      <h3 className={styles.animalName}>
+                        {breedText}
+                      </h3>
+                      <div className={styles.animalDetails}>
+                        <p className={styles.animalDetail}>
+                          {getSexText(animal.sexCd)}({getAgeText(animal.age)})
+                        </p>
+                        {(animal.weight || animal.size) && (
+                          <p className={styles.animalDetail}>
+                            {animal.weight ? getWeightText(animal.weight) : ''}
+                            {animal.weight && animal.size ? '(' : ''}
+                            {animal.size ? animal.size : ''}
+                            {animal.weight && animal.size ? ')' : ''}
+                          </p>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
-                  <div className={styles.cardInfo}>
-                    <h3 className={styles.animalName}>{getBreedText(animal.kindCd)}</h3>
-                    <p className={styles.animalBreed}>{getBreedText(animal.kindCd)}</p>
-                    <p className={styles.animalLocation}>{getLocationText(animal.happenPlace)}</p>
-                    <p style={{ fontSize: '0.9rem', color: '#666', margin: '5px 0' }}>
-                      {getSexText(animal.sexCd)} • {getAgeText(animal.age)}
-                    </p>
-                    {animal.weight && (
-                      <p style={{ fontSize: '0.8rem', color: '#666' }}>
-                        체중: {getWeightText(animal.weight)}
-                      </p>
-                    )}
-                    {animal.size && (
-                      <p style={{ fontSize: '0.8rem', color: '#666' }}>
-                        크기: {animal.size}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))
-            ) : (
-              [...Array(3)].map((_, index) => (
-                <div 
-                  key={index} 
-                  className={styles.card}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className={styles.cardImage}></div>
-                  <div className={styles.cardInfo}>
-                    <h3 className={styles.animalName}>데이터 없음</h3>
-                    <p className={styles.animalBreed}>-</p>
-                    <p className={styles.animalLocation}>-</p>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-
-        <div className={styles.locationSection}>
-          <div className={styles.locationHeader}>
-            <span className={styles.locationText}>서울 중구</span>
-            <div className={styles.locationUnderline}></div>
-          </div>
-          
-          <div className={styles.cardGrid}>
-            {jungguAnimals.length > 0 ? (
-              jungguAnimals.map((animal, index) => (
-                <div 
-                  key={animal.desertionNo || index} 
-                  className={styles.card}
-                  onClick={() => handleCardClick(animal.desertionNo)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className={styles.cardImage}>
-                    {animal.filename ? (
-                      <img 
-                        src={animal.filename} 
-                        alt={getBreedText(animal.kindCd)}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.style.display = 'none'
-                        }}
-                      />
-                    ) : (
-                      <div style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        background: 'var(--Medium-Beige)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#8b4513'
-                      }}>
-                        이미지 없음
-                      </div>
-                    )}
-                  </div>
-                  <div className={styles.cardInfo}>
-                    <h3 className={styles.animalName}>{getBreedText(animal.kindCd)}</h3>
-                    <p className={styles.animalBreed}>{getBreedText(animal.kindCd)}</p>
-                    <p className={styles.animalLocation}>{getLocationText(animal.happenPlace)}</p>
-                    <p style={{ fontSize: '0.9rem', color: '#666', margin: '5px 0' }}>
-                      {getSexText(animal.sexCd)} • {getAgeText(animal.age)}
-                    </p>
-                    {animal.weight && (
-                      <p style={{ fontSize: '0.8rem', color: '#666' }}>
-                        체중: {getWeightText(animal.weight)}
-                      </p>
-                    )}
-                    {animal.size && (
-                      <p style={{ fontSize: '0.8rem', color: '#666' }}>
-                        크기: {animal.size}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))
-            ) : (
-              [...Array(3)].map((_, index) => (
-                <div 
-                  key={index} 
-                  className={styles.card}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className={styles.cardImage}></div>
-                  <div className={styles.cardInfo}>
-                    <h3 className={styles.animalName}>데이터 없음</h3>
-                    <p className={styles.animalBreed}>-</p>
-                    <p className={styles.animalLocation}>-</p>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+                )
+              })
+              .filter(Boolean) // null 값 제거
+          ) : !isLoading ? (
+            // 로딩이 완료되었지만 동물이 없을 때
+            <div className={styles.noData}>
+              <p>등록된 동물이 없습니다.</p>
+            </div>
+          ) : null}
         </div>
       </section>
     </div>

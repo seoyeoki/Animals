@@ -60,6 +60,14 @@
   margin: 0 auto;
 }
 
+.animalGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .card {
   background: var(--Light-Beige);
   border-radius: 20px;
@@ -76,6 +84,21 @@
   box-shadow: 0 8px 30px rgba(139, 69, 19, 0.25);
 }
 
+.animalCard {
+  background: var(--Light-Beige);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--Shadow-Brown);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 1px solid var(--Border-Beige);
+}
+
+.animalCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(139, 69, 19, 0.25);
+}
+
 .cardImage {
   width: 100%;
   height: 252px;
@@ -88,12 +111,47 @@
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
 
+.animalImage {
+  width: 100%;
+  height: 200px;
+  background: var(--Medium-Beige);
+  background-image: linear-gradient(45deg, var(--Medium-Beige) 25%, transparent 25%), 
+                    linear-gradient(-45deg, var(--Medium-Beige) 25%, transparent 25%), 
+                    linear-gradient(45deg, transparent 75%, var(--Medium-Beige) 75%), 
+                    linear-gradient(-45deg, transparent 75%, var(--Medium-Beige) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.animalImage img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.noImage {
+  width: 100%;
+  height: 200px;
+  background: var(--Medium-Beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--Text-Brown);
+  font-size: 14px;
+}
+
 .cardInfo {
   padding: 20px;
   height: 89px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: var(--Light-Beige);
+}
+
+.animalInfo {
+  padding: 20px;
   background: var(--Light-Beige);
 }
 
@@ -116,6 +174,27 @@
   color: var(--Secondary-Wood);
   font-size: 14px;
   margin: 0;
+}
+
+.animalDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.animalDetail {
+  color: var(--Text-Brown);
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.noData {
+  text-align: center;
+  padding: 40px;
+  color: var(--Secondary-Wood);
+  font-size: 16px;
 }
 
 /* Responsive Design */

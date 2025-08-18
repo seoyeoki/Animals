@@ -38,12 +38,22 @@ export default function Chatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   useEffect(() => {
+    // 메시지가 추가될 때마다 스크롤
     scrollToBottom()
   }, [messages])
+
+  // 로딩 상태가 변경될 때도 스크롤
+  useEffect(() => {
+    if (isLoading) {
+      scrollToBottom()
+    }
+  }, [isLoading])
 
   const handleToggle = () => {
     if (isAnimating) return // 애니메이션 중에는 클릭 무시
@@ -115,7 +125,7 @@ export default function Chatbot() {
       // FormData 생성
       const formData = new FormData()
       formData.append('user_text', message)
-      if (selectedImage) {
+    if (selectedImage) {
         formData.append('image', selectedImage)
       }
       formData.append('top_k', '5')
@@ -143,7 +153,7 @@ export default function Chatbot() {
         const errorMessage: Message = {
           id: (Date.now() + 1).toString(),
           type: 'bot',
-          text: `죄송합니다. 오류가 발생했습니다: ${errorData.error}`,
+          text: `죄송합니다. ${errorData.error}`,
           timestamp: new Date()
         }
         setMessages(prev => [...prev, errorMessage])
@@ -153,16 +163,16 @@ export default function Chatbot() {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'bot',
-        text: '네트워크 오류가 발생했습니다. 다시 시도해주세요.',
+        text: '서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.',
         timestamp: new Date()
       }
       setMessages(prev => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
-      // 메시지와 이미지 전송 후 초기화
-      setMessage('')
-      setSelectedImage(null)
-      setImagePreview(null)
+    // 메시지와 이미지 전송 후 초기화
+    setMessage('')
+    setSelectedImage(null)
+    setImagePreview(null)
     }
   }
 
@@ -207,14 +217,14 @@ export default function Chatbot() {
             ))}
             {isLoading && (
               <div className={`${styles.messageItem} ${styles.botMessage}`}>
-                <div className={styles.messageBubble}>
+            <div className={styles.messageBubble}>
                   <div className={styles.typingIndicator}>
                     <span></span>
                     <span></span>
                     <span></span>
                   </div>
-                </div>
-              </div>
+            </div>
+          </div>
             )}
             <div ref={messagesEndRef} />
           </div>

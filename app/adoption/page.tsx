@@ -38,7 +38,7 @@ export default function Adoption() {
   const [error, setError] = useState('')
   const [hasMore, setHasMore] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
-  const [inViewStartTime, setInViewStartTime] = useState<number | null>(null)
+  const [emptyDataCount, setEmptyDataCount] = useState(0) // 연속 빈 데이터 카운터
   
   // 품종 데이터 상태
   const [breeds, setBreeds] = useState<Array<{kindCd: string, kindName: string}>>([])
@@ -50,7 +50,7 @@ export default function Adoption() {
   // Intersection Observer 설정
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: '100px'
+    rootMargin: '200px' // 100px에서 200px로 증가
   })
 
   // 컴포넌트 마운트 시 동물 데이터와 품종 데이터 가져오기
@@ -59,36 +59,46 @@ export default function Adoption() {
     fetchBreeds()
   }, [])
 
+  const loadMoreAnimals = useCallback(() => {
+    if (isLoadingMore || !hasMore) {
+      return
+    }
+
+    // 다음 페이지 계산
+    const nextPage = currentPage + 1
+    setCurrentPage(nextPage)
+    
+    // 서버에서 다음 페이지 데이터 가져오기
+    const filters: {
+      kindCd?: string
+      size?: string
+      page?: number
+    } = {}
+    
+    // 현재 필터 상태 유지
+    if (selectedBreed) {
+      filters.kindCd = selectedBreed
+    }
+    if (selectedCategory === 'small') {
+      filters.size = '소형'
+    } else if (selectedCategory === 'medium') {
+      filters.size = '중형'
+    } else if (selectedCategory === 'large') {
+      filters.size = '대형'
+    }
+    
+    filters.page = nextPage
+    
+    // 서버에서 다음 페이지 데이터 가져오기 (append=true로 설정)
+    fetchAnimals(filters, true)
+  }, [currentPage, isLoadingMore, hasMore, selectedBreed, selectedCategory])
+
   // 무한 스크롤 로직
   useEffect(() => {
-    console.log('Infinite scroll check:', { inView, hasMore, isLoadingMore, currentPage, inViewStartTime })
-    
     if (inView && hasMore && !isLoadingMore) {
-      const now = Date.now()
-      
-      if (inViewStartTime === null) {
-        // 처음 inView가 true가 되었을 때 시간 기록
-        console.log('Setting inView start time')
-        setInViewStartTime(now)
-      } else {
-        // 2초(2000ms) 이상 inView 상태가 유지되었는지 확인
-        const timeInView = now - inViewStartTime
-        console.log('Time in view:', timeInView, 'ms')
-        
-        if (timeInView >= 2000) {
-          console.log('Triggering loadMoreAnimals after 2 seconds')
-          loadMoreAnimals()
-          setInViewStartTime(null) // 리셋
-        }
-      }
-    } else if (!inView) {
-      // inView가 false가 되면 타이머 리셋
-      if (inViewStartTime !== null) {
-        console.log('Resetting inView timer')
-        setInViewStartTime(null)
-      }
+      loadMoreAnimals()
     }
-  }, [inView, hasMore, isLoadingMore, inViewStartTime])
+  }, [inView, hasMore, isLoadingMore, loadMoreAnimals])
 
   const fetchBreeds = async () => {
     try {
@@ -103,20 +113,17 @@ export default function Adoption() {
       
       const data = await response.json()
       
-             if (Array.isArray(data) && data.length > 0) {
-         console.log('품종 데이터 로드 성공:', data.length, '개')
-         console.log('첫 번째 품종 데이터:', data[0])
-         // 백엔드 응답을 프론트엔드 형식으로 매핑
-         const mappedBreeds = data.map(breed => ({
-           kindCd: breed.kindCd,
-           kindName: breed.knm || breed.kindName || '품종명 없음'
-         }))
-         setBreeds(mappedBreeds)
+      if (Array.isArray(data) && data.length > 0) {
+        // 백엔드 응답을 프론트엔드 형식으로 매핑
+        const mappedBreeds = data.map(breed => ({
+          kindCd: breed.kindCd,
+          kindName: breed.knm || breed.kindName || '품종명 없음'
+        }))
+        setBreeds(mappedBreeds)
       } else {
         throw new Error('품종 데이터가 비어있습니다')
       }
     } catch (err) {
-      console.error('Error fetching breeds:', err)
       setBreedsError(true)
       // 품종 데이터 로드 실패 시 기본 데이터 사용 (expanded list)
       setBreeds([
@@ -154,9 +161,6 @@ export default function Adoption() {
       
       const url = `/api/rescue/dogs${params.toString() ? `?${params.toString()}` : ''}`
       
-      console.log('Fetching animals from URL:', url)
-      console.log('URL params:', params.toString())
-      
       const response = await fetch(url)
       
       if (!response.ok) {
@@ -165,35 +169,45 @@ export default function Adoption() {
       
       const data = await response.json()
       
-             console.log('Received data:', { dataLength: data.length, append, ITEMS_PER_PAGE })
-       console.log('Sample data:', data.slice(0, 2)) // 처음 2개 데이터 샘플 출력
-       
-       if (append) {
-         // 무한 스크롤: 기존 데이터에 추가
-         setDisplayedAnimals(prev => {
-           const newData = [...prev, ...data]
-           console.log('Updated displayedAnimals (append):', { prevLength: prev.length, newLength: newData.length })
-           return newData
-         })
-         const hasMoreData = data.length === ITEMS_PER_PAGE
-         console.log('Setting hasMore for append:', hasMoreData)
-         setHasMore(hasMoreData) // 페이지 크기만큼 데이터가 오면 더 있다고 판단
-       } else {
-         // 초기 로드: 데이터 교체
-         console.log('Setting displayedAnimals (initial):', data.length)
-         setDisplayedAnimals(data)
-         setCurrentPage(1)
-         const hasMoreData = data.length === ITEMS_PER_PAGE
-         console.log('Setting hasMore for initial load:', hasMoreData)
-         setHasMore(hasMoreData)
-       }
+      if (append) {
+        // 무한 스크롤: 기존 데이터에 추가
+        setDisplayedAnimals(prev => {
+          const newData = [...prev, ...data]
+          return newData
+        })
+        
+        // 빈 데이터 처리
+        if (data.length === 0) {
+          const newEmptyCount = emptyDataCount + 1
+          setEmptyDataCount(newEmptyCount)
+          
+          // 연속으로 3번 빈 데이터가 오면 더 이상 데이터가 없다고 판단
+          if (newEmptyCount >= 3) {
+            setHasMore(false)
+          } else {
+            setHasMore(true) // 아직 시도해볼 수 있음
+          }
+        } else {
+          // 데이터가 있으면 카운터 리셋
+          setEmptyDataCount(0)
+          setHasMore(true)
+        }
+      } else {
+        // 초기 로드: 데이터 교체
+        setDisplayedAnimals(data)
+        setCurrentPage(1)
+        setEmptyDataCount(0) // 초기 로드 시 카운터 리셋
+        
+        // 데이터가 비어있거나 0개일 때만 hasMore를 false로 설정
+        const hasMoreData = data.length > 0
+        setHasMore(hasMoreData)
+      }
       
       // localStorage에 데이터 저장 (초기 로드시에만)
       if (!append) {
         localStorage.setItem('allAnimalsData', JSON.stringify(data))
       }
     } catch (err) {
-      console.error('Error fetching animals:', err)
       setError('동물 데이터를 불러오는 중 오류가 발생했습니다')
     } finally {
       if (append) {
@@ -204,45 +218,10 @@ export default function Adoption() {
     }
   }
 
-  const loadMoreAnimals = useCallback(() => {
-    console.log('loadMoreAnimals called:', { isLoadingMore, hasMore, currentPage })
-    if (isLoadingMore || !hasMore) {
-      console.log('loadMoreAnimals early return:', { isLoadingMore, hasMore })
-      return
-    }
-
-    // 다음 페이지 계산
-    const nextPage = currentPage + 1
-    console.log('Loading next page:', nextPage)
-    setCurrentPage(nextPage)
-    
-    // 서버에서 다음 페이지 데이터 가져오기
-    const filters: {
-      kindCd?: string
-      size?: string
-      page?: number
-    } = {}
-    
-    // 현재 필터 상태 유지
-    if (selectedBreed) {
-      filters.kindCd = selectedBreed
-    }
-    if (selectedCategory === 'small') {
-      filters.size = '소형'
-    } else if (selectedCategory === 'medium') {
-      filters.size = '중형'
-    } else if (selectedCategory === 'large') {
-      filters.size = '대형'
-    }
-    
-    filters.page = nextPage
-    console.log('Fetching with filters:', filters)
-    
-    // 서버에서 다음 페이지 데이터 가져오기 (append=true로 설정)
-    fetchAnimals(filters, true)
-  }, [currentPage, isLoadingMore, hasMore, selectedBreed, selectedCategory])
-
   const handleSearch = () => {
+    // 검색 시 빈 데이터 카운터 리셋
+    setEmptyDataCount(0)
+    
     // 검색 필터 구성
     const filters: {
       kindCd?: string
@@ -263,15 +242,6 @@ export default function Adoption() {
       filters.size = '대형'
     }
     
-    console.log('Search filters:', {
-      region: selectedRegion,
-      category: selectedCategory,
-      breed: selectedBreed,
-      district: selectedDistrict,
-      apiFilters: filters
-    })
-    
-    console.log('Calling fetchAnimals with filters:', filters)
     // API 호출로 검색 실행
     fetchAnimals(filters)
   }
@@ -482,9 +452,6 @@ export default function Adoption() {
                  .filter(animal => {
                    const breedText = getBreedText(animal.kindCd)
                    const shouldShow = breedText !== null
-                   if (!shouldShow) {
-                     console.log('Filtered out animal:', { kindCd: animal.kindCd, breedText })
-                   }
                    return shouldShow
                  }) // 백엔드 API에 존재하는 품종만 필터링
                  .map((animal, index) => {
@@ -553,10 +520,6 @@ export default function Adoption() {
              {isLoadingMore ? (
                <div className={styles.loading}>
                  <p>더 많은 동물을 불러오는 중...</p>
-               </div>
-             ) : inViewStartTime !== null ? (
-               <div className={styles.loadMoreTrigger}>
-                 <p>잠시 후 자동으로 더 불러옵니다...</p>
                </div>
              ) : (
                <div className={styles.loadMoreTrigger}>
