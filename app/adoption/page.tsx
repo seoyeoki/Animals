@@ -47,6 +47,30 @@ export default function Adoption() {
   
   const ITEMS_PER_PAGE = 12
 
+  // 이미지 URL 처리 헬퍼 함수
+  const getImageUrl = (animal: any) => {
+    // 백엔드에서 popfile1 필드로 데이터를 주므로 이를 사용
+    const filename = animal.popfile1 || animal.filename
+    
+    if (!filename || filename.trim() === '') {
+      console.log('Empty filename/popfile1')
+      return null
+    }
+    
+    // URL이 이미 완전한 형태인지 확인
+    if (filename.startsWith('http://') || filename.startsWith('https://')) {
+      console.log('Valid image URL:', filename)
+      // 프록시를 통해 이미지 로드
+      const proxyUrl = `/api/proxy-image?url=${encodeURIComponent(filename)}`
+      console.log('Proxy URL created:', proxyUrl)
+      return proxyUrl
+    }
+    
+    // 상대 경로인 경우 기본 URL 추가
+    console.log('Relative path:', filename)
+    return filename
+  }
+
   // Intersection Observer 설정
   const { ref, inView } = useInView({
     threshold: 0,
@@ -61,11 +85,13 @@ export default function Adoption() {
 
   const loadMoreAnimals = useCallback(() => {
     if (isLoadingMore || !hasMore) {
+      console.log('loadMoreAnimals 호출 무시:', { isLoadingMore, hasMore })
       return
     }
 
     // 다음 페이지 계산
     const nextPage = currentPage + 1
+    console.log('다음 페이지 로드 시작:', nextPage)
     setCurrentPage(nextPage)
     
     // 서버에서 다음 페이지 데이터 가져오기
@@ -95,7 +121,9 @@ export default function Adoption() {
 
   // 무한 스크롤 로직
   useEffect(() => {
+    console.log('무한 스크롤 체크:', { inView, hasMore, isLoadingMore })
     if (inView && hasMore && !isLoadingMore) {
+      console.log('무한 스크롤 트리거됨')
       loadMoreAnimals()
     }
   }, [inView, hasMore, isLoadingMore, loadMoreAnimals])
@@ -169,6 +197,20 @@ export default function Adoption() {
       
       const data = await response.json()
       
+      // 디버깅을 위한 로그 추가
+      console.log('API Response Data:', data)
+      console.log('Data length:', data.length)
+      console.log('First animal data:', data[0])
+      if (data[0]) {
+        console.log('First animal filename:', data[0].filename)
+      }
+      
+      // 데이터가 배열이 아닌 경우 처리
+      if (!Array.isArray(data)) {
+        console.error('API 응답이 배열이 아닙니다:', data)
+        throw new Error('서버에서 잘못된 데이터 형식을 반환했습니다')
+      }
+      
       if (append) {
         // 무한 스크롤: 기존 데이터에 추가
         setDisplayedAnimals(prev => {
@@ -178,29 +220,34 @@ export default function Adoption() {
         
         // 빈 데이터 처리
         if (data.length === 0) {
+          console.log('빈 데이터 수신, 현재 페이지:', filters?.page)
           const newEmptyCount = emptyDataCount + 1
           setEmptyDataCount(newEmptyCount)
           
-          // 연속으로 3번 빈 데이터가 오면 더 이상 데이터가 없다고 판단
-          if (newEmptyCount >= 3) {
+          // 연속으로 2번 빈 데이터가 오면 더 이상 데이터가 없다고 판단
+          if (newEmptyCount >= 2) {
+            console.log('더 이상 데이터가 없음, hasMore를 false로 설정')
             setHasMore(false)
           } else {
             setHasMore(true) // 아직 시도해볼 수 있음
           }
         } else {
           // 데이터가 있으면 카운터 리셋
+          console.log('데이터 수신됨, 개수:', data.length)
           setEmptyDataCount(0)
-          setHasMore(true)
+          setHasMore(data.length >= 10) // 10개 미만이면 더 이상 데이터가 없을 가능성
         }
       } else {
         // 초기 로드: 데이터 교체
+        console.log('초기 데이터 로드, 개수:', data.length)
         setDisplayedAnimals(data)
         setCurrentPage(1)
         setEmptyDataCount(0) // 초기 로드 시 카운터 리셋
         
         // 데이터가 비어있거나 0개일 때만 hasMore를 false로 설정
-        const hasMoreData = data.length > 0
+        const hasMoreData = data.length > 0 && data.length >= 10
         setHasMore(hasMoreData)
+        console.log('초기 로드 후 hasMore 설정:', hasMoreData)
       }
       
       // localStorage에 데이터 저장 (초기 로드시에만)
@@ -466,22 +513,45 @@ export default function Adoption() {
                        style={{ cursor: 'pointer' }}
                      >
                        <div className={styles.animalImage}>
-                         {animal.filename ? (
-                           <img 
-                             src={animal.filename} 
-                             alt={breedText}
-                             className={styles.animalImage}
-                             onError={(e) => {
-                               // 이미지 로드 실패 시 기본 이미지로 대체
-                               const target = e.target as HTMLImageElement
-                               target.style.display = 'none'
-                             }}
-                           />
-                         ) : (
-                           <div className={styles.noImage}>
-                             <span>이미지 없음</span>
-                           </div>
-                         )}
+                         {(() => {
+                           const imageUrl = getImageUrl(animal)
+                           return imageUrl ? (
+                             <img 
+                               src={imageUrl} 
+                               alt={breedText}
+                               className={styles.animalImage}
+                               onError={(e) => {
+                                 console.log('Image load error for:', imageUrl)
+                                 // 이미지 로드 실패 시 기본 이미지로 대체
+                                 const target = e.target as HTMLImageElement
+                                 target.style.display = 'none'
+                                 // 에러 발생 시 noImage div 표시
+                                 const parent = target.parentElement
+                                 if (parent) {
+                                   const noImageDiv = parent.querySelector(`.${styles.noImage}`) as HTMLElement
+                                   if (noImageDiv) {
+                                     noImageDiv.style.display = 'flex'
+                                   }
+                                 }
+                               }}
+                               onLoad={(e) => {
+                                 console.log('Image loaded successfully:', imageUrl)
+                                 // 이미지 로드 성공 시 noImage div 숨기기
+                                 const target = e.target as HTMLImageElement
+                                 const parent = target.parentElement
+                                 if (parent) {
+                                   const noImageDiv = parent.querySelector(`.${styles.noImage}`) as HTMLElement
+                                   if (noImageDiv) {
+                                     noImageDiv.style.display = 'none'
+                                   }
+                                 }
+                               }}
+                             />
+                           ) : null
+                         })()}
+                         <div className={styles.noImage} style={{ display: getImageUrl(animal) ? 'none' : 'flex' }}>
+                           <span>이미지 없음</span>
+                         </div>
                        </div>
                        <div className={styles.animalInfo}>
                          <h3 className={styles.animalName}>
@@ -519,11 +589,11 @@ export default function Adoption() {
            <div ref={ref} className={styles.loadingIndicator}>
              {isLoadingMore ? (
                <div className={styles.loading}>
-                 <p>더 많은 동물을 불러오는 중...</p>
+                 <p>더 많은 동물을 불러오는 중... ({currentPage}페이지)</p>
                </div>
              ) : (
                <div className={styles.loadMoreTrigger}>
-                 <p>스크롤하여 더 보기</p>
+                 <p>스크롤하여 더 보기 (현재 {displayedAnimals.length}마리)</p>
                </div>
              )}
            </div>

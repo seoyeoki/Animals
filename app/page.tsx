@@ -22,6 +22,7 @@ interface AnimalData {
   noticeEdt: string
   size: string
   filename: string
+  popfile1?: string  // 백엔드에서 실제로 주는 필드
 }
 
 export default function Home() {
@@ -210,22 +211,47 @@ export default function Home() {
                     style={{ cursor: 'pointer' }}
                   >
                     <div className={styles.animalImage}>
-                      {animal.filename ? (
-                        <img 
-                          src={animal.filename} 
-                          alt={breedText}
-                          className={styles.animalImage}
-                          onError={(e) => {
-                            // 이미지 로드 실패 시 기본 이미지로 대체
-                            const target = e.target as HTMLImageElement
-                            target.style.display = 'none'
-                          }}
-                        />
-                      ) : (
-                        <div className={styles.noImage}>
-                          <span>이미지 없음</span>
-                        </div>
-                      )}
+                      {(() => {
+                        // 백엔드에서 popfile1 필드로 데이터를 주므로 이를 사용
+                        const filename = animal.popfile1 || animal.filename
+                        
+                        if (filename && filename.trim() !== '') {
+                          // URL이 완전한 형태인지 확인하고 프록시 사용
+                          const imageUrl = filename.startsWith('http://') || filename.startsWith('https://') 
+                            ? `/api/proxy-image?url=${encodeURIComponent(filename)}`
+                            : filename
+                          
+                          return (
+                            <img 
+                              src={imageUrl} 
+                              alt={breedText}
+                              className={styles.animalImage}
+                              onError={(e) => {
+                                console.log('Main page image load failed:', filename)
+                                const target = e.target as HTMLImageElement
+                                target.style.display = 'none'
+                                // 이미지 로드 실패 시 placeholder 표시
+                                const container = target.parentElement
+                                if (container) {
+                                  const placeholder = document.createElement('div')
+                                  placeholder.className = styles.noImage
+                                  placeholder.innerHTML = '<span>이미지를 불러올 수 없습니다</span>'
+                                  container.appendChild(placeholder)
+                                }
+                              }}
+                              onLoad={() => {
+                                console.log('Main page image loaded successfully:', filename)
+                              }}
+                            />
+                          )
+                        } else {
+                          return (
+                            <div className={styles.noImage}>
+                              <span>이미지 없음</span>
+                            </div>
+                          )
+                        }
+                      })()}
                     </div>
                     <div className={styles.animalInfo}>
                       <h3 className={styles.animalName}>

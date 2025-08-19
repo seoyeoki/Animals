@@ -317,6 +317,7 @@
 .animalImage {
   width: 100%;
   height: 200px;
+  position: relative;
   background: var(--Medium-Beige);
   background-image: linear-gradient(45deg, var(--Medium-Beige) 25%, transparent 25%), 
                     linear-gradient(-45deg, var(--Medium-Beige) 25%, transparent 25%), 
@@ -324,6 +325,8 @@
                     linear-gradient(-45deg, transparent 75%, var(--Medium-Beige) 75%);
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
 }
 
 .animalInfo {
@@ -382,6 +385,10 @@
   height: 200px;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 /* Animal Details */
@@ -412,6 +419,10 @@
   color: var(--Secondary-Wood);
   font-size: 14px;
   border-radius: 8px 8px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 /* Loading Indicator for Infinite Scroll */

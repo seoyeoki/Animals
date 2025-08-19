@@ -77,11 +77,39 @@
   flex-shrink: 0; /* 헤더 크기 고정 */
 }
 
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .chatbotTitle {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
 }
+
+.serverStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.statusIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.statusText {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+
 
 .closeButton {
   background: none;
@@ -202,6 +230,7 @@
   font-size: 11px;
   opacity: 0.7;
   text-align: right;
+  margin-top: 10px;
 }
 
 .userMessage .messageTime {
@@ -210,6 +239,79 @@
 
 .botMessage .messageTime {
   color: #666;
+}
+
+/* 유사한 이미지들 컨테이너 */
+.similarImagesContainer {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.similarImagesTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8B4513;
+  margin-bottom: 8px;
+}
+
+.similarImagesScroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #8B4513 #f1f1f1;
+}
+
+.similarImagesScroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.similarImagesScroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.similarImagesScroll::-webkit-scrollbar-thumb {
+  background: #8B4513;
+  border-radius: 2px;
+}
+
+.similarImagesScroll::-webkit-scrollbar-thumb:hover {
+  background: #A0522D;
+}
+
+.similarImageItem {
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.similarImageItem:hover {
+  transform: scale(1.05);
+}
+
+.similarImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+.similarityScore {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(139, 69, 19, 0.9);
+  color: white;
+  font-size: 10px;
+  padding: 2px 4px;
+  text-align: center;
+  font-weight: 500;
 }
 
 /* 타이핑 인디케이터 */

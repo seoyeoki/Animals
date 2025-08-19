@@ -21,6 +21,7 @@ interface AnimalData {
   noticeEdt: string
   size: string
   filename: string
+  popfile1?: string  // 백엔드에서 실제로 주는 필드
 }
 
 function AdoptionDetailContent() {
@@ -97,11 +98,17 @@ function AdoptionDetailContent() {
       }
       
       const allAnimals = JSON.parse(cachedData)
+      console.log('Found animal data:', allAnimals.length, 'animals')
       const animal = allAnimals.find((a: AnimalData) => a.desertionNo === id)
       
       if (animal) {
+        console.log('Animal found:', animal)
+        console.log('Animal filename:', animal.filename)
+        console.log('Filename type:', typeof animal.filename)
+        console.log('Filename length:', animal.filename?.length)
         setAnimalData(animal)
       } else {
+        console.log('Animal not found for ID:', id)
         setError('해당 동물을 찾을 수 없습니다')
       }
     } catch (err) {
@@ -376,29 +383,48 @@ function AdoptionDetailContent() {
           {/* Image Section */}
           <div className={styles.imageSection}>
             <div className={styles.imageContainer}>
-              {animalData.filename && animalData.filename.trim() !== '' ? (
-                <img 
-                  src={animalData.filename} 
-                  alt={getBreedText(animalData.kindCd)}
-                  className={styles.animalImage}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    target.style.display = 'none'
-                    // 이미지 로드 실패 시 placeholder 표시
-                    const container = target.parentElement
-                    if (container) {
-                      const placeholder = document.createElement('div')
-                      placeholder.className = styles.imagePlaceholder
-                      placeholder.innerHTML = '<span>이미지를 불러올 수 없습니다</span>'
-                      container.appendChild(placeholder)
-                    }
-                  }}
-                />
-              ) : (
-                <div className={styles.imagePlaceholder}>
-                  <span>이미지 없음</span>
-                </div>
-              )}
+              {(() => {
+                // 백엔드에서 popfile1 필드로 데이터를 주므로 이를 사용
+                const filename = animalData.popfile1 || animalData.filename
+                console.log('Rendering image section, filename:', filename)
+                console.log('Filename exists:', !!filename)
+                console.log('Filename is not empty:', filename && filename.trim() !== '')
+                
+                if (filename && filename.trim() !== '') {
+                  const proxyUrl = `/api/proxy-image?url=${encodeURIComponent(filename)}`
+                  console.log('Using proxy URL:', proxyUrl)
+                  return (
+                    <img 
+                      src={proxyUrl}
+                      alt={getBreedText(animalData.kindCd)}
+                      className={styles.animalImage}
+                      onLoad={() => {
+                        console.log('Detail page image loaded successfully:', filename)
+                      }}
+                      onError={(e) => {
+                        console.log('Detail page image load failed:', filename)
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                        // 이미지 로드 실패 시 placeholder 표시
+                        const container = target.parentElement
+                        if (container) {
+                          const placeholder = document.createElement('div')
+                          placeholder.className = styles.imagePlaceholder
+                          placeholder.innerHTML = '<span>이미지를 불러올 수 없습니다</span>'
+                          container.appendChild(placeholder)
+                        }
+                      }}
+                    />
+                  )
+                } else {
+                  console.log('Showing "이미지 없음" placeholder')
+                  return (
+                    <div className={styles.imagePlaceholder}>
+                      <span>이미지 없음</span>
+                    </div>
+                  )
+                }
+              })()}
             </div>
           </div>
 

@@ -1,24 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const body = await request.json()
-    
-    const response = await fetch('https://backend-w8ew.onrender.com/users/login', {
-      method: 'POST',
+    const response = await fetch('https://467c02534073.ngrok-free.app/health', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
     })
 
     if (!response.ok) {
-      console.error('Backend response not ok:', response.status, response.statusText)
-      throw new Error(`Backend API error: ${response.status}`)
+      console.error('Health check failed:', response.status, response.statusText)
+      return NextResponse.json(
+        { error: 'Health check failed' },
+        { status: response.status }
+      )
     }
 
     const data = await response.json()
-    console.log('Backend response data:', data)
     
     return NextResponse.json(data, {
       status: 200,
@@ -29,9 +28,9 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (error) {
-    console.error('Proxy error:', error)
+    console.error('Health check proxy error:', error)
     return NextResponse.json(
-      { error: 'Failed to login' },
+      { error: 'Health check failed' },
       { status: 500 }
     )
   }
