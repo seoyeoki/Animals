@@ -32,10 +32,13 @@ export default function Home() {
   const [error, setError] = useState('')
   const [breeds, setBreeds] = useState<{ kindCd: string; kindName: string }[]>([])
 
-  // 컴포넌트 마운트 시 동물 데이터와 품종 데이터 가져오기
+  // 컴포넌트 마운트 시 품종 데이터를 먼저 가져온 후 동물 데이터 가져오기
   useEffect(() => {
-    fetchRandomAnimals()
-    fetchBreeds()
+    const initializeData = async () => {
+      const breedsData = await fetchBreeds()
+      await fetchRandomAnimals(breedsData)
+    }
+    initializeData()
   }, [])
 
   const fetchBreeds = async () => {
@@ -44,38 +47,81 @@ export default function Home() {
       if (response.ok) {
         const data = await response.json()
         setBreeds(data)
+        return data
       }
     } catch (err) {
       console.error('품종 데이터 로딩 오류:', err)
     }
+    return []
   }
 
-  const fetchRandomAnimals = async () => {
+  const fetchRandomAnimals = async (breedsData: { kindCd: string; kindName: string }[] = []) => {
     try {
       setIsLoading(true)
       setError('')
       
-      // 첫 페이지만 호출
-      const url = '/api/rescue/dogs?page=1'
+      let allAnimals: AnimalData[] = []
+      let currentPage = 1
+      const maxPages = 10 // 최대 10페이지까지 시도 (안전장치)
       
-      console.log('API 호출:', url)
-      
-      const response = await fetch(url)
-      
-      if (!response.ok) {
-        throw new Error('동물 데이터를 가져오는데 실패했습니다')
+      // 유효한 품종을 가진 동물이 6마리 이상이 될 때까지 또는 최대 페이지에 도달할 때까지 반복
+      while (currentPage <= maxPages) {
+        const url = `/api/rescue/dogs?page=${currentPage}`
+        
+        console.log(`API 호출 (페이지 ${currentPage}):`, url)
+        
+        const response = await fetch(url)
+        
+        if (!response.ok) {
+          throw new Error(`페이지 ${currentPage}에서 동물 데이터를 가져오는데 실패했습니다`)
+        }
+        
+        const pageData = await response.json()
+        
+        console.log(`페이지 ${currentPage}에서 받은 데이터:`, pageData.length, '개')
+        
+        // 현재 페이지의 데이터를 전체 배열에 추가
+        allAnimals = [...allAnimals, ...pageData]
+        
+        // 만약 현재 페이지에 데이터가 없다면 더 이상 페이지가 없는 것
+        if (pageData.length === 0) {
+          console.log(`페이지 ${currentPage}에 데이터가 없음. 페이징 중단.`)
+          break
+        }
+        
+        // 현재까지 수집된 데이터에서 유효한 품종을 가진 동물이 6마리 이상인지 확인
+        const validAnimalsCount = allAnimals.filter(animal => {
+          const breedText = getBreedTextWithData(animal.kindCd, breedsData)
+          return breedText !== null
+        }).length
+        
+        console.log(`현재까지 유효한 동물: ${validAnimalsCount}마리`)
+        
+        // 유효한 동물이 6마리 이상이면 루프 종료
+        if (validAnimalsCount >= 6) {
+          console.log('유효한 동물이 6마리 이상 수집됨. 페이징 중단.')
+          break
+        }
+        
+        currentPage++
       }
       
-      const data = await response.json()
+      console.log('총 수집된 데이터:', allAnimals.length, '개')
       
-      console.log('받은 데이터:', data.length, '개')
+      // 유효한 품종을 가진 동물들만 필터링하여 최대 6마리까지 표시
+      const validAnimals = allAnimals
+        .filter(animal => {
+          const breedText = getBreedTextWithData(animal.kindCd, breedsData)
+          return breedText !== null
+        })
+        .slice(0, 6)
       
-      // 최대 6마리까지만 표시
-      const limitedData = data.slice(0, 6)
-      setAnimals(limitedData)
+      console.log('유효한 품종을 가진 동물:', validAnimals.length, '개')
       
-      // localStorage에 데이터 저장 (상세 페이지에서 사용)
-      localStorage.setItem('allAnimalsData', JSON.stringify(data))
+      setAnimals(validAnimals)
+      
+      // localStorage에 전체 데이터 저장 (상세 페이지에서 사용)
+      localStorage.setItem('allAnimalsData', JSON.stringify(allAnimals))
       
     } catch (err) {
       console.error('오류:', err)
@@ -137,6 +183,20 @@ export default function Home() {
     
     // API에서 받아온 품종 데이터에서 찾기
     const breed = breeds.find(b => b.kindCd === kindCd)
+    if (breed) {
+      return breed.kindName
+    }
+    
+    // 백엔드 API에 존재하지 않는 품종은 null 반환
+    return null
+  }
+
+  // 품종 코드를 텍스트로 변환 (매개변수로 받은 breeds 데이터 사용)
+  const getBreedTextWithData = (kindCd: string, breedsData: { kindCd: string; kindName: string }[]) => {
+    if (!kindCd) return null
+    
+    // 매개변수로 받은 품종 데이터에서 찾기
+    const breed = breedsData.find(b => b.kindCd === kindCd)
     if (breed) {
       return breed.kindName
     }
