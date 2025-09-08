@@ -167,6 +167,9 @@ export default function Header() {
           <Link href="/adoption" className={styles.navItem}>
             입양 및 입소
           </Link>
+          <Link href="/matching" className={styles.navItem}>
+            매칭
+          </Link>
         </div>
       </nav>
     </header>

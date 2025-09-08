@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './page.module.css'
+import Image from 'next/image'
 
 export default function IntroPage() {
   return (
@@ -15,7 +16,16 @@ export default function IntroPage() {
               모든 동물이 행복한 가정을 찾을 수 있도록 돕고 있습니다.
             </p>
           </div>
-          <div className={styles.heroImage}></div>
+          <div className={styles.heroImage}>
+            <Image
+              src="/happy pets.jpg"
+              alt="가족과 웰시코기가 함께하는 따뜻한 순간"
+              width={400}
+              height={300}
+              className={styles.heroImageContent}
+              priority
+            />
+          </div>
         </div>
 
         <div className={styles.features}>

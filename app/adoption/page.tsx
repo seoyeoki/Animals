@@ -470,18 +470,7 @@ export default function Adoption() {
           </button>
         </div>
 
-        {/* AI Recommendation Section */}
-        <div className={styles.aiSection}>
-          <div className={styles.aiCard}>
-            <div className={styles.aiIcon}>🤖</div>
-            <div className={styles.aiContent}>
-              <h3 className={styles.aiTitle}>AI 추천</h3>
-              <p className={styles.aiDescription}>
-                어떤 반려동물을 만나면 좋을지 알아보세요!
-              </p>
-            </div>
-          </div>
-        </div>
+
 
         {/* Error State */}
         {error && (
