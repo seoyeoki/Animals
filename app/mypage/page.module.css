@@ -147,3 +147,235 @@
     top: 20px;
   }
 } 
+
+/* 개인 신상 입력 섹션 */
+.personalInfoSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+/* 폼 그룹 */
+.formGroup {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.formLabel {
+  display: block;
+  font-weight: 600;
+  color: var(--Primary-Wood);
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.formInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--Text-Brown);
+  background-color: var(--Light-Beige);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--Primary-Wood);
+  box-shadow: 0 0 0 2px rgba(97, 63, 40, 0.2);
+}
+
+.formTextarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px 16px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--Text-Brown);
+  background-color: var(--Light-Beige);
+  resize: vertical;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--Primary-Wood);
+  box-shadow: 0 0 0 2px rgba(97, 63, 40, 0.2);
+}
+
+/* 성별 선택 버튼 */
+.genderSelect {
+  display: flex;
+  gap: 10px;
+}
+
+.genderButton,
+.householdButton {
+  flex: 1;
+  padding: 12px 24px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--Primary-Wood);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.genderButton.selected,
+.householdButton.selected {
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+  border-color: var(--Primary-Wood);
+}
+
+.genderButton:hover,
+.householdButton:hover {
+  background-color: var(--Faded-Wood);
+}
+
+/* 가구원 수 선택 버튼 */
+.householdSelect {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* 산책 횟수 드롭다운 */
+.walksGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.walksPrefix,
+.walksSuffix {
+  color: var(--Text-Brown);
+  font-size: 16px;
+}
+
+.walksSelect {
+  padding: 8px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  background-color: var(--Light-Beige);
+  font-size: 16px;
+  color: var(--Primary-Wood);
+  cursor: pointer;
+}
+
+/* 저장 버튼 */
+.saveButton {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.saveButton:hover {
+  background-color: var(--Secondary-Wood);
+}
+
+/* 비활성화된 버튼 및 입력 필드 스타일 */
+.genderButton:disabled,
+.householdButton:disabled,
+.formInput:disabled,
+.formTextarea:disabled,
+.walksSelect:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* 정보 수정하기 버튼 (기본 상태) */
+.editButton {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.editButton:hover {
+  background-color: var(--Secondary-Wood);
+}
+
+/* 마음에 드는 강아지 섹션 */
+.imagePreviewContainer {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--Faded-Wood);
+}
+
+.imagePreview {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fileInput {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--Text-Brown);
+  background-color: var(--Light-Beige);
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.fileInput:focus {
+  outline: none;
+  border-color: var(--Primary-Wood);
+}
+
+.fileInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 개인 정보 섹션 - 편집 모드 */
+.editMode .fileInput {
+  background-color: var(--Secondary-Wood);
+  color: var(--Light-Beige);
+  border-color: var(--Faded-Wood);
+}
+
+.editMode .fileInput:focus {
+  border-color: var(--Light-Beige);
+}
+
+.editMode .fileInput:disabled {
+  opacity: 0.5;
+}
+
+.editMode .imagePreviewContainer {
+  background-color: var(--Secondary-Wood);
+  border-color: var(--Faded-Wood);
+}

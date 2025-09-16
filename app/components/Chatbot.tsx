@@ -36,7 +36,6 @@ export default function Chatbot() {
   const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const animationTimerRef = useRef<NodeJS.Timeout | null>(null)
-  const CHAT_API_BASE = 'https://5650e60a6a7b.ngrok-free.app'
 
   const scrollToBottom = () => {
     try {
@@ -146,7 +145,7 @@ export default function Chatbot() {
       const formBody = new URLSearchParams()
       formBody.set('message', message.trim())
 
-      const response = await fetch(`${CHAT_API_BASE}/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -211,7 +210,7 @@ export default function Chatbot() {
         )
 
         if (needsJsonRetry) {
-          const jsonResp = await fetch(`${CHAT_API_BASE}/chat`, {
+          const jsonResp = await fetch(`/api/chat`, {
         method: 'POST',
             headers: {
               'Content-Type': 'application/json'

@@ -1,242 +1,417 @@
-.container {
-  width: 100%;
+/* Container */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
-  padding-top: 0;
-  background: var(--Background-Beige);
+  background-color: var(--Background-Beige);
+  padding: 40px 20px;
 }
 
-.contentWrapper {
-  max-width: 1296px;
-  margin: 0 auto;
-  padding: 120px 72px 60px 72px;
-}
-
+/* Page Title */
 .title {
   color: var(--Primary-Wood);
-  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 48px;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: -0.48px;
-  text-align: center;
-  margin-bottom: 12px;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
 }
 
-.subtitle {
-  color: var(--Text-Brown);
-  font-family: 'Noto Sans KR', ABeeZee, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: -0.2px;
-  text-align: center;
-  margin: 0 0 40px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-}
-
-.cardTitle {
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-
-.cardDesc {
-  margin: 0;
-  color: #666;
-}
-
-.primaryButton {
-  margin-top: 12px;
-  background: var(--Primary-Wood);
-  color: var(--Light-Beige);
-  border: 1px solid #654321;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.primaryButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.formPanel {
-  margin-top: 20px;
-  background: #ffffff;
-  border: 1px solid var(--Border-Beige);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.label {
-  color: var(--Primary-Wood);
-  font-weight: 600;
-}
-
-.textArea {
+/* Content Wrapper */
+.contentWrap {
   width: 100%;
-  min-height: 80px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  resize: vertical;
+  max-width: 600px;
+  background-color: var(--Light-Beige);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--Shadow-Brown);
+  padding: 30px;
+  border: 1px solid var(--Border-Beige);
 }
 
-.formRow {
+/* Toggle Buttons */
+.toggleWrap {
   display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  margin: 10px 0 12px;
-}
-
-.formGroupInline {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.numberInput {
-  width: 120px;
-  border: 1px solid #ddd;
+  margin-bottom: 20px;
   border-radius: 8px;
-  padding: 8px 10px;
+  overflow: hidden;
+  border: 1px solid var(--Border-Beige);
 }
 
-.trailingText {
+.toggleButton {
+  flex: 1;
+  padding: 12px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #777;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.toggleButton.active {
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+}
+
+.toggleButton:first-child {
+  border-right: 1px solid var(--Border-Beige);
+}
+
+/* Form Panel */
+.formPanel {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.formTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--Primary-Wood);
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputLabel {
+  display: block;
+  font-weight: 600;
+  color: var(--Primary-Wood);
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.inputLabel h4 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.inputTextarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px 16px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  font-size: 16px;
   color: var(--Text-Brown);
-  padding-bottom: 4px;
-  margin-left: 4px;
-  line-height: 1.2;
+  background-color: #fff;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.inputTextarea:focus {
+  outline: none;
+  border-color: var(--Primary-Wood);
+}
+
+.inputNumber {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--Text-Brown);
+  background-color: #fff;
+}
+
+.buttonGroup {
+  margin-top: 30px;
 }
 
 .submitButton {
-  background: #8b4513;
-  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 16px;
   border: none;
   border-radius: 8px;
-  padding: 10px 14px;
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: var(--Secondary-Wood);
 }
 
 .submitButton:disabled {
-  opacity: 0.6;
+  background-color: var(--Faded-Wood);
   cursor: not-allowed;
 }
 
-.profilePanel {
+.errorBox {
   margin-top: 20px;
-  background: #ffffff;
-  border: 1px solid var(--Border-Beige);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #ffebeb;
+  border: 1px solid #ff9999;
 }
 
-.profileTitle {
-  margin: 0 0 12px;
-  font-size: 18px;
-  color: var(--Primary-Wood);
-}
-
-.profileContent {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.profileRow {
-  display: flex;
-  gap: 12px;
-}
-
-.profileKey {
-  width: 80px;
-  color: #666;
-}
-
-.profileVal {}
-
-.profilePre {
+.errorP {
   margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
   white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+/* 마이페이지 프로필 카드 스타일 */
+.infoCard {
+  background-color: var(--Light-Beige);
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px var(--Shadow-Brown);
+  border: 1px solid var(--Border-Beige);
+  margin: 0 auto;
+}
+
+.profileCard {
+  max-width: none;
+}
+
+.infoTitle {
+  color: var(--Primary-Wood);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--Border-Beige);
+}
+
+.infoItem:last-child {
+  border-bottom: none;
+}
+
+.infoLabel {
+  font-weight: 500;
+  color: var(--Text-Brown);
+  font-size: 16px;
+}
+
+.infoValue {
+  font-weight: 600;
+  color: var(--Primary-Wood);
+  font-size: 16px;
+  word-break: break-all;
+  text-align: right;
 }
 
 .profileEmpty {
-  color: #666;
+  text-align: center;
+  padding: 30px;
+  color: #888;
+  border: 1px dashed var(--Border-Beige);
+  border-radius: 8px;
 }
 
 .profileCtaWrap {
-  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .beigeButton {
   display: inline-block;
-  padding: 10px 14px;
-  background: #e6d7c3;
-  color: #8b4513;
+  padding: 12px 24px;
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
   text-decoration: none;
-  border: 1px solid #d4c4a8;
   border-radius: 8px;
   font-weight: 600;
+  transition: background-color 0.3s;
 }
 
-.imageRow {
+.beigeButton:hover {
+  background-color: var(--Secondary-Wood);
+}
+
+/* 닉네임 항목 스타일 (실선 없음) */
+.infoItemNoBorder {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  padding: 15px 0;
+}
+
+/* 개인 정보 섹션 그룹핑 */
+.personalInfoGroup {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--Border-Beige);
+}
+
+/* 기타사항과 이미지 레이아웃 조정 */
+.infoItemImage {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--Border-Beige);
+  align-items: flex-start;
+}
+
+.infoLabelImage {
+  font-weight: 500;
+  color: var(--Text-Brown);
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.imagePreviewContainer {
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
 }
 
 .imagePreview {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--Border-Beige);
+}
+
+/* 새로운 설문 폼 스타일 */
+.imageInputRow {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.imagePreview {
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--Border-Beige);
+}
+
+.fileInput {
+  flex-grow: 1;
+}
+
+/* 새로운 버튼 스타일 */
+.primaryButton {
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none; /* Link 태그용 */
+}
+
+.primaryButton:hover {
+  background-color: var(--Secondary-Wood);
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: var(--Primary-Wood);
+  border: 1px solid var(--Primary-Wood);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  text-decoration: none; /* Link 태그용 */
+}
+
+.secondaryButton:hover {
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+}
+
+/* 추천 강아지 목록 스타일 */
+.recommendationsWrap {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--Border-Beige);
+}
+
+.recommendationsTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--Primary-Wood);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.recommendationsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.recommendationItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--Primary-Wood);
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.recommendationItem:hover {
+  transform: translateY(-5px);
+}
+
+.recImage {
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid #eee;
+  border: 1px solid var(--Border-Beige);
 }
 
-.errorText {
-  color: #b00020;
-  margin: 8px 0;
+.recRank {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: var(--Primary-Wood);
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-.resultBox {
-  margin-top: 12px;
-  background: #fafafa;
-  border: 1px solid #eee;
+/* 추천 메시지 스타일 */
+.recommendationTextWrap {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--Border-Beige);
   border-radius: 8px;
-  padding: 12px;
+  background-color: #f9f6f1;
 }
 
-.resultPre {
-  margin: 0;
+.recommendationText {
   white-space: pre-wrap;
-  word-break: break-word;
+  word-wrap: break-word;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--Text-Brown);
+  margin: 0;
 }
-
-@media (max-width: 768px) {
-  .contentWrapper {
-    padding: 40px 20px;
-  }
-}
-

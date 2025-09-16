@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { RECOMMEND_API_BASE } from '@/app/api-url';
 
 export async function GET(request: NextRequest) {
   try {
-    const response = await fetch('https://467c02534073.ngrok-free.app/health', {
+    const response = await fetch('${RECOMMEND_API_BASE}/health', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

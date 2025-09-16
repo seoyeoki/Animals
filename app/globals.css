@@ -1,13 +1,16 @@
+/* app/globals.css */
 :root {
-  --Primary-Wood: #8b4513;
-  --Secondary-Wood: #654321;
-  --Light-Beige: #f5f1eb;
-  --Medium-Beige: #e6d7c3;
-  --Dark-Beige: #d4c4a8;
-  --Text-Brown: #5d4037;
-  --Background-Beige: #faf8f5;
-  --Border-Beige: #d4c4a8;
-  --Shadow-Brown: rgba(139, 69, 19, 0.15);
+  --Background-Beige: #F5F1E9;
+  --Light-Beige: #FEFBF7;
+  --Border-Beige: #E0D9C9;
+
+  --Primary-Wood: #613F28;
+  --Secondary-Wood: #80614A;
+  --Dark-Wood: #452C1E;
+  --Faded-Wood: #A38A73;
+
+  --Text-Brown: #4A3A2C;
+  --Shadow-Brown: rgba(0, 0, 0, 0.05);
 }
 
 * {

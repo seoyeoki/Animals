@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     }
     
     // similarity_api로 요청 전달
-    const response = await fetch('https://467c02534073.ngrok-free.app/recommend-and-search', {
+    const response = await fetch('${RECOMMEND_API_BASE}/recommend-and-search', {
       method: 'POST',
       body: formData, // FormData를 그대로 전달
     })

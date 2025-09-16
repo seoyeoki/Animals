@@ -295,7 +295,7 @@ export default function Adoption() {
 
   const handleCardClick = (animalId: string) => {
     // 동물 카드 클릭 시 상세 페이지로 이동
-    router.push(`/adoption-detail?id=${animalId}`)
+    router.push(`/adoption-detail?desertion_no=${animalId}`)
   }
 
   // 성별 텍스트 변환
