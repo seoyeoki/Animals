@@ -122,11 +122,11 @@
 /* Links Section */
 .links {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* 가운데 정렬 */
   align-items: center;
-  width: 435px;
-  margin-top: 20px;
-  padding: 0 10px;
+  gap: 10px; /* 텍스트와 링크 사이 간격 */
+  width: 100%;
+  margin-top: 10px; /* 로그인 버튼과의 간격 조정 */
 }
 
 .linkText {
@@ -162,7 +162,7 @@
   
   .links {
     width: 100%;
-    flex-direction: column;
+    flex-direction: row; /* 모바일에서도 가로 정렬 유지 */
     gap: 10px;
   }
   
@@ -170,4 +170,4 @@
     left: 20px;
     top: 20px;
   }
-} 
+}

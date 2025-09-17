@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
       noticeEdt: item.noticeEdt,
       size: item.size,
       filename: item.filename,
-      popfile1: item.popfile
+      popfile1: item.popfile1
     };
     
     return NextResponse.json(animalDataForPage, { status: 200 });

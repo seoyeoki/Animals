@@ -106,11 +106,12 @@ export default function Header() {
           <Link href="/intro" className={styles.navItem}>
             소개
           </Link>
-          <Link href="/guide" className={styles.navItem}>
-            이용법
-          </Link>
           <Link href="/adoption" className={styles.navItem}>
             입양 및 입소
+          </Link>
+          {/* ✨ '입양 후기' 버튼의 링크를 수정했습니다. */}
+          <Link href="/adoption-review" className={styles.navItem}>
+            입양 후기
           </Link>
           <Link href="/matching" className={styles.navItem}>
             매칭

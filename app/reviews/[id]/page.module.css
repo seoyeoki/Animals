@@ -1,0 +1,229 @@
+.main {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    background-color: var(--Background-Beige);
+  }
+  
+  .reviewContainer {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--Light-Beige);
+    border: 1px solid var(--Border-Beige);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 20px var(--Shadow-Brown);
+    align-self: flex-start; /* 컨테이너가 위쪽에 붙도록 설정 */
+  }
+  
+  .header {
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--Border-Beige);
+    margin-bottom: 30px;
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--Primary-Wood);
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+  }
+  
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--Secondary-Wood);
+  }
+  
+  .counts {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .content {
+    min-height: 300px; /* 최소 높이를 주어 내용이 적어도 어색하지 않게 */
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--Text-Brown);
+    white-space: pre-wrap; /* 줄바꿈과 공백을 그대로 표시 */
+  }
+  
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .listButton {
+    padding: 10px 30px;
+    background-color: var(--Primary-Wood);
+    color: var(--Light-Beige);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .listButton:hover {
+    background-color: var(--Secondary-Wood);
+  }
+  
+  .loading, .error, .noResults {
+    width: 100%;
+    text-align: center;
+    padding: 100px 0;
+    color: var(--Secondary-Wood);
+    font-size: 20px;
+  }
+  
+  .error {
+    color: #d32f2f;
+  }
+
+  /* --- ✨ 파일 맨 아래에 댓글 관련 스타일 추가 ✨ --- */
+
+.commentSection {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px dashed var(--Border-Beige);
+  }
+  
+  .commentTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--Primary-Wood);
+    margin-bottom: 20px;
+  }
+  
+  .commentForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .commentTextarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--Border-Beige);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--Text-Brown);
+    background-color: #fff;
+    resize: vertical;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  .commentTextarea:focus {
+    outline: none;
+    border-color: var(--Primary-Wood);
+    box-shadow: 0 0 0 2px rgba(97, 63, 40, 0.2);
+  }
+  
+  .commentError {
+    font-size: 14px;
+    color: #d32f2f;
+    margin-bottom: 10px;
+  }
+  
+  .commentSubmitButton {
+    align-self: flex-end; /* 버튼을 오른쪽으로 정렬 */
+    padding: 10px 20px;
+    background-color: var(--Primary-Wood);
+    color: var(--Light-Beige);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .commentSubmitButton:hover:not(:disabled) {
+    background-color: var(--Secondary-Wood);
+  }
+  
+  .commentSubmitButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* --- ✨ 파일 맨 아래에 댓글 목록 관련 스타일 추가 ✨ --- */
+
+.commentList {
+    margin-bottom: 30px; /* 댓글 목록과 작성 폼 사이 간격 */
+  }
+  
+  .commentItem {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--Border-Beige);
+  }
+  
+  .commentItem:last-child {
+    border-bottom: none;
+  }
+  
+  .commentContent {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: var(--Text-Brown);
+    line-height: 1.6;
+  }
+  
+  .commentDate {
+    font-size: 12px;
+    color: var(--Secondary-Wood);
+  }
+  
+  .noComments {
+    text-align: center;
+    color: var(--Secondary-Wood);
+    padding: 20px 0;
+    font-size: 14px;
+  }
+
+  /* --- ✨ 파일 맨 아래에 좋아요 버튼 관련 스타일 추가 ✨ --- */
+
+/* 좋아요 버튼을 오른쪽 정렬하기 위한 컨테이너 */
+.actionsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin-top: 30px; /* 본문과의 간격 */
+    padding-bottom: 30px; /* 댓글 섹션과의 간격 */
+    border-bottom: 1px dashed var(--Border-Beige); /* 구분선 */
+  }
+  
+  /* 새로운 '좋아요' 버튼 스타일 */
+  .actionLikeButton {
+    background-color: #fff;
+    border: 1px solid var(--Primary-Wood);
+    color: var(--Primary-Wood);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .actionLikeButton:hover:not(:disabled) {
+    background-color: var(--Primary-Wood);
+    color: #fff;
+  }
+  
+  .actionLikeButton.liked,
+  .actionLikeButton:disabled {
+    background-color: #d32f2f;
+    color: white;
+    border-color: #d32f2f;
+    cursor: not-allowed;
+  }

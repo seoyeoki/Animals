@@ -134,6 +134,11 @@ export default function MyPage() {
               <span className={styles.infoLabel}>닉네임:</span>
               <span className={styles.infoValue}>{userData?.nickname || '별명 없음'}</span>
             </div>
+            {/* ✨ 이메일 정보 추가 ✨ */}
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>이메일:</span>
+              <span className={styles.infoValue}>{userData?.email || '이메일 없음'}</span>
+            </div>
           </div>
         </div>
 

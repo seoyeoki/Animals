@@ -112,15 +112,15 @@ export default function Login() {
           >
             {isLoading ? '로그인 중...' : '로그인'}
           </button>
+          
+          <div className={styles.links}>
+            <span className={styles.linkText}>회원이 아니신가요?</span>
+            <Link href="/register" className={styles.link}>
+              회원가입
+            </Link>
+          </div>
         </form>
-        
-        <div className={styles.links}>
-          <span className={styles.linkText}>회원이 아니신가요?</span>
-          <Link href="/register" className={styles.link}>
-            회원가입
-          </Link>
-        </div>
       </main>
     </div>
   )
-} 
+}

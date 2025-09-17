@@ -19,18 +19,18 @@
 /* Content Wrapper */
 .contentWrap {
   width: 100%;
-  max-width: 600px;
-  background-color: var(--Light-Beige);
+  max-width: 700px;
+  background-color: transparent;
   border-radius: 12px;
-  box-shadow: 0 4px 20px var(--Shadow-Brown);
-  padding: 30px;
-  border: 1px solid var(--Border-Beige);
+  box-shadow: none;
+  padding: 0;
+  border: none;
 }
 
 /* Toggle Buttons */
 .toggleWrap {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--Border-Beige);
@@ -57,137 +57,116 @@
   border-right: 1px solid var(--Border-Beige);
 }
 
-/* Form Panel */
-.formPanel {
-  padding: 0;
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-}
+/* --- ✨ 통합된 카드 및 폼 스타일 ✨ --- */
 
-.formTitle {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--Primary-Wood);
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-.inputGroup {
-  margin-bottom: 20px;
-}
-
-.inputLabel {
-  display: block;
-  font-weight: 600;
-  color: var(--Primary-Wood);
-  margin-bottom: 8px;
-  font-size: 16px;
-}
-
-.inputLabel h4 {
-  margin: 0 0 8px 0;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.inputTextarea {
-  width: 100%;
-  min-height: 120px;
-  padding: 12px 16px;
-  border: 1px solid var(--Border-Beige);
-  border-radius: 8px;
-  font-size: 16px;
-  color: var(--Text-Brown);
-  background-color: #fff;
-  resize: vertical;
-  transition: border-color 0.3s;
-}
-
-.inputTextarea:focus {
-  outline: none;
-  border-color: var(--Primary-Wood);
-}
-
-.inputNumber {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--Border-Beige);
-  border-radius: 8px;
-  font-size: 16px;
-  color: var(--Text-Brown);
-  background-color: #fff;
-}
-
-.buttonGroup {
-  margin-top: 30px;
-}
-
-.submitButton {
-  display: block;
-  width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--Primary-Wood);
-  color: var(--Light-Beige);
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.submitButton:hover {
-  background-color: var(--Secondary-Wood);
-}
-
-.submitButton:disabled {
-  background-color: var(--Faded-Wood);
-  cursor: not-allowed;
-}
-
-.errorBox {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #ffebeb;
-  border: 1px solid #ff9999;
-}
-
-.errorP {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-
-/* 마이페이지 프로필 카드 스타일 */
+/* 프로필 & 설문 공통 카드 스타일 */
 .infoCard {
   background-color: var(--Light-Beige);
   border-radius: 12px;
   padding: 30px;
   width: 100%;
-  max-width: 500px;
   box-shadow: 0 4px 20px var(--Shadow-Brown);
   border: 1px solid var(--Border-Beige);
-  margin: 0 auto;
-}
-
-.profileCard {
-  max-width: none;
 }
 
 .infoTitle {
   color: var(--Primary-Wood);
   font-size: 24px;
   font-weight: 600;
-  margin: 0 0 20px 0;
+  margin: 0 0 25px 0;
   text-align: center;
 }
 
-.infoItem {
+/* 설문 폼 그룹 */
+.formGroup {
+  margin-bottom: 25px;
+}
+
+.formLabel {
+  display: block;
+  font-weight: 600;
+  color: var(--Primary-Wood);
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--Text-Brown);
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--Primary-Wood);
+  box-shadow: 0 0 0 2px rgba(97, 63, 40, 0.2);
+}
+
+.formTextarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* 커스텀 파일 업로드 버튼 */
+.fileInputContainer {
+  position: relative;
+}
+
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileInputLabel {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: var(--Primary-Wood);
+  color: var(--Light-Beige);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.fileInputLabel:hover {
+  background-color: var(--Secondary-Wood);
+}
+
+.imagePreviewContainer {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 250px;
+  border: 2px dashed var(--Border-Beige);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 5px;
+  background-color: #fff;
+}
+
+.imagePreview {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+
+/* --- 프로필 정보 표시 스타일 --- */
+
+.infoItem,
+.infoItemNoBorder {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -196,6 +175,10 @@
 }
 
 .infoItem:last-child {
+  border-bottom: none;
+}
+
+.infoItemNoBorder {
   border-bottom: none;
 }
 
@@ -213,57 +196,16 @@
   text-align: right;
 }
 
-.profileEmpty {
-  text-align: center;
-  padding: 30px;
-  color: #888;
-  border: 1px dashed var(--Border-Beige);
-  border-radius: 8px;
-}
-
-.profileCtaWrap {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.beigeButton {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: var(--Primary-Wood);
-  color: var(--Light-Beige);
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background-color 0.3s;
-}
-
-.beigeButton:hover {
-  background-color: var(--Secondary-Wood);
-}
-
-/* 닉네임 항목 스타일 (실선 없음) */
-.infoItemNoBorder {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-}
-
-/* 개인 정보 섹션 그룹핑 */
 .personalInfoGroup {
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px dashed var(--Border-Beige);
 }
 
-/* 기타사항과 이미지 레이아웃 조정 */
 .infoItemImage {
   display: flex;
   flex-direction: column;
   padding: 15px 0;
-  border-bottom: 1px solid var(--Border-Beige);
   align-items: flex-start;
 }
 
@@ -274,39 +216,25 @@
   margin-bottom: 10px;
 }
 
-.imagePreviewContainer {
-  width: 100%;
-  max-width: 250px;
-  margin: 0 auto;
-}
-
-.imagePreview {
-  width: 100%;
-  height: auto;
+.profileEmpty {
+  text-align: center;
+  padding: 30px;
+  color: #888;
+  border: 1px dashed var(--Border-Beige);
   border-radius: 8px;
-  border: 1px solid var(--Border-Beige);
 }
 
-/* 새로운 설문 폼 스타일 */
-.imageInputRow {
+
+/* --- ✨ 공용 버튼 스타일 ✨ --- */
+
+.buttonWrap,
+.profileCtaWrap {
+  margin-top: 30px;
   display: flex;
+  justify-content: center;
   gap: 15px;
-  align-items: center;
-  margin-top: 10px;
 }
 
-.imagePreview {
-  max-width: 150px;
-  height: auto;
-  border-radius: 8px;
-  border: 1px solid var(--Border-Beige);
-}
-
-.fileInput {
-  flex-grow: 1;
-}
-
-/* 새로운 버튼 스타일 */
 .primaryButton {
   background-color: var(--Primary-Wood);
   color: var(--Light-Beige);
@@ -314,14 +242,22 @@
   border-radius: 8px;
   padding: 12px 24px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
-  text-decoration: none; /* Link 태그용 */
+  text-decoration: none;
+  text-align: center; /* 텍스트 가운데 정렬 */
+  flex: 1; /* ✨ 추가: 공간을 균등하게 차지 */
+  width: auto; /* 기존 width: 100% 제거 또는 auto로 변경 */
 }
 
-.primaryButton:hover {
+.primaryButton:hover:not(:disabled) {
   background-color: var(--Secondary-Wood);
+}
+
+.primaryButton:disabled {
+  background-color: var(--Faded-Wood);
+  cursor: not-allowed;
 }
 
 .secondaryButton {
@@ -334,7 +270,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  text-decoration: none; /* Link 태그용 */
+  text-decoration: none;
 }
 
 .secondaryButton:hover {
@@ -342,9 +278,31 @@
   color: var(--Light-Beige);
 }
 
-/* 추천 강아지 목록 스타일 */
-.recommendationsWrap {
+
+/* --- 결과 표시 영역 --- */
+
+.resultArea {
+  width: 100%;
+  max-width: 700px;
   margin-top: 30px;
+}
+
+.errorBox {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #ffebeb;
+  border: 1px solid #ff9999;
+}
+
+.errorP {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.recommendationsWrap {
   padding-top: 20px;
   border-top: 1px dashed var(--Border-Beige);
 }
@@ -398,7 +356,20 @@
   font-size: 14px;
 }
 
-/* 추천 메시지 스타일 */
+.recInfo {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.recBreed {
+  font-weight: 600;
+}
+
+.recDetail {
+  font-size: 14px;
+  color: var(--Secondary-Wood);
+}
+
 .recommendationTextWrap {
   margin-top: 20px;
   padding: 20px;
