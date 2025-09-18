@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { RECOMMEND_API_BASE, API_KEY_RECOMMEND } from '@/app/api-url';
 
-const EXTERNAL_SURVEY_API = `${RECOMMEND_API_BASE}/recommend_with_survey`;
+const EXTERNAL_SURVEY_API = `${RECOMMEND_API_BASE}/recommend_with_survey_form?topk=6`;
 
 export async function POST(request: NextRequest) {
   try {

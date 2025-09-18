@@ -1,0 +1,91 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-color: var(--Background-Beige);
+  }
+  .formContainer {
+    width: 100%;
+    max-width: 550px; /* ✨ 컨테이너 너비 증가 */
+    padding: 50px; /* ✨ 내부 여백 증가 */
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  .title {
+    text-align: center;
+    color: var(--Primary-Wood);
+    font-size: 30px; /* ✨ 폰트 크기 증가 */
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+  .formGroup {
+    margin-bottom: 25px; /* ✨ 그룹 간 간격 증가 */
+  }
+  .label {
+    display: block;
+    font-size: 18px; /* ✨ 폰트 크기 증가 */
+    font-weight: 600;
+    color: var(--Primary-Wood);
+    margin-bottom: 12px; /* ✨ 라벨-입력창 간격 증가 */
+  }
+  .textarea {
+    width: 100%;
+    min-height: 140px; /* ✨ 높이 증가 */
+    padding: 15px; /* ✨ 내부 여백 증가 */
+    font-size: 16px;
+    border: 1px solid var(--Border-Beige);
+    border-radius: 8px;
+    resize: vertical;
+  }
+  .fileInput {
+    width: 100%;
+    padding: 15px; /* ✨ 내부 여백 증가 */
+    font-size: 16px; /* ✨ 폰트 크기 추가 */
+    border: 1px solid var(--Border-Beige);
+    border-radius: 8px;
+  }
+  .imagePreview {
+    margin-top: 15px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--Border-Beige);
+  }
+  .error {
+    color: #d32f2f;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .buttonGroup {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    border-top: 1px solid var(--Border-Beige);
+    padding-top: 20px;
+  }
+  .prevButton, .submitButton {
+    flex: 1;
+    padding: 16px; /* ✨ 버튼 크기 증가 */
+    font-size: 18px; /* ✨ 폰트 크기 증가 */
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .prevButton {
+    background-color: #fff;
+    border: 1px solid var(--Border-Beige);
+    color: var(--Primary-Wood);
+  }
+  .submitButton {
+    color: var(--Light-Beige);
+    background-color: var(--Primary-Wood);
+    border: none;
+  }
+  .submitButton:disabled {
+    background-color: var(--Faded-Wood);
+    cursor: not-allowed;
+  }

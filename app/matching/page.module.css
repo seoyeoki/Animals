@@ -1,388 +1,186 @@
-/* Container */
 .main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  justify-content: center;
+  padding: 60px 20px;
   background-color: var(--Background-Beige);
-  padding: 40px 20px;
 }
 
-/* Page Title */
+.formContainer {
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  border: 1px solid var(--Border-Beige);
+}
+
 .title {
-  color: var(--Primary-Wood);
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 40px;
-}
-
-/* Content Wrapper */
-.contentWrap {
-  width: 100%;
-  max-width: 700px;
-  background-color: transparent;
-  border-radius: 12px;
-  box-shadow: none;
-  padding: 0;
-  border: none;
-}
-
-/* Toggle Buttons */
-.toggleWrap {
-  display: flex;
-  margin-bottom: 30px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--Border-Beige);
-}
-
-.toggleButton {
-  flex: 1;
-  padding: 12px;
-  background-color: #f0f0f0;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  color: #777;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.toggleButton.active {
-  background-color: var(--Primary-Wood);
-  color: var(--Light-Beige);
-}
-
-.toggleButton:first-child {
-  border-right: 1px solid var(--Border-Beige);
-}
-
-/* --- ✨ 통합된 카드 및 폼 스타일 ✨ --- */
-
-/* 프로필 & 설문 공통 카드 스타일 */
-.infoCard {
-  background-color: var(--Light-Beige);
-  border-radius: 12px;
-  padding: 30px;
-  width: 100%;
-  box-shadow: 0 4px 20px var(--Shadow-Brown);
-  border: 1px solid var(--Border-Beige);
-}
-
-.infoTitle {
-  color: var(--Primary-Wood);
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 0 25px 0;
   text-align: center;
+  color: var(--Primary-Wood);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
-/* 설문 폼 그룹 */
 .formGroup {
   margin-bottom: 25px;
 }
 
-.formLabel {
-  display: block;
-  font-weight: 600;
-  color: var(--Primary-Wood);
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.formInput,
-.formTextarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--Border-Beige);
-  border-radius: 8px;
-  font-size: 16px;
-  color: var(--Text-Brown);
-  background-color: #fff;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.formInput:focus,
-.formTextarea:focus {
-  outline: none;
-  border-color: var(--Primary-Wood);
-  box-shadow: 0 0 0 2px rgba(97, 63, 40, 0.2);
-}
-
-.formTextarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-/* 커스텀 파일 업로드 버튼 */
-.fileInputContainer {
-  position: relative;
-}
-
-.fileInput {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-.fileInputLabel {
-  display: inline-block;
-  padding: 10px 18px;
-  background-color: var(--Primary-Wood);
-  color: var(--Light-Beige);
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.fileInputLabel:hover {
-  background-color: var(--Secondary-Wood);
-}
-
-.imagePreviewContainer {
-  margin-top: 15px;
-  width: 100%;
-  max-width: 250px;
-  border: 2px dashed var(--Border-Beige);
-  border-radius: 8px;
-  overflow: hidden;
-  padding: 5px;
-  background-color: #fff;
-}
-
-.imagePreview {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px;
-}
-
-
-/* --- 프로필 정보 표시 스타일 --- */
-
-.infoItem,
-.infoItemNoBorder {
+/* ✨ 한 줄 배치를 위한 새로운 스타일 */
+.inlineGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--Border-Beige);
+}
+.inlineGroup .label {
+  margin-bottom: 0; /* 라벨의 하단 마진 제거 */
+}
+.inlineGroup .input {
+  width: 100px; /* 입력창 너비 고정 */
+  text-align: center;
 }
 
-.infoItem:last-child {
-  border-bottom: none;
-}
-
-.infoItemNoBorder {
-  border-bottom: none;
-}
-
-.infoLabel {
-  font-weight: 500;
-  color: var(--Text-Brown);
+.label {
+  display: block;
   font-size: 16px;
-}
-
-.infoValue {
   font-weight: 600;
   color: var(--Primary-Wood);
-  font-size: 16px;
-  word-break: break-all;
-  text-align: right;
-}
-
-.personalInfoGroup {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px dashed var(--Border-Beige);
-}
-
-.infoItemImage {
-  display: flex;
-  flex-direction: column;
-  padding: 15px 0;
-  align-items: flex-start;
-}
-
-.infoLabelImage {
-  font-weight: 500;
-  color: var(--Text-Brown);
-  font-size: 16px;
   margin-bottom: 10px;
 }
 
-.profileEmpty {
-  text-align: center;
-  padding: 30px;
-  color: #888;
-  border: 1px dashed var(--Border-Beige);
+.input, .select, .textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid var(--Border-Beige);
   border-radius: 8px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--Primary-Wood);
+  box-shadow: 0 0 0 3px rgba(97, 63, 40, 0.15);
+}
+.textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
-
-/* --- ✨ 공용 버튼 스타일 ✨ --- */
-
-.buttonWrap,
-.profileCtaWrap {
-  margin-top: 30px;
+.inputWithUnit {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  align-items: center;
+  gap: 12px;
+}
+.inputWithUnit span {
+  font-weight: 500;
+  color: var(--Secondary-Wood);
+  white-space: nowrap;
 }
 
-.primaryButton {
+/* ✨ +/- 버튼 스타일(stepperButton)은 삭제되었습니다. */
+
+.radioGroup {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.radioButton {
+  flex-grow: 1;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #555;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s;
+}
+.radioButton:hover:not(.active) {
+  background-color: #f0f0f0;
+  border-color: var(--Primary-Wood);
+}
+.radioButton.active {
   background-color: var(--Primary-Wood);
+  color: white;
+  border-color: var(--Primary-Wood);
+  font-weight: 600;
+}
+
+.tagGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tagButton {
+  padding: 8px 15px;
+  border: 1px solid var(--Border-Beige);
+  border-radius: 20px;
+  background-color: #f7f7f7;
+  color: var(--Secondary-Wood);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.tagButton:hover:not(.active) {
+  background-color: #efefef;
+}
+.tagButton.active {
+  background-color: var(--Primary-Wood);
+  color: white;
+  border-color: var(--Primary-Wood);
+  font-weight: 500;
+}
+
+.error {
+  color: #d32f2f;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.buttonGroup {
+  margin-top: 30px;
+  border-top: 1px solid var(--Border-Beige);
+  padding-top: 20px;
+}
+
+.nextButton {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--Light-Beige);
+  background-color: var(--Primary-Wood);
   border: none;
   border-radius: 8px;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
-  text-decoration: none;
-  text-align: center; /* 텍스트 가운데 정렬 */
-  flex: 1; /* ✨ 추가: 공간을 균등하게 차지 */
-  width: auto; /* 기존 width: 100% 제거 또는 auto로 변경 */
 }
-
-.primaryButton:hover:not(:disabled) {
+.nextButton:hover {
   background-color: var(--Secondary-Wood);
 }
 
-.primaryButton:disabled {
-  background-color: var(--Faded-Wood);
-  cursor: not-allowed;
-}
-
-.secondaryButton {
-  background-color: transparent;
-  color: var(--Primary-Wood);
-  border: 1px solid var(--Primary-Wood);
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  text-decoration: none;
-}
-
-.secondaryButton:hover {
-  background-color: var(--Primary-Wood);
-  color: var(--Light-Beige);
-}
-
-
-/* --- 결과 표시 영역 --- */
-
-.resultArea {
+.fileInput {
   width: 100%;
-  max-width: 700px;
-  margin-top: 30px;
-}
-
-.errorBox {
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #ffebeb;
-  border: 1px solid #ff9999;
-}
-
-.errorP {
-  margin: 0;
+  padding: 12px;
   font-size: 14px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  border: 1px dashed var(--Border-Beige);
+  border-radius: 8px;
+  background-color: #fcfcfc;
 }
 
-.recommendationsWrap {
-  padding-top: 20px;
-  border-top: 1px dashed var(--Border-Beige);
-}
-
-.recommendationsTitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--Primary-Wood);
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.recommendationsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-  justify-items: center;
-}
-
-.recommendationItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: var(--Primary-Wood);
-  transition: transform 0.2s;
-  position: relative;
-}
-
-.recommendationItem:hover {
-  transform: translateY(-5px);
-}
-
-.recImage {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
+.imagePreview {
+  margin-top: 15px;
+  max-width: 200px;
+  height: auto;
   border-radius: 8px;
   border: 1px solid var(--Border-Beige);
-}
-
-.recRank {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: var(--Primary-Wood);
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.recInfo {
-  text-align: center;
-  margin-top: 8px;
-}
-
-.recBreed {
-  font-weight: 600;
-}
-
-.recDetail {
-  font-size: 14px;
-  color: var(--Secondary-Wood);
-}
-
-.recommendationTextWrap {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid var(--Border-Beige);
-  border-radius: 8px;
-  background-color: #f9f6f1;
-}
-
-.recommendationText {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--Text-Brown);
-  margin: 0;
+  display: block;
 }

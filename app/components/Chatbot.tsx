@@ -386,7 +386,7 @@ export default function Chatbot() {
         disabled={isAnimating}
       >
         <img 
-          src="https://api.builder.io/api/v1/image/assets/TEMP/c829a260964bfc445a8395b93b2849770b8c9ec9?width=158" 
+          src="/glass.png" 
           alt="ChatBot" 
           className={styles.chatbotIcon}
         />

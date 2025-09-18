@@ -32,13 +32,47 @@ function AdoptionDetailContent() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
   
-  // ✨ 2. breeds 관련 상태와 함수는 더 이상 필요 없으므로 삭제
-  // const [breeds, setBreeds] = useState<Array<{kindCd: string, kindName: string}>>([])
-  // const [breedsError, setBreedsError] = useState(false)
+  // ✨ 품종 정보 매핑을 위한 상태
+  const [breedMap, setBreedMap] = useState<Record<string, string>>({})
+
+  // ✨ 품종 정보 로드 함수
+  const fetchBreeds = async () => {
+    try {
+      const response = await fetch('/api/breeds-all');
+      if (!response.ok) {
+        throw new Error('품종 정보를 불러오는 데 실패했습니다.');
+      }
+      const data = await response.json();
+      
+      if (Array.isArray(data)) {
+        const breedMapping: Record<string, string> = {};
+        data.forEach((breed: { kindCd: string; knm?: string; kindName?: string }) => {
+          const breedName = breed.knm || breed.kindName || '품종명 없음';
+          breedMapping[breed.kindCd] = breedName;
+        });
+        setBreedMap(breedMapping);
+        console.log('품종 매핑 완료:', breedMapping);
+      }
+    } catch (e) {
+      console.error('품종 정보 로드 실패:', e);
+    }
+  };
+
+  // ✨ 품종 코드를 이름으로 바꿔주는 함수
+  const getBreedName = (breedCode: string) => {
+    const breedName = breedMap[breedCode];
+    if (!breedName) {
+      return '품종 정보 없음';
+    }
+    return breedName;
+  };
 
   useEffect(() => {
+    // ✨ 품종 정보를 먼저 로드
+    fetchBreeds();
+    
     // ✨ 3. URL 파라미터로 'id' 대신 'desertion_no'를 사용하도록 통일
-    const desertionNo = searchParams.get('desertion_no');
+    const desertionNo = searchParams.get('id');
     if (desertionNo) {
       fetchAnimalData(desertionNo)
     } else {
@@ -176,7 +210,7 @@ function AdoptionDetailContent() {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.pageTitle}>
-          <h1 className={styles.title}>{(animalData.kindName || animalData.kindCd)} 상세정보</h1>
+          <h1 className={styles.title}>{getBreedName(animalData.kindCd)} 상세정보</h1>
         </div>
 
         <div className={styles.postInfo}>
@@ -189,11 +223,11 @@ function AdoptionDetailContent() {
           <div className={styles.mainContent}>
             <div className={styles.contentBox}>
               <div className={styles.animalInfo}>
-                <h2 className={styles.animalName}>{(animalData.kindName || animalData.kindCd)}</h2>
+                <h2 className={styles.animalName}>{getBreedName(animalData.kindCd)}</h2>
                 <div className={styles.infoGrid}>
                   <div className={styles.infoItem}>
                     <span className={styles.infoLabel}>품종:</span>
-                    <span className={styles.infoValue}>{(animalData.kindName || animalData.kindCd)}</span>
+                    <span className={styles.infoValue}>{getBreedName(animalData.kindCd)}</span>
                   </div>
                   {/* ... 나머지 info items는 기존과 동일 ... */}
                   <div className={styles.infoItem}>
@@ -243,7 +277,7 @@ function AdoptionDetailContent() {
                 const imageUrl = animalData.popfile1 || animalData.filename;
                 if (imageUrl && imageUrl.trim() !== '') {
                   const proxyUrl = `/api/proxy-image?url=${encodeURIComponent(imageUrl)}`;
-                  return <img src={proxyUrl} alt={(animalData.kindName || animalData.kindCd)} className={styles.animalImage} />;
+                  return <img src={proxyUrl} alt={getBreedName(animalData.kindCd)} className={styles.animalImage} />;
                 } else {
                   return <div className={styles.imagePlaceholder}><span>이미지 없음</span></div>;
                 }
@@ -252,9 +286,15 @@ function AdoptionDetailContent() {
           </div>
 
           <div className={styles.contactSection}>
-            <button className={styles.contactButton} onClick={handleContact}>
-              {animalData.careTel ? '전화연락하기' : '연락하기'}
-            </button>
+            <a 
+              href={`https://www.animal.go.kr/front/awtis/public/publicDtl.do?desertionNo=${animalData.desertionNo}`}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={styles.contactButton}
+              style={{ display: 'block', textDecoration: 'none', textAlign: 'center' }}
+            >
+              공고 상세보기
+            </a>
           </div>
         </div>
 

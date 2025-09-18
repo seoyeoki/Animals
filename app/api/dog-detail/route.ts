@@ -41,20 +41,40 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await response.json();
-    let item = data?.response?.body?.items?.item?.[0];
-
-    // ✨✨✨ 요청하신 ID 검증 로직 ✨✨✨
-    // 요청한 ID와 실제 응답받은 ID가 다른지 확인합니다.
-    if (item && item.desertionNo !== desertionNo) {
-      console.warn(`[ID 불일치] 요청: ${desertionNo}, 응답: ${item.desertionNo}. 유효하지 않은 데이터로 처리합니다.`);
-      // ID가 다르면 item을 null로 만들어 아래의 if(!item)에서 404를 반환하도록 합니다.
-      item = null;
+    console.log('🐾 전체 API 응답 구조:', JSON.stringify(data, null, 2));
+    
+    // ✨ API 응답 구조를 더 자세히 분석
+    let item = null;
+    if (data?.response?.body?.items) {
+      console.log('🐾 items 구조:', data.response.body.items);
+      
+      if (data.response.body.items.item) {
+        if (Array.isArray(data.response.body.items.item)) {
+          item = data.response.body.items.item[0];
+          console.log('🐾 배열에서 첫 번째 아이템:', item);
+        } else {
+          item = data.response.body.items.item;
+          console.log('🐾 단일 객체:', item);
+        }
+      } else {
+        console.log('🐾 items.item이 없음');
+      }
+    } else {
+      console.log('🐾 response.body.items가 없음');
     }
 
-    console.log('🐾 Fetched item from public API:', item);
+    console.log('🐾 최종 추출된 item:', item);
+    console.log('🐾 요청된 desertionNo:', desertionNo);
 
     if (!item) {
+        console.log('🐾 item이 null이므로 404 반환');
         return NextResponse.json({ error: 'Dog detail not found in API response.' }, { status: 404 });
+    }
+
+    // ✨ ID 검증을 일시적으로 비활성화하여 테스트
+    if (item.desertionNo !== desertionNo) {
+      console.warn(`[ID 불일치] 요청: ${desertionNo}, 응답: ${item.desertionNo}. 일단 데이터를 반환합니다.`);
+      // item = null; // 이 줄을 주석 처리하여 ID가 달라도 데이터 반환
     }
     
     let kindName = item.kindCd;

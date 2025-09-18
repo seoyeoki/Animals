@@ -1,0 +1,125 @@
+.main {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: var(--Background-Beige);
+  }
+  
+  .detailCard {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 960px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px var(--Shadow-Brown);
+    overflow: hidden;
+  }
+  
+  .imageContainer {
+    flex-basis: 45%;
+    background-color: #f0f0f0;
+  }
+  
+  .animalImage {
+    width: 100%;
+    height: 500px; /* 고정 높이 */
+    object-fit: cover;
+    display: block;
+  }
+  
+  .infoContainer {
+    flex-basis: 55%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .infoHeader {
+    border-bottom: 2px solid var(--Border-Beige);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .breed {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--Primary-Wood);
+  }
+  
+  .infoGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .infoItem {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+  }
+  
+  .label {
+    font-weight: 500;
+    color: var(--Secondary-Wood);
+  }
+  
+  .value {
+    font-weight: 600;
+    color: var(--Text-Brown);
+  }
+  
+  .description {
+    margin-bottom: 20px;
+    flex-grow: 1; /* 남은 공간을 모두 차지 */
+  }
+  
+  .descTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--Primary-Wood);
+    margin-bottom: 10px;
+  }
+  
+  .descText {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--Text-Brown);
+  }
+  
+  .ctaButtonContainer {
+    margin-top: auto; /* 컨테이너를 맨 아래로 밀어냄 */
+    text-align: center;
+  }
+  
+  .ctaButton {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--Primary-Wood);
+    color: var(--Light-Beige);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .ctaButton:hover {
+    background-color: var(--Secondary-Wood);
+  }
+  
+  .loading, .error {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--Primary-Wood);
+  }
