@@ -50,8 +50,8 @@ export default function MatchingPage() {
   const handlePersonalityToggle = (p: string) => {
     setProfile(prev => {
       const isSelected = prev.dogPersonalities.includes(p);
-      if (!isSelected && prev.dogPersonalities.length >= 3) {
-        alert('성격은 최대 3개까지만 선택할 수 있습니다.');
+      if (!isSelected && prev.dogPersonalities.length >= 2) {
+        alert('성격은 최대 2개까지만 선택할 수 있습니다.');
         return prev;
       }
       const newPersonalities = isSelected
@@ -186,7 +186,7 @@ export default function MatchingPage() {
           </div>
         </div>
         <div className={styles.formGroup}>
-          <label className={styles.label}>선호하는 강아지 성격 (최대 3개)</label>
+          <label className={styles.label}>선호하는 강아지 성격 (최대 2개)</label>
           <div className={styles.tagGroup}>
             {personalityOptions.map(p => (
               <button key={p} onClick={() => handlePersonalityToggle(p)} className={`${styles.tagButton} ${profile.dogPersonalities.includes(p) ? styles.active : ''}`}>{p}</button>
