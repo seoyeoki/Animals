@@ -74,7 +74,7 @@ export default function MatchingImagePage() {
   return (
     <main className={styles.main}>
       <div className={styles.formContainer}>
-        <h1 className={styles.title}>좀 더 궁금해요</h1>
+        <h1 className={styles.title}>이미지와 닮은 강아지 찾기</h1>
         <div className={styles.formGroup}>
           <label htmlFor="profileText" className={styles.label}>저는 이런 입양자예요</label>
           <textarea
