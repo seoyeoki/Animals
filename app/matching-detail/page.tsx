@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './page.module.css';
 
@@ -22,39 +22,39 @@ function MatchingDetailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dogJson = searchParams.get('dog');
-  
   const dogData: RecommendedDog | null = dogJson ? JSON.parse(decodeURIComponent(dogJson)) : null;
+
+  // 품종 코드 → 품종명 매핑
+  const [breedMap, setBreedMap] = useState<{ [code: string]: string }>({});
+  useEffect(() => {
+    fetch('/api/breeds-all')
+      .then(res => res.json())
+      .then(data => {
+        // data: [{ code: string, name: string }]
+        const map: { [code: string]: string } = {};
+        data.forEach((item: { code: string, name: string }) => {
+          map[item.code] = item.name;
+        });
+        setBreedMap(map);
+      });
+  }, []);
 
   if (!dogData) {
     return <div className={styles.error}>강아지 정보를 불러올 수 없습니다.</div>;
   }
 
-  const proxyImageUrl = `/api/proxy-image?url=${encodeURIComponent(dogData.image_url)}`;
-  const getSexText = (sex: string) => (sex === 'M' ? '수컷' : sex === 'F' ? '암컷' : '미상');
+  // 품종명 변환
+  const breedName = breedMap[dogData.breed] || dogData.breed;
 
-  return (
-    <main className={styles.main}>
-      <div className={styles.detailCard}>
-        <div className={styles.imageContainer}>
-          <img src={proxyImageUrl} alt={dogData.breed} className={styles.animalImage} />
-        </div>
-        <div className={styles.infoContainer}>
-          <div className={styles.infoHeader}>
-            <h1 className={styles.breed}>{dogData.breed}</h1>
-          </div>
-          <div className={styles.infoGrid}>
-            <div className={styles.infoItem}>
-              <span className={styles.label}>나이</span>
-              <span className={styles.value}>{dogData.age}</span>
-            </div>
-            <div className={styles.infoItem}>
-              <span className={styles.label}>성별</span>
-              <span className={styles.value}>{getSexText(dogData.sex)}</span>
-            </div>
-            <div className={styles.infoItem}>
-              <span className={styles.label}>체중</span>
-              <span className={styles.value}>{dogData.weight}</span>
-            </div>
+  // 나이 계산 (태어난 해 → 현재 나이)
+  function getAgeText(ageStr: string) {
+    // ageStr 예시: "2020(년생)"
+    const birthYearMatch = ageStr.match(/(\d{4})/);
+    if (!birthYearMatch) return ageStr;
+    const birthYear = parseInt(birthYearMatch[1], 10);
+    const nowYear = new Date().getFullYear();
+    const age = nowYear - birthYear;
+    return age > 0 ?
           </div>
           <div className={styles.description}>
             <h3 className={styles.descTitle}>특징 및 설명</h3>
