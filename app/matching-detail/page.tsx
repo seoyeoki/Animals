@@ -24,7 +24,7 @@ function MatchingDetailContent() {
   const dogJson = searchParams.get('dog');
   const dogData: RecommendedDog | null = dogJson ? JSON.parse(decodeURIComponent(dogJson)) : null;
 
-  // 품종 코드 → 품종명 매핑 (기존 코드 유지)
+  // 품종 코드 → 품종명 매핑
   const [breedMap, setBreedMap] = useState<{ [code: string]: string }>({});
   useEffect(() => {
     fetch('/api/breeds-all')
@@ -42,34 +42,50 @@ function MatchingDetailContent() {
     return <div className={styles.error}>강아지 정보를 불러올 수 없습니다.</div>;
   }
 
-  // 품종명 변환
-  const breedName = breedMap[dogData.breed] || dogData.breed;
+  // 품종명 변환 (정보 없을 시 fallback 텍스트 수정)
+  const breedName = breedMap[dogData.breed] || '품종 정보 없음';
 
   // 나이 계산 (태어난 해 → 현재 나이)
   function getAgeText(ageStr: string) {
-    // ageStr 예시: "2020(년생)"
+    // 개발자 도구에서 ageStr 값 확인
+    console.log('ageStr:', ageStr);
+    
     const birthYearMatch = ageStr.match(/(\d{4})/);
     if (!birthYearMatch) return ageStr;
     const birthYear = parseInt(birthYearMatch[1], 10);
     const nowYear = new Date().getFullYear();
-    // 👇 나이 계산 방식 수정
     const age = nowYear - birthYear + 1;
     return age > 0 ? `${age}살 (${birthYear}년생)` : ageStr;
   }
 
   return (
     <main className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.imageSection}>
-          <img src={dogData.image_url} alt="강아지 사진" className={styles.dogImage} />
+      {/* CSS 클래스 이름 및 구조 수정 */}
+      <div className={styles.detailCard}>
+        <div className={styles.imageContainer}>
+          <img src={dogData.image_url} alt="강아지 사진" className={styles.animalImage} />
         </div>
-        <div className={styles.infoSection}>
-          <h2 className={styles.dogTitle}>{breedName}</h2>
-          <div className={styles.dogInfo}>
-            <span>나이: {getAgeText(dogData.age)}</span>
-            <span>성별: {dogData.sex}</span>
-            <span>몸무게: {dogData.weight}</span>
-            <span>중성화: {dogData.neuter}</span>
+        <div className={styles.infoContainer}>
+          <div className={styles.infoHeader}>
+             <h2 className={styles.breed}>{breedName}</h2>
+          </div>
+          <div className={styles.infoGrid}>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>나이</span>
+              <span className={styles.value}>{getAgeText(dogData.age)}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>성별</span>
+              <span className={styles.value}>{dogData.sex}</span>
+            </div>
+             <div className={styles.infoItem}>
+              <span className={styles.label}>몸무게</span>
+              <span className={styles.value}>{dogData.weight}</span>
+            </div>
+             <div className={styles.infoItem}>
+              <span className={styles.label}>중성화</span>
+              <span className={styles.value}>{dogData.neuter}</span>
+            </div>
           </div>
           <div className={styles.description}>
             <h3 className={styles.descTitle}>특징 및 설명</h3>
