@@ -42,13 +42,12 @@ function MatchingDetailContent() {
     return <div className={styles.error}>강아지 정보를 불러올 수 없습니다.</div>;
   }
 
-  // 품종명 변환 (정보 없을 시 fallback 텍스트 수정)
+  // 품종명 변환
   const breedName = breedMap[dogData.breed] || '품종 정보 없음';
 
-  // 나이 계산 (태어난 해 → 현재 나이)
+  // 나이 계산
   function getAgeText(ageStr: string) {
-    // 개발자 도구에서 ageStr 값 확인
-    console.log('ageStr:', ageStr);
+    console.log('ageStr:', ageStr); // 개발자 도구 확인용 로그
     
     const birthYearMatch = ageStr.match(/(\d{4})/);
     if (!birthYearMatch) return ageStr;
@@ -60,10 +59,14 @@ function MatchingDetailContent() {
 
   return (
     <main className={styles.main}>
-      {/* CSS 클래스 이름 및 구조 수정 */}
       <div className={styles.detailCard}>
         <div className={styles.imageContainer}>
-          <img src={dogData.image_url} alt="강아지 사진" className={styles.animalImage} />
+          {/* 👇 이미지 없을 시 기본 로고 표시 */}
+          <img 
+            src={dogData.image_url || '/logo.png'} 
+            alt="강아지 사진" 
+            className={styles.animalImage} 
+          />
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.infoHeader}>

@@ -147,8 +147,11 @@ export default function MatchingResultsPage() {
             {surveyResults.results.map((dog) => (
               <Link href={`/matching-detail?dog=${encodeURIComponent(JSON.stringify(dog))}`} key={`survey-${dog.desertionNo}`} className={styles.recommendationItem}>
                 <div className={styles.recImageContainer}>
-                  <img src={`/api/proxy-image?url=${encodeURIComponent(dog.image_url)}`} alt={getBreedName(dog.breed)} className={styles.recImage} />
-                </div>
+                  <img 
+                    src={dog.image_url || '/logo.png'} 
+                    alt="강아지 사진" 
+                    className={styles.animalImage} 
+                  />
                 <div className={styles.recInfo}>
                   {/* ✨ 4. 헬퍼 함수를 사용하여 변환된 값을 출력합니다. */}
                   <span className={styles.recBreed}>{getBreedName(dog.breed)}</span>
