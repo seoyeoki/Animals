@@ -54,7 +54,22 @@ function MatchingDetailContent() {
     const birthYear = parseInt(birthYearMatch[1], 10);
     const nowYear = new Date().getFullYear();
     const age = nowYear - birthYear;
-    return age > 0 ?
+    return age > 0 ? `${age}살 (${birthYear}년생)` : ageStr;
+  }
+
+  return (
+    <main className={styles.main}>
+      <div className={styles.container}>
+        <div className={styles.imageSection}>
+          <img src={dogData.image_url} alt="강아지 사진" className={styles.dogImage} />
+        </div>
+        <div className={styles.infoSection}>
+          <h2 className={styles.dogTitle}>{breedName}</h2>
+          <div className={styles.dogInfo}>
+            <span>나이: {getAgeText(dogData.age)}</span>
+            <span>성별: {dogData.sex}</span>
+            <span>몸무게: {dogData.weight}</span>
+            <span>중성화: {dogData.neuter}</span>
           </div>
           <div className={styles.description}>
             <h3 className={styles.descTitle}>특징 및 설명</h3>
