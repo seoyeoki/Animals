@@ -18,7 +18,7 @@ interface MatchingProfile {
   extraInfo: string;
 }
 
-const personalityOptions = ["차분한", "활발한", "충직한", "똑똑한", "사교적인", "독립적인"];
+const personalityOptions = ["순한", "똑똑한", "활발한", "사람따름", "호기심", "장난선호"];
 
 export default function MatchingPage() {
   const router = useRouter();
