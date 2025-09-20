@@ -24,13 +24,12 @@ function MatchingDetailContent() {
   const dogJson = searchParams.get('dog');
   const dogData: RecommendedDog | null = dogJson ? JSON.parse(decodeURIComponent(dogJson)) : null;
 
-  // 품종 코드 → 품종명 매핑
+  // 품종 코드 → 품종명 매핑 (기존 코드 유지)
   const [breedMap, setBreedMap] = useState<{ [code: string]: string }>({});
   useEffect(() => {
     fetch('/api/breeds-all')
       .then(res => res.json())
       .then(data => {
-        // data: [{ code: string, name: string }]
         const map: { [code: string]: string } = {};
         data.forEach((item: { code: string, name: string }) => {
           map[item.code] = item.name;
@@ -53,7 +52,8 @@ function MatchingDetailContent() {
     if (!birthYearMatch) return ageStr;
     const birthYear = parseInt(birthYearMatch[1], 10);
     const nowYear = new Date().getFullYear();
-    const age = nowYear - birthYear;
+    // 👇 나이 계산 방식 수정
+    const age = nowYear - birthYear + 1;
     return age > 0 ? `${age}살 (${birthYear}년생)` : ageStr;
   }
 
@@ -75,7 +75,6 @@ function MatchingDetailContent() {
             <h3 className={styles.descTitle}>특징 및 설명</h3>
             <p className={styles.descText}>{dogData.desc}</p>
           </div>
-          {/* ✨ '이 강아지 찾아가기' 버튼 추가 */}
           <div className={styles.ctaButtonContainer}>
             <a href={dogData.detail_url} target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
               이 강아지 찾아가기
